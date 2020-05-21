@@ -30,7 +30,7 @@
             <meta name="og:url" content="{{ (website_url ~ app.request.requestUri)|sanitize_url }}">
             <meta name="og:site_name" content="{{ author }}">
             <meta name="og:type" content="{% block og_type %}website{% endblock %}">
-            <link rel="alternate" type="application/rss+xml" href="{{ path('blog_rss') }}" title="Site Title">
+            <link rel="alternate" type="application/rss+xml" href="{{ path('blog_rss') }}" title="Rss feed for {{ website_url }}">
         {% endblock %}
         {% block stylesheets %}
             {{ encore_entry_link_tags('tailwind') }}
