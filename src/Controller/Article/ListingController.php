@@ -19,8 +19,11 @@ final class ListingController
 
     private RequestStack $requestStack;
 
-    public function __construct(Environment $renderer, ArticleRepositoryInterface $repository, RequestStack $requestStack)
-    {
+    public function __construct(
+        Environment $renderer,
+        ArticleRepositoryInterface $repository,
+        RequestStack $requestStack
+    ) {
         $this->renderer = $renderer;
         $this->repository = $repository;
         $this->requestStack = $requestStack;
