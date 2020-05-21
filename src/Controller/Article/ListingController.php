@@ -16,9 +16,7 @@ final class ListingController
     private Environment $renderer;
 
     private ArticleRepositoryInterface $repository;
-    /**
-     * @var \Symfony\Component\HttpFoundation\RequestStack
-     */
+
     private RequestStack $requestStack;
 
     public function __construct(Environment $renderer, ArticleRepositoryInterface $repository, RequestStack $requestStack)
