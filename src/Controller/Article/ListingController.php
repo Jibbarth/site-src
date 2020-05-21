@@ -6,6 +6,7 @@ namespace App\Controller\Article;
 
 use App\Repository\ArticleRepositoryInterface;
 use Ramsey\Collection\AbstractCollection;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -15,19 +16,35 @@ final class ListingController
     private Environment $renderer;
 
     private ArticleRepositoryInterface $repository;
+    /**
+     * @var \Symfony\Component\HttpFoundation\RequestStack
+     */
+    private RequestStack $requestStack;
 
-    public function __construct(Environment $renderer, ArticleRepositoryInterface $repository)
+    public function __construct(Environment $renderer, ArticleRepositoryInterface $repository, RequestStack $requestStack)
     {
         $this->renderer = $renderer;
         $this->repository = $repository;
+        $this->requestStack = $requestStack;
     }
 
     /**
-     * @Route("/blog", name="article_list")
+     * @Route("/blog", defaults={"_format"="html"}, methods="GET", name="article_list")
+     * @Route("/rss.xml",  methods="GET", name="blog_rss")
      */
     public function __invoke(): Response
     {
-        return new Response($this->renderer->render('article/list.html.twig', [
+        $format = 'html';
+        $request = $this->requestStack->getCurrentRequest();
+        if (null === $request) {
+            throw new \LogicException('No request');
+        }
+
+        if ('blog_rss' === $request->get('_route')) {
+            $format = 'xml';
+        }
+
+        return new Response($this->renderer->render(\sprintf('article/list.%s.twig', $format), [
             'articles' => $this->repository->getAll()->sort('getDate', AbstractCollection::SORT_DESC),
         ]));
     }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>✍ Writings // {{ author }}</title>
+        <description>Last articles published on {{ website_url ~ path('article_list') }}</description>
+        <pubDate>{{ 'now'|date('r', timezone='GMT') }}</pubDate>
+        <lastBuildDate>{{ (articles|first).date|default('now')|date('r', timezone='GMT') }}</lastBuildDate>
+        <link>{{ website_url ~ path('article_list') }}</link>
+        <language>{{ app.request.locale }}</language>
+
+        {% for article in articles %}
+            {% set url = website_url ~ path('article_detail', {type: article.type, article: article.id}) %}
+            {% if article.type == constant('App\\Constant\\ArticleType::EXTERNAL') %}
+                {% set url = article.url %}
+            {% endif %}
+            <item>
+                <title>{{ article.title }}</title>
+                <description>{{ article.getAbstract()|default('')|markdown_to_html|striptags|raw }}</description>
+                <link>{{ url }}</link>
+                <guid>{{ url }}</guid>
+                <content:encoded><![CDATA[ {{ article.content|default('')|markdown_to_html }} ]]></content:encoded>
+                <pubDate>{{ article.date|date(format='r', timezone='GMT') }}</pubDate>
+                <author>{{ author }}</author>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>
