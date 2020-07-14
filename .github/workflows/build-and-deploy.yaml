@@ -45,11 +45,41 @@ jobs:
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
             -   name: Build 📦
                 run: bin/console dump-static-site --ansi
+                env:
+                    GITHUB_USERNAME: ${{ secrets.GITHUB_TOKEN }}
             -   name: Deploy 🚀
                 uses: JamesIves/github-pages-deploy-action@releases/v3
                 with:
                     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     REPOSITORY_NAME: Jibbarth/jibbarth.github.io
+                    BRANCH: master
+                    FOLDER: output
+    update-readme:
+        needs: check
+        runs-on: ubuntu-latest
+        name: Update Github Profile Readme
+        steps:
+            -   name: Checkout 🛎️
+                uses: actions/checkout@v2
+                with:
+                    persist-credentials: false
+            -   uses: shivammathur/setup-php@v1
+                with:
+                    php-version: 7.4
+                    coverage: none
+            -   uses: actions/setup-node@v1
+            -   run: yarn install
+            -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
+            -   name: Build 📦
+                run: bin/console generate-readme --ansi
+                env:
+                    GITHUB_USERNAME: ${{ secrets.GITHUB_TOKEN }}
+            -   name: Deploy 🚀
+                uses: JamesIves/github-pages-deploy-action@releases/v3
+                with:
+                    ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    REPOSITORY_NAME: Jibbarth/Jibbarth
                     BRANCH: master
                     FOLDER: output
