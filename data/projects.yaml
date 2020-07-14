@@ -1,8 +1,8 @@
 ## Featured
 -
-    name: SimpleConfigBundle
-    description: Expose your bundles configuration in a Web UI view.
-    url: https://github.com/Jibbarth/SimpleConfigBundle
+    name: Slack Newsletter
+    description: A Symfony Project to build a newsletter from a Slack workspace.
+    url: https://github.com/Jibbarth/slacknewsletter
     category: !php/const App\Constant\ProjectCategory::FEATURED
     role: !php/const App\Constant\Role::AUTHOR
     image: ~
@@ -21,9 +21,9 @@
     role: !php/const App\Constant\Role::MAINTENER
     image: https://raw.githubusercontent.com/nunomaduro/phpinsights/v1.14.0/art/heart.png
 -
-    name: Slack Newsletter
-    description: A Symfony Project to build a newsletter from a Slack workspace.
-    url: https://github.com/Jibbarth/slacknewsletter
+    name: SimpleConfigBundle
+    description: Expose your bundles configuration in a Web UI view.
+    url: https://github.com/Jibbarth/SimpleConfigBundle
     category: !php/const App\Constant\ProjectCategory::FEATURED
     role: !php/const App\Constant\Role::AUTHOR
     image: ~
