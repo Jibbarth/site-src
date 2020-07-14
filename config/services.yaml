@@ -1,8 +1,10 @@
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
-parameters:
-    github_user: jibbarth
-    author: Jibé Barth
+parameters: &parameters
+    github_user: Jibbarth
+    firstname: Jibé
+    lastname: Barth
+    author: '%firstname% %lastname%'
     website_url: https://jibébarth.fr
     gravatar_hash: f7a23636c530faa0ceca6199226902e7
     ga: UA-39521443-1
@@ -26,6 +28,14 @@ parameters:
         - VueJS
         - Tailwind
         - Docker
+    readme:
+        town: Bordeaux
+        banner_keywords: 'programming,developer,design'
+        main_language: PHP
+        main_framework: Symfony
+        job_position: Lead developer
+        society: Synolia
+        website: https://jibébarth.fr
 
 services:
     _defaults:
@@ -63,3 +73,6 @@ services:
 
     # replace default markdown by our markdown configured
     twig.markdown.default: '@App\Twig\Extra\Markdown'
+
+twig:
+    globals: *parameters

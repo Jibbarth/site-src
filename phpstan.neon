@@ -6,6 +6,7 @@ parameters:
         classesAllowedToBeExtended:
             - Twig\Extension\AbstractExtension
             - Ramsey\Collection\AbstractCollection
+            - Symfony\Component\Console\Command\Command
 
     excludes_analyse:
         - %currentWorkingDirectory%/src/Kernel.php

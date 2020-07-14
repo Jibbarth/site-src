@@ -1,0 +1,71 @@
+![banner image]({{ unsplash_url(readme.banner_keywords, 854, 300) }})
+
+<h2 align="center">Hi, I'm {{ firstname }} 👋</h2>
+
+<p align="center">
+<a href="{{ website_url }}" title="Personal website">{{ fa('rss', 'solid')}}</a>
+{% if social is not empty %}{% for type, value in social %}{% if type != 'github' %}
+<a href="https://{{ value.prefix ?? '' }}{{ type }}.com/{{ value.username }}" title="{{ type|capitalize }}">{{ fa(type, 'brands')}}</a>
+{% endif %}{% endfor %}{% endif %}
+</p>
+
+I'm **{{ readme.job_position|capitalize }}** at **{{ readme.society }}** based in **{{ readme.town }}**.
+
+> Love working with **{{ readme.main_framework }}** 😍
+
+#### OSS Projects ⚡
+
+{% set column_size = 100 / (oss_projects|length) %}
+<table>
+  <tbody>
+    <tr valign="top">
+{% for project in oss_projects %}
+      <td width="{{ column_size }}%" align="center">
+          <a href="{{ project.url }}">
+            <p>{{ project.name}}</p>
+            <img src="{{ project.image ?? unsplash_url(project.name ~',programming', 200, 150) }}" width="200px" height="150px"/>
+          </a>
+      </td>
+{% endfor %}
+    </tr>
+  </tbody>
+</table>
+
+
+
+#### Recent activity
+
+{% if articles is not empty %}
+**🗞 Latest blogpost**:
+
+{% for post in articles %}
+{% set url = website_url ~ path('article_detail', {type: post.type, article: post.id}) %}
+{% if post.type == constant('App\\Constant\\ArticleType::EXTERNAL') %}{% set url = post.url %}{% endif %}
+* [{{ post.title }}]({{ url }})
+{% endfor %}
+{% endif %}
+
+{% if pull_requests is not empty %}
+**👨‍💻 Latest Pull Requests**:
+
+{% for pr in pull_requests %}
+* [[{{ pr.repository.name }}] {{ pr.title }}]({{ pr.permalink }}) - _{{ pr.state }}_
+{% endfor %}
+{% endif %}
+
+{% if stars is not empty %}
+**🌟 Latest Stars**:
+
+{% for star in stars %}
+* [{{ star.nameWithOwner }}]({{ star.url }}) {% if star.description is not empty %} - _{{ star.description }}_{% endif %}
+
+{% endfor %}{% endif %}
+
+<details>
+<summary> Want to see my github stats ? </summary>
+
+![Github stats](https://github-readme-stats.vercel.app/api?username={{ github_user }}&&show_icons=true)
+</details>
+
+---
+![visitors](https://visitor-badge.glitch.me/badge?page_id={{ github_user }}.{{ github_user }})
