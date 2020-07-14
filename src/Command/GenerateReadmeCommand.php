@@ -12,21 +12,21 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class GenerateReadmeCommand extends Command
 {
-    protected static $defaultName = 'generate-readme';
+    private const NAME = 'generate-readme';
 
     private ReadmeGenerator $readmeGenerator;
 
     public function __construct(ReadmeGenerator $readmeGenerator)
     {
-        parent::__construct(self::$defaultName);
+        parent::__construct(self::NAME);
         $this->readmeGenerator = $readmeGenerator;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $style = new SymfonyStyle($input, $output);
         $this->readmeGenerator->generate();
-        $io->success('Readme successfuly generated');
+        $style->success('Readme successfuly generated');
 
         return self::SUCCESS;
     }

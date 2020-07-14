@@ -17,6 +17,9 @@ final class FontAwesomeExtension extends AbstractExtension
         $this->twig = $twig;
     }
 
+    /**
+     * @return array<\Twig\TwigFunction>
+     */
     public function getFunctions(): array
     {
         return [
