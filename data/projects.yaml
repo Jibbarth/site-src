@@ -12,7 +12,7 @@
     url: https://github.com/Jibbarth/dev-pack
     category: !php/const App\Constant\ProjectCategory::FEATURED
     role: !php/const App\Constant\Role::AUTHOR
-    image: https://images.unsplash.com/photo-1546146830-2cca9512c68e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80
+    image: https://images.unsplash.com/photo-1546146830-2cca9512c68e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80&h=150
 -
     name: PHP Insights
     description: Instant PHP quality checks from your console
