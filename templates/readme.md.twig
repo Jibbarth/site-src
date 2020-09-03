@@ -23,7 +23,7 @@ I'm **{{ readme.job_position|capitalize }}** at **{{ readme.society }}** based i
       <td width="{{ column_size }}%" align="center">
           <a href="{{ project.url }}">
             <p>{{ project.name}}</p>
-            <img src="{{ project.image ?? unsplash_url(project.name ~',programming', 200, 150) }}" width="200px" height="150px"/>
+            <img src="{{ project.image ?? unsplash_url(project.name ~',programming', 200, 150) }}" />
           </a>
       </td>
 {% endfor %}
