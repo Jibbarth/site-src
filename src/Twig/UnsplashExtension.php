@@ -51,6 +51,7 @@ final class UnsplashExtension extends AbstractExtension
         );
 
         $response->getStatusCode(); // Retrieve info
+
         return $response->getInfo()['url'];
     }
 }
