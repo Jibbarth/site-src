@@ -143,6 +143,9 @@
     "object-calisthenics/phpcs-calisthenics-rules": {
         "version": "v3.7.0"
     },
+    "ondram/ci-detector": {
+        "version": "3.5.1"
+    },
     "opis/closure": {
         "version": "3.5.3"
     },

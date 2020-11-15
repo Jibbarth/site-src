@@ -4,9 +4,10 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-intl": "*",
         "doctrine/annotations": "^1.0",
         "doctrine/cache": "^1.10",
         "knplabs/github-api": "^2.14",
@@ -86,7 +87,9 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.1.*"
+            "require": "5.2.*"
         }
-    }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "RC"
 }
