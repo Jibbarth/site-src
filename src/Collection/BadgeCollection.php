@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Collection;
 
+use App\Model\Badge;
 use Ramsey\Collection\AbstractCollection;
-use SymfonyCorp\Connect\Api\Entity\Badge;
 
 final class BadgeCollection extends AbstractCollection
 {

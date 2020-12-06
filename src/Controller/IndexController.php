@@ -7,7 +7,7 @@ namespace App\Controller;
 use App\Collection\SliceableCollection;
 use App\Constant\ProjectCategory;
 use App\Repository\ArticleRepositoryInterface;
-use App\Repository\BadgeUserRepository;
+use App\Repository\BadgeRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
 use Ramsey\Collection\CollectionInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,18 +25,18 @@ final class IndexController
 
     private ArticleRepositoryInterface $articleRepository;
 
-    private BadgeUserRepository $badgeUserRepository;
+    private BadgeRepositoryInterface $badgeRepository;
 
     public function __construct(
         Environment $twig,
         ProjectRepositoryInterface $projectRepository,
         ArticleRepositoryInterface $articleRepository,
-        BadgeUserRepository $badgeUserRepository
+        BadgeRepositoryInterface $badgeRepository
     ) {
         $this->twig = $twig;
         $this->projectRepository = $projectRepository;
         $this->articleRepository = $articleRepository;
-        $this->badgeUserRepository = $badgeUserRepository;
+        $this->badgeRepository = $badgeRepository;
     }
 
     /**
@@ -60,7 +60,7 @@ final class IndexController
         return new Response($this->twig->render('index.html.twig', [
             'projects' => $featuredProjects,
             'articles' => $articleCollection,
-            'badges' => $this->badgeUserRepository->getBadges(),
+            'badges' => $this->badgeRepository->getBadges(),
         ]));
     }
 }

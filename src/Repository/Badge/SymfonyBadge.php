@@ -2,16 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Repository\Badge;
 
 use App\Collection\BadgeCollection;
+use App\Model\Badge;
 use App\Parser\VndComSymfonyConnectXmlParser;
+use App\Repository\BadgeRepositoryInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use SymfonyCorp\Connect\Api\Api;
-use SymfonyCorp\Connect\Api\Entity\Badge;
+use SymfonyCorp\Connect\Api\Entity\Badge as SfBadge;
 use function Symfony\Component\String\u;
 
-final class BadgeUserRepository
+final class SymfonyBadge implements BadgeRepositoryInterface
 {
     private Api $api;
 
@@ -34,13 +36,18 @@ final class BadgeUserRepository
         $root = $this->api->getRoot();
         $user = $root->getUser($this->userUuid);
         $badges = $user->getBadges();
-        $badges = \array_map(function (Badge $badge) use ($root): Badge {
-            /** @var Badge $badge */
+        $badges = \array_map(function (SfBadge $badge) use ($root): Badge {
+            /** @var SfBadge $badge */
             $badge = $root->getBadge($badge->getId());
-
             $badge->setImage($this->resolveImage($badge->getImage()));
 
-            return $badge;
+            return new Badge(
+                (string) $badge->getId(),
+                $badge->getName(),
+                $badge->getDescription(),
+                $badge->getImage(),
+                $badge->getAlternateUrl()
+            );
         }, $badges->getItems());
 
         return new BadgeCollection($badges);
