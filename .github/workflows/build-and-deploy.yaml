@@ -13,6 +13,8 @@ jobs:
     check:
         runs-on: ubuntu-latest
         name: Validate code
+        env:
+            PHP_CS_FIXER_IGNORE_ENV: true
         steps:
             -   name: Checkout 🛎️
                 uses: actions/checkout@v2
