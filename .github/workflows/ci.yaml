@@ -24,3 +24,13 @@ jobs:
               run: vendor/bin/grumphp run --ansi
             - name: PHPInsights
               run: vendor/bin/phpinsights -n --ansi
+            - name: Install front dependencies
+              run: yarn && yarn encore prod
+            - name: Assert static site build
+              run: bin/console dump-static-site --ansi
+              env:
+                  GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
+            - name: Assert README build
+              run: bin/console generate-readme --ansi
+              env:
+                  GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
