@@ -32,7 +32,7 @@ final class DevToBadge implements BadgeRepositoryInterface
         $crawler = new Crawler($response->getContent(), self::DEV_TO_URL, self::DEV_TO_URL);
         $badges = $crawler
             ->filter(self::BADGE_NODE_PATH)
-            ->each(fn (Crawler $node, $i) => new Badge(
+            ->each(static fn (Crawler $node) => new Badge(
                 \uniqid('', true),
                 $node->attr('title') ?? '',
                 $node->attr('title') ?? '',

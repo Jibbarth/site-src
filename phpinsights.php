@@ -19,6 +19,8 @@ return [
         \SlevomatCodingStandard\Sniffs\ControlStructures\DisallowYodaComparisonSniff::class,
         \NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits::class,
         \SlevomatCodingStandard\Sniffs\Classes\SuperfluousTraitNamingSniff::class,
+        // Implicit constructor is not well handle for now
+        \SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff::class,
     ],
     'config' => [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff::class => [
