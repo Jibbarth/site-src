@@ -91,5 +91,5 @@
         }
     },
     "prefer-stable": true,
-    "minimum-stability": "RC"
+    "minimum-stability": "stable"
 }
