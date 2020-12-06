@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bbf031455a140b041262e5dd5e4feee4",
+    "content-hash": "3fc9594819b7746b725555364b90e958",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -5210,16 +5210,16 @@
         },
         {
             "name": "symfonycorp/connect",
-            "version": "v6.3.0",
+            "version": "v7.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfonycorp/connect.git",
-                "reference": "8f552fda19e1366645c2caf8b6f776df343651a1"
+                "reference": "99c709a7d654de5a8d130c96820f0e5e0ed745ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfonycorp/connect/zipball/8f552fda19e1366645c2caf8b6f776df343651a1",
-                "reference": "8f552fda19e1366645c2caf8b6f776df343651a1",
+                "url": "https://api.github.com/repos/symfonycorp/connect/zipball/99c709a7d654de5a8d130c96820f0e5e0ed745ff",
+                "reference": "99c709a7d654de5a8d130c96820f0e5e0ed745ff",
                 "shasum": ""
             },
             "require": {
@@ -5230,17 +5230,18 @@
                 "symfony/http-client": "^4.4|^5.0"
             },
             "conflict": {
+                "symfony/security-bundle": "<5.2",
                 "symfony/security-core": "<4.3"
             },
             "require-dev": {
-                "symfony/form": "^3.4|^4.0|^5.0",
+                "symfony/form": "^4.4|^5.0",
                 "symfony/phpunit-bridge": "^4.4|^5.0",
-                "symfony/security-http": "^4.3|^5.0"
+                "symfony/security-bundle": "^4.4|^5.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.x-dev"
+                    "dev-master": "7.x-dev"
                 }
             },
             "autoload": {
@@ -5262,7 +5263,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfonycorp/connect/issues",
-                "source": "https://github.com/symfonycorp/connect/tree/master"
+                "source": "https://github.com/symfonycorp/connect/tree/v7.2.0"
             },
             "funding": [
                 {
@@ -5270,7 +5271,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-07-22T21:02:09+00:00"
+            "time": "2020-11-30T06:30:33+00:00"
         },
         {
             "name": "symplify/autowire-array-parameter",
