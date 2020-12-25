@@ -46,6 +46,7 @@ services:
             iterable $gifProviders: !tagged_iterator app.gif_provider
             string $githubUser: '%github_user%'
             string $sfConnectUser: '%sf_connect_uuid%'
+            string $websiteUrl: '%website_url%'
     _instanceof:
         App\Gif\GifLinkProviderInterface:
             tags: ['app.gif_provider']
