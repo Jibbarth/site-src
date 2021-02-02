@@ -36,7 +36,6 @@ grumphp:
     phpstan:
       level: ~
       configuration: phpstan.neon
-    securitychecker: ~
     xmllint: ~
     yamllint:
       parse_custom_tags: true
