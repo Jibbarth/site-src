@@ -50,6 +50,8 @@ jobs:
                 run: bin/console dump-static-site --ansi
                 env:
                     GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
+                    AFUP_USERNAME: ${{ secrets.AFUP_USERNAME }}
+                    AFUP_PWD: ${{ secrets.AFUP_PWD }}
             -   name: Deploy 🚀
                 uses: JamesIves/github-pages-deploy-action@releases/v3
                 with:

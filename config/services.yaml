@@ -47,6 +47,8 @@ services:
             string $githubUser: '%github_user%'
             string $sfConnectUser: '%sf_connect_uuid%'
             string $websiteUrl: '%website_url%'
+            string $afupEmail: '%env(resolve:AFUP_USERNAME)%'
+            string $afupPassword: '%env(resolve:AFUP_PWD)%'
     _instanceof:
         App\Gif\GifLinkProviderInterface:
             tags: ['app.gif_provider']
