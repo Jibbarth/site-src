@@ -22,12 +22,12 @@ final class UrlSanitizerExtension extends AbstractExtension
 
     public function sanitizeUrl(string $url): string
     {
-        $host = \Safe\parse_url($url, PHP_URL_HOST);
+        $host = \Safe\parse_url($url, \PHP_URL_HOST);
         if (null === $host) {
             throw new \InvalidArgumentException(\sprintf('"%s" is not an absolute url', $url));
         }
 
-        $sanitizedHost = \idn_to_ascii($host, IDNA_NONTRANSITIONAL_TO_ASCII, INTL_IDNA_VARIANT_UTS46);
+        $sanitizedHost = \idn_to_ascii($host, \IDNA_NONTRANSITIONAL_TO_ASCII, \INTL_IDNA_VARIANT_UTS46);
         if (false === $sanitizedHost) {
             $sanitizedHost = \mb_strtolower($host);
         }
