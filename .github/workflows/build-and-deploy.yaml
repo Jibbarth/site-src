@@ -24,7 +24,7 @@ jobs:
                 with:
                     php-version: 8.0
                     coverage: none
-            -   run: composer install --no-progress --ignore-platform-reqs
+            -   run: composer install --no-progress
             -   name: Grumphp
                 run: vendor/bin/grumphp run --ansi
             -   name: PHPInsights
@@ -45,7 +45,7 @@ jobs:
             -   uses: actions/setup-node@v1
             -   run: yarn install
             -   run: yarn encore prod
-            -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest --ignore-platform-reqs
+            -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
             -   name: Build 📦
                 run: bin/console dump-static-site --ansi
                 env:
@@ -75,7 +75,7 @@ jobs:
                     coverage: none
             -   uses: actions/setup-node@v1
             -   run: yarn install
-            -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest --ignore-platform-reqs
+            -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
             -   name: Build 📦
                 run: bin/console generate-readme --ansi
                 env:
