@@ -46,11 +46,12 @@ final class FileProjectRepository implements ProjectRepositoryInterface
     {
         $key = $this->slugger->slug($name)->toString();
 
-        if (false === $this->projects->offsetExists($key)) {
+        $project = $this->projects->offsetGet($key);
+        if (null === $project) {
             throw new InvalidArgumentException('Unable to find project with name ' . $name);
         }
 
-        return $this->projects->offsetGet($key);
+        return $project;
     }
 
     public function getAll(): ProjectCollection

@@ -7,6 +7,9 @@ namespace App\Collection;
 use App\Model\Project;
 use Ramsey\Collection\AbstractCollection;
 
+/**
+ * @extends AbstractCollection<Project>
+ */
 final class ProjectCollection extends AbstractCollection implements SliceableCollection
 {
     use SliceTrait;
