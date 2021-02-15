@@ -60,7 +60,7 @@ final class IndexController
         return new Response($this->twig->render('index.html.twig', [
             'projects' => $featuredProjects,
             'articles' => $articleCollection,
-            'badges' => $this->badgeRepository->getBadges(),
+            'badges' => $this->badgeRepository->getBadges()->shuffle(),
         ]));
     }
 }

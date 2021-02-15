@@ -13,4 +13,13 @@ final class BadgeCollection extends AbstractCollection
     {
         return Badge::class;
     }
+
+    public function shuffle(): self
+    {
+        $collection = clone $this;
+
+        \shuffle($collection->data);
+
+        return $collection;
+    }
 }
