@@ -39,4 +39,9 @@ final class ChainBadgeRepository implements BadgeRepositoryInterface
 
         return $badges;
     }
+
+    public function getCategory(): string
+    {
+        throw new \LogicException('ChainBadgeRepository not implement get category');
+    }
 }

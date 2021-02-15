@@ -46,11 +46,17 @@ final class SymfonyBadge implements BadgeRepositoryInterface
                 $badge->getName(),
                 $badge->getDescription(),
                 $badge->getImage(),
-                $badge->getAlternateUrl()
+                $badge->getAlternateUrl(),
+                $this->getCategory()
             );
         }, $badges->getItems());
 
         return new BadgeCollection($badges);
+    }
+
+    public function getCategory(): string
+    {
+        return 'SymfonyConnect';
     }
 
     private function resolveImage(string $url): string

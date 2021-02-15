@@ -9,4 +9,6 @@ use App\Collection\BadgeCollection;
 interface BadgeRepositoryInterface
 {
     public function getBadges(): BadgeCollection;
+
+    public function getCategory(): string;
 }
