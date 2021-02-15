@@ -176,6 +176,9 @@
     "php-http/message-factory": {
         "version": "v1.0.2"
     },
+    "php-http/multipart-stream-builder": {
+        "version": "1.1.2"
+    },
     "php-http/promise": {
         "version": "v1.0.0"
     },
@@ -242,14 +245,17 @@
     "psr/log": {
         "version": "1.1.3"
     },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
     "ramsey/collection": {
         "version": "1.0.1"
     },
+    "react/promise": {
+        "version": "v2.8.0"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.1"
-    },
-    "sebastian/finder-facade": {
-        "version": "2.0.0"
     },
     "sebastian/phpcpd": {
         "version": "5.0.2"
@@ -562,9 +568,6 @@
     },
     "thecodingmachine/safe": {
         "version": "v1.1.1"
-    },
-    "theseer/fdomdocument": {
-        "version": "1.6.6"
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"

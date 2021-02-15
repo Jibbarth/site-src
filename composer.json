@@ -10,7 +10,7 @@
         "ext-intl": "*",
         "doctrine/annotations": "^1.0",
         "doctrine/cache": "^1.10",
-        "knplabs/github-api": "^2.14",
+        "knplabs/github-api": "^3.0",
         "league/commonmark": "^1.4",
         "nyholm/psr7": "^1.2",
         "phpdocumentor/reflection-docblock": "^5.2",
@@ -26,6 +26,7 @@
         "symfony/framework-bundle": "^5.0",
         "symfony/http-client-contracts": "^2.0",
         "symfony/http-foundation": "^5.0",
+        "symfony/mime": "^5.2",
         "symfony/property-access": "^5.0",
         "symfony/property-info": "^5.0",
         "symfony/serializer": "^5.0",
@@ -44,6 +45,7 @@
     },
     "require-dev": {
         "barth/dev-pack": "dev-master",
+        "nunomaduro/phpinsights": "dev-master",
         "symfony/maker-bundle": "^1.14",
         "symfony/profiler-pack": "^1.0"
     },
