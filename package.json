@@ -17,7 +17,7 @@
     "@symfony/webpack-encore": "^0.28.3",
     "babel-plugin-prismjs": "^2.0.1",
     "core-js": "^3.6.5",
-    "prismjs": "^1.21.0",
+    "prismjs": "^1.23.0",
     "tailwind": "^4.0.0",
     "tailwindcss": "^1.2.0"
   }
