@@ -70,16 +70,6 @@ body .markdown> h1:first-child  {
   @apply text-base border-l-4 border-gray-300 pl-4 pr-4 text-gray-600;
 }
 
-.markdown :not(pre) code {
-    @apply font-mono text-xs font-semibold inline border border-gray-300 bg-gray-200 rounded px-1 py-1 text-red-600;
-}
-
-.markdown pre {
-    background-color: #2d2d2d;
-    overflow: auto;
-    @apply p-4;
-}
-
 .markdown ul {
   @apply text-base pl-8 list-disc;
 }
@@ -107,5 +97,20 @@ body .markdown> h1:first-child  {
 .markdown img {
     @apply m-auto;
 }
+.markdown img:not(.emoji) {
+    @apply my-8;
+}
 
+.markdown :not(pre) code {
+    @apply font-mono text-xs font-semibold inline border border-gray-300 bg-gray-200 rounded px-1 py-1 text-red-600;
+}
+
+.markdown pre {
+    overflow: auto;
+    @apply border mx-8 p-4 mb-10 text-base;
+}
+
+.markdown pre[class*="language-"] > code[class*="language-"] {
+    @apply text-base font-mono;
+}
 /* purgecss stop ignore */
