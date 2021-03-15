@@ -2,7 +2,8 @@ import '../css/markdown.css'
 import '../css/gist.css'
 
 import Prism from 'prismjs'
-import 'prismjs/themes/prism-tomorrow.css'
+import 'prism-themes/themes/prism-vsc-dark-plus.css'
+
 
 Prism.highlightAll();
 
