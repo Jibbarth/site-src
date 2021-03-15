@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% set meta_img = unsplash_url('coding', 600, 400) %}
 {% block title %}{{ article.title }} // {{ author }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block description %}{{ article.getAbstract()|markdown_to_html|striptags|raw }}{% endblock %}
-{% block meta_image %}{{ unsplash_url('programming', 600, 300) }}{% endblock %}
+{% block meta_image %}{{ meta_img }}{% endblock %}
 {% block header_image %}
-    <img class="h-full w-full object-cover" src="{{ unsplash('programming', 1600, 300) }}">
+    <img class="h-full w-full object-cover" src="{{ unsplash('coding', 1600, 300) }}">
 {% endblock %}
 
 {% block sub_profile %}
