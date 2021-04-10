@@ -36,6 +36,22 @@
             {{ encore_entry_link_tags('tailwind') }}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
+        {% block javascripts %}
+            <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" rel="prefetch" crossorigin="anonymous"></script>
+            {{ encore_entry_script_tags('app') }}
+
+            {% if app.environment is same as('prod') %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+
+                gtag('config', 'UA-39521443-1');
+            </script>
+            {% endif %}
+        {% endblock %}
     </head>
     <body class="flex flex-col min-h-screen bg-gray-300 font-sans">
         <header>
@@ -88,21 +104,5 @@
                 </div>
             </div>
         </footer>
-        {% block javascripts %}
-            <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" rel="prefetch" crossorigin="anonymous"></script>
-            {{ encore_entry_script_tags('app') }}
-
-            {% if app.environment is same as('prod') %}
-            <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga }}"></script>
-            <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', 'UA-39521443-1');
-            </script>
-            {% endif %}
-        {% endblock %}
     </body>
 </html>
