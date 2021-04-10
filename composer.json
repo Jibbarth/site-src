@@ -8,7 +8,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
-        "doctrine/annotations": "^1.0",
         "doctrine/cache": "^1.10",
         "knplabs/github-api": "^3.0",
         "league/commonmark": "^1.4",
