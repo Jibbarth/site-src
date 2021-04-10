@@ -24,9 +24,7 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
         $this->client = $client;
     }
 
-    /**
-     * @Route("/img/fa/{type}-{collection}-{size}.svg", name="image")
-     */
+    #[Route('/img/fa/{type}-{collection}-{size}.svg', name: 'image')]
     public function __invoke(string $type, string $collection, int $size): Response
     {
         $faSvgUrl = \sprintf(

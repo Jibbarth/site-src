@@ -29,10 +29,8 @@ final class ListingController
         $this->requestStack = $requestStack;
     }
 
-    /**
-     * @Route("/blog", defaults={"_format"="html"}, methods="GET", name="article_list")
-     * @Route("/rss.xml",  methods="GET", name="blog_rss")
-     */
+    #[Route('/blog', name: 'article_list', defaults: ['_format' => 'html'], methods: ['GET'])]
+    #[Route('/rss.xml', name: 'blog_rss', methods: ['GET'])]
     public function __invoke(): Response
     {
         $format = 'html';

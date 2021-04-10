@@ -22,9 +22,7 @@ final class ProjectListController
         $this->repository = $repository;
     }
 
-    /**
-     * @Route("/projects", name="project_list")
-     */
+    #[Route('/projects', name: 'project_list')]
     public function __invoke(): Response
     {
         $allArticles = $this->repository->getAll();

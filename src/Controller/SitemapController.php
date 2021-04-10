@@ -28,9 +28,7 @@ final class SitemapController
     ) {
     }
 
-    /**
-     * @Route("/sitemap.xml", name="sitemap", defaults={"_format"="xml"})
-     */
+    #[Route('/sitemap.xml', name: 'sitemap', defaults: ['_format' => 'xml'])]
     public function __invoke(): Response
     {
         $urls = [];

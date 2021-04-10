@@ -23,9 +23,7 @@ final class DetailController implements ControllerWithDataProviderInterface
         $this->articleRepository = $articleRepository;
     }
 
-    /**
-     * @Route("/{type}/{article}", name="article_detail")
-     */
+    #[Route('/{type}/{article}', name: 'article_detail')]
     public function __invoke(string $type, string $article): Response
     {
         $article = $this->articleRepository->getById($article);

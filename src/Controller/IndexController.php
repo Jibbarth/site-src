@@ -39,9 +39,7 @@ final class IndexController
         $this->badgeRepository = $badgeRepository;
     }
 
-    /**
-     * @Route("/", name="home")
-     */
+    #[Route('/', name: 'home')]
     public function __invoke(): Response
     {
         $featuredProjects = $this->projectRepository->getAll()
