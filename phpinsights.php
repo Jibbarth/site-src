@@ -12,6 +12,9 @@ return [
         \NunoMaduro\PhpInsights\Domain\Metrics\Code\Code::class => [
             \SlevomatCodingStandard\Sniffs\ControlStructures\RequireYodaComparisonSniff::class,
         ],
+        \NunoMaduro\PhpInsights\Domain\Metrics\Style\Style::class => [
+            \PhpCsFixer\Fixer\Import\NoUnusedImportsFixer::class,
+        ],
     ],
     'remove' => [
         \SlevomatCodingStandard\Sniffs\Classes\SuperfluousInterfaceNamingSniff::class,
@@ -22,6 +25,8 @@ return [
         \SlevomatCodingStandard\Sniffs\Classes\SuperfluousTraitNamingSniff::class,
         // Implicit constructor is not well handle for now
         \SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff::class,
+        // wrong detection of php8 attributes
+        \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
     ],
     'config' => [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff::class => [
