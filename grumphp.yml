@@ -21,8 +21,10 @@ grumphp:
       standard: "PSR12"
       warning_severity: 0
       whitelist_patterns:
-        - '\/src'
-        - '\/tests'
+        - 'src'
+        - 'tests'
+      exclude:
+        - 'PSR12.Files.FileHeader'
     phpcsfixer2:
       config: '.php_cs'
       verbose: true

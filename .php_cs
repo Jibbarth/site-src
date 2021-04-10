@@ -8,6 +8,8 @@ return PhpCsFixer\Config::create()
         '@PhpCsFixer' => true,
         '@PHP71Migration' => true,
         '@PHP71Migration:risky' => true,
+        '@PSR12' => true,
+        '@PSR12:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'array_syntax' => ['syntax' => 'short'],
