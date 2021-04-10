@@ -1,9 +1,8 @@
-import '../css/markdown.css'
-import '../css/gist.css'
-
 import Prism from 'prismjs'
-import 'prism-themes/themes/prism-vsc-dark-plus.css'
 
+import 'prism-themes/themes/prism-vsc-dark-plus.css'
+import '../css/gist.css'
+import '../css/markdown.css'
 
 Prism.highlightAll();
 

@@ -107,7 +107,14 @@ body .markdown> h1:first-child  {
 
 .markdown pre {
     overflow: auto;
-    @apply border mx-8 p-4 mb-10 text-base;
+    @apply border p-4 mb-10 text-base;
+}
+
+@screen lg {
+    .markdown pre {
+        overflow: auto;
+        @apply mx-8;
+    }
 }
 
 .markdown pre[class*="language-"] > code[class*="language-"] {
