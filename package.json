@@ -16,10 +16,12 @@
     "webpack-notifier": "^1.6.0"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@symfony/webpack-encore": "^1.0.0",
     "babel-plugin-prismjs": "^2.0.1",
     "core-js": "^3.6.5",
+    "jsonp": "^0.2.1",
     "prism-themes": "^1.6.0",
     "prismjs": "^1.23.0",
     "tailwind": "^4.0.0",

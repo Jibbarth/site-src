@@ -1,6 +1,8 @@
 {
     "plugins": [
-        ["prismjs",
+        "@babel/plugin-proposal-class-properties",
+        [
+            "prismjs",
             {
                 "css": true,
                 "languages": [

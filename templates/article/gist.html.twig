@@ -28,7 +28,7 @@
                             {{ file.content | markdown_to_html }}
                         </div>
                     {% else %}
-                        <script src="https://gist.github.com/{{ github_user }}/{{ article.id }}.js?file={{ file.filename }}"></script>
+                        <div {{ stimulus_controller('gist_file', {githubUser: github_user, article: article.id, file: file.filename}) }}></div>
                     {% endif %}
                 </div>
             {% endfor %}
