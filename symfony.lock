@@ -35,6 +35,9 @@
     "composer/composer": {
         "version": "1.10.7"
     },
+    "composer/metadata-minifier": {
+        "version": "1.0.0"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -77,6 +80,9 @@
     "ergebnis/phpstan-rules": {
         "version": "0.15.0"
     },
+    "erusev/parsedown": {
+        "version": "1.7.4"
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.2",
         "recipe": {
@@ -113,6 +119,9 @@
     "league/container": {
         "version": "3.3.1"
     },
+    "mnapoli/front-yaml": {
+        "version": "1.8.0"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
     },
@@ -139,9 +148,6 @@
         "files": [
             "config/packages/nyholm_psr7.yaml"
         ]
-    },
-    "object-calisthenics/phpcs-calisthenics-rules": {
-        "version": "v3.7.0"
     },
     "ondram/ci-detector": {
         "version": "3.5.1"
