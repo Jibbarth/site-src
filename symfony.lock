@@ -98,6 +98,9 @@
     "gitonomy/gitlib": {
         "version": "v1.2.1"
     },
+    "jean85/pretty-package-versions": {
+        "version": "2.0.3"
+    },
     "justinrainbow/json-schema": {
         "version": "5.2.10"
     },
@@ -125,8 +128,8 @@
     "monolog/monolog": {
         "version": "2.1.0"
     },
-    "nette/finder": {
-        "version": "v2.5.2"
+    "nette/neon": {
+        "version": "v3.2.2"
     },
     "nette/utils": {
         "version": "v3.1.2"
@@ -565,6 +568,15 @@
     },
     "symplify/autowire-array-parameter": {
         "version": "v8.0.0"
+    },
+    "symplify/composer-json-manipulator": {
+        "version": "v9.3.0"
+    },
+    "symplify/console-package-builder": {
+        "version": "v9.3.0"
+    },
+    "symplify/easy-testing": {
+        "version": "v9.3.0"
     },
     "symplify/package-builder": {
         "version": "v8.0.0"
