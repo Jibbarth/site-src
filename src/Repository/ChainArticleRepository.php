@@ -42,7 +42,7 @@ final class ChainArticleRepository implements ArticleRepositoryInterface
 
         $articles = $articles->merge(...$allArticles);
         if ('prod' === $this->env) {
-            $articles = $articles->filter(fn (Article $article): bool => $article->isPublished());
+            $articles = $articles->filter(static fn (Article $article): bool => $article->isPublished());
         }
         \assert($articles instanceof ArticleCollection);
 

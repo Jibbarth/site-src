@@ -20,9 +20,7 @@ final class LocalArticleRepository implements ArticleRepositoryInterface
     private ArticleCollection $collection;
 
     private string $projectDir;
-    /**
-     * @var \App\Parser\FrontYamlParser
-     */
+
     private FrontYamlParser $parser;
 
     public function __construct(FrontYamlParser $parser, string $projectDir)
