@@ -7,6 +7,6 @@ namespace App\Constant;
 final class ArticleType
 {
     public const EXTERNAL = 'external';
-    public const INTERNAL = 'internal';
+    public const INTERNAL = 'post';
     public const GIST = 'gist';
 }

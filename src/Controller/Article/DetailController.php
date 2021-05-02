@@ -26,10 +26,10 @@ final class DetailController implements ControllerWithDataProviderInterface
     #[Route('/{type}/{article}', name: 'article_detail')]
     public function __invoke(string $type, string $article): Response
     {
-        $article = $this->articleRepository->getById($article);
+        $post = $this->articleRepository->getById($article);
 
         return new Response($this->renderer->render(\Safe\sprintf('article/%s.html.twig', $type), [
-            'article' => $article,
+            'article' => $post,
         ]));
     }
 

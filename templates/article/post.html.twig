@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% set meta_img = unsplash_url('coding', 600, 400) %}
+{% set meta_img = article.image ?? unsplash_url('coding', 600, 400) %}
 {% block title %}{{ article.title }} // {{ author }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block description %}{{ article.getAbstract()|markdown_to_html|striptags|raw }}{% endblock %}
 {% block meta_image %}{{ meta_img }}{% endblock %}
 {% block header_image %}
-    <img class="h-full w-full object-cover" src="{{ unsplash('coding', 1600, 300) }}">
+    <img class="h-full w-full object-cover" src="{{ article.image ?? unsplash('coding', 1600, 300) }}">
 {% endblock %}
 
 {% block sub_profile %}
@@ -21,27 +21,16 @@
             <div class="markdown" {{ stimulus_controller('code-highlight') }}>
                 {{ article.content | markdown_to_html }}
             </div>
-            {% for file in article.files %}
-                <div class="pt-6 pb-3 border-t ">
-                    {% if file.type == "text/markdown" %}
-                        <div class="markdown">
-                            {{ file.content | markdown_to_html }}
-                        </div>
-                    {% else %}
-                        <div {{ stimulus_controller('gist_file', {githubUser: github_user, article: article.id, file: file.filename}) }}></div>
-                    {% endif %}
-                </div>
-            {% endfor %}
             <div class="mt-6 mb-0 text-right">
                 <a href="#" {{ stimulus_controller('share') }} class="share hidden mr-2 px-4 py-2 bg-gray-100 text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white" data-title="{{ article.title }}">
                     <i class="fas fa-share-alt"></i>
                     Share
                 </a>
-                <a href="{{ article.url }}"
+                <a href="https://github.com/{{ github_user }}/site-src/edit/master/data/_posts/{{ article.id }}.md"
                    target="_blank" rel="nofollow,noopener"
                    class="px-4 py-2 bg-gray-100 text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
-                    <i class="fa fa-external-link-alt"></i>
-                    React on gist.github.com
+                    <i class="fab fa-github-alt"></i>
+                    Found a typo ?
                 </a>
             </div>
         </div>

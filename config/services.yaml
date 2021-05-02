@@ -49,6 +49,8 @@ services:
             string $websiteUrl: '%website_url%'
             string $afupEmail: '%env(resolve:AFUP_USERNAME)%'
             string $afupPassword: '%env(resolve:AFUP_PWD)%'
+            string $env: '%kernel.environment%'
+
     _instanceof:
         App\Gif\GifLinkProviderInterface:
             tags: ['app.gif_provider']

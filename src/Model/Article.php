@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
+use App\Constant\ArticleStatus;
 use App\Constant\ArticleType;
 use Symfony\Component\Validator\Constraints as Assert;
 use function Symfony\Component\String\u;
@@ -29,6 +30,10 @@ final class Article
      * @var array<string, array<string,string>>
      */
     private array $files = [];
+
+    private ?string $image = null;
+
+    private string $status = ArticleStatus::PUBLISHED;
 
     public function __construct(string $id, string $title, ?string $content, \DateTimeInterface $date, ?string $url)
     {
@@ -96,6 +101,30 @@ final class Article
         $this->files = $files;
 
         return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function withImage(string $imageUrl): self
+    {
+        $this->image = $imageUrl;
+
+        return $this;
+    }
+
+    public function markInDraft(): self
+    {
+        $this->status = ArticleStatus::DRAFT;
+
+        return $this;
+    }
+
+    public function isPublished(): bool
+    {
+        return ArticleStatus::PUBLISHED === $this->status;
     }
 
     private function defineType(): void

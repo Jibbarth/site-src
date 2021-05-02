@@ -10,9 +10,9 @@ use App\Repository\ArticleRepositoryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
 
-final class FileArticleRepository implements ArticleRepositoryInterface
+final class ExternalArticleRepository implements ArticleRepositoryInterface
 {
-    private const FILENAME = 'articles.yaml';
+    private const FILENAME = 'external_articles.yaml';
 
     private SerializerInterface $serializer;
 
@@ -46,9 +46,9 @@ final class FileArticleRepository implements ArticleRepositoryInterface
             $this->getAll();
         }
 
-        $articlesFiltered = $this->collection->filter(static function (Article $article) use ($id): bool {
-            return $article->getId() === $id;
-        });
+        $articlesFiltered = $this->collection
+            ->filter(static fn (Article $article): bool => $article->getId() === $id);
+
         if ($articlesFiltered->isEmpty()) {
             throw new NotFoundHttpException();
         }
