@@ -14,11 +14,12 @@ final class ChainArticleRepository implements ArticleRepositoryInterface
      * @var array<ArticleRepositoryInterface>
      */
     private array $repositories = [];
+    private string $env;
 
     /**
      * @param iterable<\App\Repository\ArticleRepositoryInterface> $articleRepositories
      */
-    public function __construct(iterable $articleRepositories)
+    public function __construct(iterable $articleRepositories, string $env)
     {
         foreach ($articleRepositories as $articleRepository) {
             if ($articleRepository instanceof self) {
@@ -27,18 +28,22 @@ final class ChainArticleRepository implements ArticleRepositoryInterface
 
             $this->repositories[] = $articleRepository;
         }
+        $this->env = $env;
     }
 
     public function getAll(): ArticleCollection
     {
         $articles = new ArticleCollection();
         $allArticles = [];
-        /** @var ArticleRepositoryInterface $repository */
+
         foreach ($this->repositories as $repository) {
             $allArticles[] = $repository->getAll();
         }
 
         $articles = $articles->merge(...$allArticles);
+        if ('prod' === $this->env) {
+            $articles = $articles->filter(fn (Article $article): bool => $article->isPublished());
+        }
         \assert($articles instanceof ArticleCollection);
 
         return $articles;
