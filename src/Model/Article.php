@@ -14,7 +14,7 @@ final class Article
 
     private string $title;
 
-    private ?string $content;
+    private string $content = '';
 
     private \DateTimeInterface $date;
 
@@ -34,17 +34,12 @@ final class Article
     {
         $this->id = $id;
         $this->title = $title;
-        $this->content = $content;
         $this->url = $url;
         $this->date = $date;
-
-        $this->type = ArticleType::INTERNAL;
-        if (null === $content && null !== $url) {
-            $this->type = ArticleType::EXTERNAL;
+        if (null !== $content) {
+            $this->content = $content;
         }
-        if (null !== u($url ?? '')->indexOf('gist.github.com')) {
-            $this->type = ArticleType::GIST;
-        }
+        $this->defineType();
     }
 
     public function getId(): string
@@ -79,7 +74,10 @@ final class Article
 
     public function getAbstract(): string
     {
-        return u($this->content ?? '')->replace($this->title, '')->truncate(200, '...')->toString();
+        return u($this->content)
+            ->replace($this->title, '')
+            ->truncate(200, '...')
+            ->toString();
     }
 
     /**
@@ -98,5 +96,16 @@ final class Article
         $this->files = $files;
 
         return $this;
+    }
+
+    private function defineType(): void
+    {
+        $this->type = ArticleType::INTERNAL;
+        if ('' === $this->content && null !== $this->url) {
+            $this->type = ArticleType::EXTERNAL;
+        }
+        if (null !== u($this->url ?? '')->indexOf('gist.github.com')) {
+            $this->type = ArticleType::GIST;
+        }
     }
 }
