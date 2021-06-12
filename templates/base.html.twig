@@ -37,7 +37,7 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
         {% block javascripts %}
-            <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" rel="prefetch" crossorigin="anonymous"></script>
+            <script async src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" rel="prefetch" crossorigin="anonymous"></script>
             {{ encore_entry_script_tags('app') }}
 
             {% if app.environment is same as('prod') %}
@@ -51,6 +51,7 @@
                 gtag('config', 'UA-39521443-1');
             </script>
             {% endif %}
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         {% endblock %}
     </head>
     <body class="flex flex-col min-h-screen bg-gray-300 font-sans">
