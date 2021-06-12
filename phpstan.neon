@@ -16,6 +16,7 @@ parameters:
         - %currentWorkingDirectory%/config
         - %currentWorkingDirectory%/public
         - %currentWorkingDirectory%/phpinsights.php
+        - %currentWorkingDirectory%/.php-cs-fixer.dist.php
     autoload_files:
         - %currentWorkingDirectory%/vendor/autoload.php
 

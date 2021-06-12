@@ -7,6 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.2",
+    "@hotwired/turbo": "^7.0.0-beta.5",
     "@symfony/stimulus-bridge": "^2.0.2",
     "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/Resources/assets",
     "node-sass": "^4.13.1",

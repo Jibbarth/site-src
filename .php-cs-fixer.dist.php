@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
 // Customize your own with https://mlocati.github.io/php-cs-fixer-configurator/
 
-return PhpCsFixer\Config::create()
-    ->setUsingCache(true)
+return (new PhpCsFixer\Config())
     ->setRules([
         '@PhpCsFixer' => true,
         '@PHP71Migration' => true,
@@ -48,4 +48,4 @@ return PhpCsFixer\Config::create()
         ->in(__DIR__ . '/src/')
         ->notName('Kernel.php')
     )
-;
+    ->setCacheFile('.php-cs-fixer.cache');

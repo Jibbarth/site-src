@@ -26,7 +26,7 @@ grumphp:
       exclude:
         - 'PSR12.Files.FileHeader'
     phpcsfixer2:
-      config: '.php_cs'
+      config: '.php-cs-fixer.dist.php'
       verbose: true
       diff: true
       triggered_by: ['php']
