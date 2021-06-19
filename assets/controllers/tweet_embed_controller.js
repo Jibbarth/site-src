@@ -18,6 +18,7 @@ export default class extends Controller {
     }
 
     _loadTweet() {
+        this.element.innerHTML = "";
         window.twttr.widgets.createTweet(
             this.idValue,
             this.element,
