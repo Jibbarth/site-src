@@ -1,8 +1,8 @@
 ---
 title: "PHPInsights v2 released"
-date: 2021-06-19
+date: 2021-06-21
 hero: https://user-images.githubusercontent.com/3168281/122650958-08bd6080-d136-11eb-8e77-04cf8377cb6b.png
-state: draft
+state: published
 ---
 
 In case you missed the following tweet, let me introduce the new **v2.0** for [PHPInsights](https://phpinsights.com).
