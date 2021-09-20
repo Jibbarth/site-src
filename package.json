@@ -24,7 +24,7 @@
     "core-js": "^3.6.5",
     "jsonp": "^0.2.1",
     "prism-themes": "^1.6.0",
-    "prismjs": "^1.23.0",
+    "prismjs": "^1.25.0",
     "tailwind": "^4.0.0",
     "tailwindcss": "^1.2.0"
   }
