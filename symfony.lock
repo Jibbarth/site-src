@@ -77,9 +77,6 @@
     "ergebnis/phpstan-rules": {
         "version": "0.15.3"
     },
-    "erusev/parsedown": {
-        "version": "1.7.4"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "2.19",
         "recipe": {
