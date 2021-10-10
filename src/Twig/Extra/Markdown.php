@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Twig\Extra;
 
-use League\CommonMark\Environment;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\MarkdownConverter;
@@ -14,12 +15,14 @@ final class Markdown implements MarkdownInterface
 {
     private MarkdownConverter $converter;
 
-    /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
-     */
     public function __construct()
     {
-        $environment = Environment::createCommonMarkEnvironment();
+        $environment = new Environment([
+            'heading_permalink' => [
+                'symbol' => '#',
+            ],
+        ]);
+        $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
         $environment->addExtension(new HeadingPermalinkExtension());
 
@@ -28,6 +31,6 @@ final class Markdown implements MarkdownInterface
 
     public function convert(string $body): string
     {
-        return $this->converter->convertToHtml($body);
+        return (string) $this->converter->convertToHtml($body);
     }
 }

@@ -47,6 +47,9 @@
     "dealerdirect/phpcodesniffer-composer-installer": {
         "version": "v0.7.1"
     },
+    "dflydev/dot-access-data": {
+        "version": "v3.0.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -113,6 +116,9 @@
     "league/commonmark": {
         "version": "1.6.2"
     },
+    "league/config": {
+        "version": "v1.1.1"
+    },
     "league/container": {
         "version": "3.3.5"
     },
@@ -124,6 +130,9 @@
     },
     "nette/neon": {
         "version": "v3.2.2"
+    },
+    "nette/schema": {
+        "version": "v1.2.1"
     },
     "nette/utils": {
         "version": "v3.2.2"

@@ -10,7 +10,7 @@
         "ext-intl": "*",
         "doctrine/cache": "^2.0",
         "knplabs/github-api": "^3.0",
-        "league/commonmark": "^1.4",
+        "league/commonmark": "^2.0",
         "mnapoli/front-yaml": "^1.8",
         "nyholm/psr7": "^1.2",
         "phpdocumentor/reflection-docblock": "^5.2",
