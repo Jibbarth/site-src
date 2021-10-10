@@ -12,6 +12,7 @@
         "knplabs/github-api": "^3.0",
         "league/commonmark": "^2.0",
         "mnapoli/front-yaml": "^2.0",
+        "nesbot/carbon": "^2.53",
         "nyholm/psr7": "^1.2",
         "phpdocumentor/reflection-docblock": "^5.2",
         "ramsey/collection": "^1.0",
