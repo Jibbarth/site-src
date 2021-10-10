@@ -43,7 +43,7 @@ final class ListingController
             $format = 'xml';
         }
 
-        return new Response($this->renderer->render(\sprintf('article/list.%s.twig', $format), [
+        return new Response($this->renderer->render(sprintf('article/list.%s.twig', $format), [
             'articles' => $this->repository->getAll()->sort('getDate', AbstractCollection::SORT_DESC),
         ]));
     }

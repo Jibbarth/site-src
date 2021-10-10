@@ -42,7 +42,7 @@ final class AfupBadge implements BadgeRepositoryInterface
                 $title = u($node->attr('alt'))->replace('Badge ', '')->toString();
 
                 return new Badge(
-                    \uniqid('', true),
+                    uniqid('', true),
                     $title,
                     'Afup : ' . $title,
                     $image->getUri(),

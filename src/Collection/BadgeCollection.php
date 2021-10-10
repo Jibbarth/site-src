@@ -24,7 +24,7 @@ final class BadgeCollection extends AbstractCollection
     {
         $collection = clone $this;
 
-        \shuffle($collection->data);
+        shuffle($collection->data);
 
         return $collection;
     }

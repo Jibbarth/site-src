@@ -39,7 +39,7 @@ return (new PhpCsFixer\Config())
         'php_unit_test_class_requires_covers' => false,
         'protected_to_private' => true,
         'self_accessor' => false,
-        'single_line_comment_style' => null,
+        'single_line_comment_style' => false,
         'single_line_throw' => false,
         'yoda_style' => true,
     ])

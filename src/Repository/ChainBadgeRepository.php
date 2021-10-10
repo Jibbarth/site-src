@@ -19,8 +19,8 @@ final class ChainBadgeRepository implements BadgeRepositoryInterface
     public function __construct(iterable $badgeRepositories)
     {
         \assert($badgeRepositories instanceof \Traversable);
-        $this->repositories = \array_filter(
-            \iterator_to_array($badgeRepositories),
+        $this->repositories = array_filter(
+            iterator_to_array($badgeRepositories),
             static fn ($repository) => !$repository instanceof self
         );
     }

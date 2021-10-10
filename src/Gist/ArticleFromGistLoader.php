@@ -32,7 +32,7 @@ final class ArticleFromGistLoader
             }
         );
 
-        $file = \array_shift($gist['files']);
+        $file = array_shift($gist['files']);
         $article = new Article(
             $gist['id'],
             $gist['description'],

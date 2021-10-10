@@ -42,13 +42,13 @@ final class PublicGistArticleRepository implements ArticleRepositoryInterface
             return $this->client->user()->gists($this->githubUser);
         });
 
-        $articles = \array_map(function (array $githubData): Article {
+        $articles = array_map(function (array $githubData): Article {
             return $this->gistArticleLoader->retrieve($githubData['id']);
-        }, \array_filter($gists, static function (array $githubData): bool {
+        }, array_filter($gists, static function (array $githubData): bool {
             if (0 === \count($githubData['files'])) {
                 return false;
             }
-            $file = \array_shift($githubData['files']);
+            $file = array_shift($githubData['files']);
             // if first file is not in markdown, consider gist as not relevant
 
             return 'Markdown' === $file['language'] || 'text/markdown' === $file['type'];

@@ -26,14 +26,14 @@ final class DevToBadge implements BadgeRepositoryInterface
     {
         $response = $this->client->request(
             'GET',
-            \sprintf('%s%s', self::DEV_TO_URL, $this->githubUser)
+            sprintf('%s%s', self::DEV_TO_URL, $this->githubUser)
         );
 
         $crawler = new Crawler($response->getContent(), self::DEV_TO_URL, self::DEV_TO_URL);
         $badges = $crawler
             ->filter(self::BADGE_NODE_PATH)
             ->each(fn (Crawler $node) => new Badge(
-                \uniqid('', true),
+                uniqid('', true),
                 $node->attr('title') ?? '',
                 $node->attr('title') ?? '',
                 $node->filter('img')->attr('src') ?? '',

@@ -32,7 +32,7 @@ final class ExternalArticleRepository implements ArticleRepositoryInterface
         if ($this->collection->isEmpty()) {
             $filename = $this->projectDir . \DIRECTORY_SEPARATOR . 'data' . \DIRECTORY_SEPARATOR . self::FILENAME;
 
-            $articles = $this->serializer->deserialize(\file_get_contents($filename), Article::class . '[]', 'yaml');
+            $articles = $this->serializer->deserialize(file_get_contents($filename), Article::class . '[]', 'yaml');
 
             $this->collection = new ArticleCollection($articles);
         }

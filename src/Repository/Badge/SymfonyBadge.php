@@ -36,7 +36,7 @@ final class SymfonyBadge implements BadgeRepositoryInterface
         $root = $this->api->getRoot();
         $user = $root->getUser($this->userUuid);
         $badges = $user->getBadges();
-        $badges = \array_map(function (SfBadge $badge) use ($root): Badge {
+        $badges = array_map(function (SfBadge $badge) use ($root): Badge {
             /** @var SfBadge $badge */
             $badge = $root->getBadge($badge->getId());
             $badge->setImage($this->resolveImage($badge->getImage()));

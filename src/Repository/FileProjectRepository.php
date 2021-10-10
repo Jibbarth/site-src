@@ -34,7 +34,7 @@ final class FileProjectRepository implements ProjectRepositoryInterface
         $projects = $serializer->denormalize($data, Project::class . '[]');
 
         $this->projects = new ProjectCollection(\Safe\array_combine(
-            \array_map(
+            array_map(
                 static fn (Project $project): string => $slugger->slug($project->getName())->toString(),
                 $projects
             ),

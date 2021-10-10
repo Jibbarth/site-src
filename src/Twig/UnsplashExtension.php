@@ -40,7 +40,7 @@ final class UnsplashExtension extends AbstractExtension
             \Safe\sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
         );
 
-        return 'data:image/png;base64, ' . \base64_encode($response->getContent());
+        return 'data:image/png;base64, ' . base64_encode($response->getContent());
     }
 
     public function getUnsplashUrl(string $keyword, int $width = 1600, int $height = 900): string

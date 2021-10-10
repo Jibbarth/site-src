@@ -27,7 +27,7 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
     #[Route('/img/fa/{type}-{collection}-{size}.svg', name: 'image')]
     public function __invoke(string $type, string $collection, int $size): Response
     {
-        $faSvgUrl = \sprintf(
+        $faSvgUrl = sprintf(
             'https://raw.githubusercontent.com/FortAwesome/Font-Awesome/master/svgs/%s/%s.svg',
             $collection,
             $type
