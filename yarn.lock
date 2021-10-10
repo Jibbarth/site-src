@@ -928,15 +928,10 @@
     postcss "7.0.32"
     purgecss "^2.3.0"
 
-"@hotwired/turbo@^7.0.0-beta.4":
-  version "7.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.0-beta.4.tgz#be6d7014902d45121f56358d360e0810bad4c19e"
-  integrity sha512-koox7UeA2Na0tLBPesxNO3nk/gtezRxF33NHKbAx+zv5s2k1Xh/orB5xNr5dAckoUj3Pdpytnw41WH4QB1jYBg==
-
-"@hotwired/turbo@^7.0.0-beta.5":
-  version "7.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.0-rc.1.tgz#a5c1be86def1cc39b3011c935c5734b8632af5c3"
-  integrity sha512-niNA68ku4TZYbV3biwTPf1L5CidP50S2xfeb5rGQfodvPB9UAtkqKFFRIA0LL8y0DG4MGIZ/QFlbvlmFea5p4w==
+"@hotwired/turbo@^7.0.0-rc.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.1.tgz#2a8c6ab2f24914d1d47f3a7a7779e2881e8c61a0"
+  integrity sha512-awqraytYXbHV2NT0WAOnDDDGJeHHnFtnztdXvRuIqgsStUtPKM8B9H7ISm77SwbHemEjxEOB8Ku4RfNbEEXsPQ==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
@@ -1000,8 +995,6 @@
 
 "@symfony/ux-turbo@file:vendor/symfony/ux-turbo/Resources/assets":
   version "0.1.0"
-  dependencies:
-    "@hotwired/turbo" "^7.0.0-beta.4"
 
 "@symfony/webpack-encore@^1.0.0":
   version "1.1.2"
