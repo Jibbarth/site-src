@@ -50,6 +50,7 @@ services:
             string $afupEmail: '%env(resolve:AFUP_USERNAME)%'
             string $afupPassword: '%env(resolve:AFUP_PWD)%'
             string $env: '%kernel.environment%'
+            int $minDiffInDayToBeOutdated: 10
 
     _instanceof:
         App\Gif\GifLinkProviderInterface:
