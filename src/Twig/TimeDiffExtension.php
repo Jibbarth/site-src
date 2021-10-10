@@ -10,6 +10,9 @@ use Twig\TwigFilter;
 
 final class TimeDiffExtension extends AbstractExtension
 {
+    /**
+     * @return array<\Twig\TwigFilter>
+     */
     public function getFilters(): array
     {
         return [

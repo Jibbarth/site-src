@@ -18,6 +18,9 @@ final class IsOutdatedArticleExtension extends AbstractExtension
         $this->minDiffInDayToBeOutdated = $minDiffInDayToBeOutdated;
     }
 
+    /**
+     * @return array<\Twig\TwigFunction>
+     */
     public function getFunctions(): array
     {
         return [
