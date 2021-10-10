@@ -19,6 +19,9 @@
     <div class="flex flex-col items-center">
         <div class="bg-gray-100 p-6 w-full max-w-4xl">
             <div class="markdown" {{ stimulus_controller('code-highlight') }}>
+                {% if is_outdated_article(article) %}
+                    {{ include('_partials/outdated.html.twig') }}
+                {% endif %}
                 {{ article.content | markdown_to_html }}
             </div>
             <div class="mt-6 mb-0 text-right">
