@@ -23,7 +23,7 @@ final class LastPrRetriever
         $data = $this->client->graphql()->execute(<<<EOL
             query {
               viewer {
-                pullRequests(first: {$size}, states: [OPEN, MERGED], orderBy: {field:UPDATED_AT, direction: DESC} ) {
+                pullRequests(first: {$size}, states: [OPEN], orderBy: {field:UPDATED_AT, direction: DESC} ) {
                   nodes {
                     title
                     permalink
