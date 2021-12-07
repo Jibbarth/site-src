@@ -24,6 +24,9 @@ jobs:
                 with:
                     php-version: 8.0
                     coverage: none
+            -   uses: actions/setup-node@v2
+                with:
+                    node-version: '14'
             -   run: composer install --no-progress
             -   name: Grumphp
                 run: vendor/bin/grumphp run --ansi
@@ -42,6 +45,9 @@ jobs:
                 with:
                     php-version: 8.0
                     coverage: none
+            -   uses: actions/setup-node@v2
+                with:
+                    node-version: '14'
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
             -   run: yarn install --force
             -   run: yarn encore prod
@@ -72,6 +78,9 @@ jobs:
                 with:
                     php-version: 8.0
                     coverage: none
+            -   uses: actions/setup-node@v2
+                with:
+                    node-version: '14'
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
             -   run: yarn install --force
             -   name: Build 📦
