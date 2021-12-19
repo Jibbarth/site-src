@@ -1,6 +1,6 @@
 <div class="w-full sm:w-1/2 md:w-1/3 mb-4 sm:px-2">
     <div class="bg-gray-100 sm:rounded h-full overflow-hidden shadow flex flex-col">
-        <img class="h-64 md:h-40 w-full object-cover object-center" src="{{ project.image ?? unsplash(project.name ~',programming', 300, 300) }}" alt="">
+        <img class="h-64 md:h-40 w-full object-cover object-center" src="{{ project.image ?? unsplash(project.name ~',programming', 300, 300) }}" alt="{{ project.name }}" loading="lazy">
         <div class="p-4 pb-0 flex-grow">
             <a href="{{ project.url}}"
                target="_blank" rel="noopener,noreferrer"
