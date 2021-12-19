@@ -42,7 +42,16 @@
             <div class="mb-4 sm:px-2">
                 <div class="badge-container transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-110
                 relative bg-white shadow h-32 w-32 rounded-full overflow-hidden border-2 border-white">
-                    <img class="object-cover w-full h-full" src="{{ badge.image }}" alt="{{ badge.name }}"/>
+                    <img class="object-cover w-full h-full"
+                         loading="lazy"
+                         src="{{ data_uri_thumbnail(badge.image, 125, 125) }}"
+                         alt="{{ badge.name }}"
+                         {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
+                            src: badge.image
+                         }) }}
+                         width="125"
+                         height="125"
+                    />
                     <div class="badge-info absolute transition-all transform duration-200 delay-150 ease-in-out mt-1 flex bg-gray-300 rounded-full bg-opacity-75 w-full h-full">
                         <a href="{{ badge.link }}" class="block p-2 m-auto text-center self-center" target="_blank" rel="noopener,noreferrer">
                             <p class="text-sm font-semibold text-gray-800">{{ badge.name }}</p>
