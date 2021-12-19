@@ -982,6 +982,9 @@
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
+"@symfony/ux-lazy-image@file:vendor/symfony/ux-lazy-image/Resources/assets":
+  version "1.1.0"
+
 "@symfony/ux-turbo@file:vendor/symfony/ux-turbo/Resources/assets":
   version "0.1.0"
 

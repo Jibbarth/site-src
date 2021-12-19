@@ -10,6 +10,7 @@
     "@hotwired/stimulus": "^3.0.0",
     "@hotwired/turbo": "^7.0.1",
     "@symfony/stimulus-bridge": "^3.0",
+    "@symfony/ux-lazy-image": "file:vendor/symfony/ux-lazy-image/Resources/assets",
     "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/Resources/assets",
     "autoprefixer": "^10.4.0",
     "node-sass": "^4.13.1",
