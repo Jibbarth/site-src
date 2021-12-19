@@ -11,8 +11,10 @@
     "@hotwired/turbo": "^7.0.1",
     "@symfony/stimulus-bridge": "^3.0",
     "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/Resources/assets",
+    "autoprefixer": "^10.4.0",
     "node-sass": "^4.13.1",
-    "postcss-loader": "^3.0.0",
+    "postcss": "^8.4.5",
+    "postcss-loader": "^4.3.0",
     "sass-loader": "^10.0.0",
     "webpack-notifier": "^1.6.0"
   },
@@ -26,6 +28,6 @@
     "prism-themes": "^1.6.0",
     "prismjs": "^1.25.0",
     "tailwind": "^4.0.0",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^3.0.7"
   }
 }
