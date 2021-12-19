@@ -66,7 +66,16 @@
                 <div class="-ml-56 sm:w-64">
                     <div class="shadow h-32 w-32 -my-16 border-white rounded-full overflow-hidden border-4">
                         <a href="/">
-                            <img class="object-cover w-full h-full" src="https://gravatar.com/avatar/{{ gravatar_hash }}?s=200">
+                            {% set profile_path = 'https://gravatar.com/avatar/'~ gravatar_hash ~'?s=200' %}
+                            <img class="object-cover w-full h-full"
+                                 alt="profile picture"
+                                 src="{{ data_uri_thumbnail(profile_path, 120, 120) }}"
+                                 {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
+                                    src: profile_path
+                                 }) }}
+                                 width="120"
+                                 height="120"
+                            />
                         </a>
                     </div>
                 </div>
