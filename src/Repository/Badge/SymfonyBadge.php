@@ -64,6 +64,11 @@ final class SymfonyBadge implements BadgeRepositoryInterface
         $response = $this->client->request('GET', $url);
         $response->getContent();
 
-        return u($response->getInfo()['url'])->replace('30x30', '200x200')->toString();
+        $imageUrl = $response->getInfo('url') ?? $url;
+        if (!\is_string($imageUrl)) {
+            throw new \RuntimeException(sprintf('Unable to resolve image url: %s', $url));
+        }
+
+        return u($imageUrl)->replace('30x30', '200x200')->toString();
     }
 }

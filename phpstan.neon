@@ -9,7 +9,7 @@ parameters:
             - Ramsey\Collection\AbstractCollection
             - Symfony\Component\Console\Command\Command
 
-    excludes_analyse:
+    excludePaths:
         - %currentWorkingDirectory%/src/Kernel.php
         - %currentWorkingDirectory%/src/Migrations
         - %currentWorkingDirectory%/tests
@@ -17,7 +17,7 @@ parameters:
         - %currentWorkingDirectory%/public
         - %currentWorkingDirectory%/phpinsights.php
         - %currentWorkingDirectory%/.php-cs-fixer.dist.php
-    autoload_files:
+    bootstrapFiles:
         - %currentWorkingDirectory%/vendor/autoload.php
 
     ignoreErrors:

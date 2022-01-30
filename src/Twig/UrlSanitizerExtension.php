@@ -23,7 +23,7 @@ final class UrlSanitizerExtension extends AbstractExtension
     public function sanitizeUrl(string $url): string
     {
         $host = \Safe\parse_url($url, \PHP_URL_HOST);
-        if (null === $host) {
+        if (null === $host || !\is_string($host)) {
             throw new \InvalidArgumentException(sprintf('"%s" is not an absolute url', $url));
         }
 

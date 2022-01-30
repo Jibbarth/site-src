@@ -37,6 +37,10 @@ final class PrivateGistArticleRepository implements ArticleRepositoryInterface
         $filename = $this->projectDir . \DIRECTORY_SEPARATOR . 'data' . \DIRECTORY_SEPARATOR . self::FILENAME;
         $listIds = $this->yaml::parse(\Safe\file_get_contents($filename));
 
+        if (!\is_array($listIds)) {
+            throw new \RuntimeException('Invalid private gist list');
+        }
+
         $articles = [];
         foreach ($listIds as $id) {
             $articles[] = $this->gistArticleLoader->retrieve($id);

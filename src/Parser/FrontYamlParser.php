@@ -20,6 +20,14 @@ final class FrontYamlParser
     public function parse(string $content): FrontPostDocument
     {
         $document = $this->parser->parse($content, false);
+        /**
+         * @var array{
+         *     title: string,
+         *     date: \DateTimeInterface,
+         *     state: ?string,
+         *     hero: ?string,
+         * } $yaml
+         */
         $yaml = $document->getYAML();
 
         return new FrontPostDocument(

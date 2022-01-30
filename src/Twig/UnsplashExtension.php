@@ -37,7 +37,7 @@ final class UnsplashExtension extends AbstractExtension
     {
         $response = $this->client->request(
             'GET',
-            \Safe\sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
+            sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
         );
 
         return 'data:image/png;base64, ' . base64_encode($response->getContent());
@@ -47,11 +47,15 @@ final class UnsplashExtension extends AbstractExtension
     {
         $response = $this->client->request(
             'GET',
-            \Safe\sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
+            sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
         );
 
         $response->getStatusCode(); // Retrieve info
+        $url = $response->getInfo('url');
+        if (!\is_string($url)) {
+            throw new \RuntimeException('Unable to retrieve URL');
+        }
 
-        return $response->getInfo()['url'];
+        return $url;
     }
 }
