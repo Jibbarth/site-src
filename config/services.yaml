@@ -89,5 +89,8 @@ services:
     # replace default markdown by our markdown configured
     twig.markdown.default: '@App\Twig\Extra\Markdown'
 
+    Psr\Container\ContainerInterface:
+        alias: "service_container"
+
 twig:
     globals: *parameters
