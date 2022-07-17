@@ -6,13 +6,6 @@ grumphp:
     composer:
       file: "./composer.json"
       no_check_all: true
-    git_blacklist:
-      keywords:
-        - "var_dump"
-        - "dump\\("
-        - "print_r"
-        - "die\\("
-      triggered_by: [php, twig]
     jsonlint:
       detect_key_conflicts: true
     phpcpd:
