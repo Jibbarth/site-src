@@ -9,3 +9,14 @@ import '@fortawesome/fontawesome-free/js/all.min'
 import '../bootstrap'
 
 window.addEventListener('load', () => twemoji.parse(document.body), false);
+
+document.addEventListener("turbo:load", () => {
+    // Google Analytics.
+    // https://github.com/turbolinks/turbolinks/issues/73#issuecomment-460028854
+    if(typeof(gtag) == "function") {
+        gtag("config", window.gaIdentifier, {
+            "page_title": document.title,
+            "page_path": location.href.replace(location.origin, ""),
+        })
+    }
+})

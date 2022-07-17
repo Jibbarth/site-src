@@ -38,19 +38,21 @@
         {% endblock %}
         {% block javascripts %}
             <script async src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" rel="prefetch" crossorigin="anonymous"></script>
-            {{ encore_entry_script_tags('app') }}
 
             {% if app.environment is same as('prod') %}
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga }}"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
+                window.gaIdentifier = '{{ ga|e }}';
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                gtag('config', 'UA-39521443-1');
+                gtag('config', window.gaIdentifier);
             </script>
             {% endif %}
+
+            {{ encore_entry_script_tags('app') }}
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         {% endblock %}
     </head>
