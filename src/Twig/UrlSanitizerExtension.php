@@ -6,6 +6,7 @@ namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+
 use function Symfony\Component\String\u;
 
 final class UrlSanitizerExtension extends AbstractExtension

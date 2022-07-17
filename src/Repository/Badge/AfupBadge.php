@@ -10,6 +10,7 @@ use App\Repository\BadgeRepositoryInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+
 use function Symfony\Component\String\u;
 
 final class AfupBadge implements BadgeRepositoryInterface

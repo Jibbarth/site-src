@@ -7,6 +7,7 @@ namespace App\Model;
 use App\Constant\ArticleStatus;
 use App\Constant\ArticleType;
 use Symfony\Component\Validator\Constraints as Assert;
+
 use function Symfony\Component\String\u;
 
 final class Article

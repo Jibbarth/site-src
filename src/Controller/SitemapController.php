@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symplify\SymfonyStaticDumper\Routing\RoutesProvider;
 use Twig\Environment;
+
 use function Symfony\Component\String\u;
 
 final class SitemapController

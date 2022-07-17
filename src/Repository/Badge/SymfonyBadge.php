@@ -11,6 +11,7 @@ use App\Repository\BadgeRepositoryInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use SymfonyCorp\Connect\Api\Api;
 use SymfonyCorp\Connect\Api\Entity\Badge as SfBadge;
+
 use function Symfony\Component\String\u;
 
 final class SymfonyBadge implements BadgeRepositoryInterface
