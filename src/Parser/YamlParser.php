@@ -17,10 +17,7 @@ final class YamlParser implements YamlParserInterface
         $this->parser = new Parser();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function parse(string $yaml)
+    public function parse(string $yaml): mixed
     {
         return $this->parser->parse($yaml, Yaml::PARSE_DATETIME);
     }

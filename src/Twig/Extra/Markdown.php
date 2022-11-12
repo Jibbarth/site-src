@@ -31,6 +31,6 @@ final class Markdown implements MarkdownInterface
 
     public function convert(string $body): string
     {
-        return (string) $this->converter->convertToHtml($body);
+        return (string) $this->converter->convert($body);
     }
 }
