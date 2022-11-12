@@ -6,7 +6,6 @@ namespace App\Repository;
 
 use App\Collection\ProjectCollection;
 use App\Model\Project;
-use InvalidArgumentException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -48,7 +47,7 @@ final class FileProjectRepository implements ProjectRepositoryInterface
 
         $project = $this->projects->offsetGet($key);
         if (null === $project) {
-            throw new InvalidArgumentException('Unable to find project with name ' . $name);
+            throw new \InvalidArgumentException('Unable to find project with name ' . $name);
         }
 
         return $project;
