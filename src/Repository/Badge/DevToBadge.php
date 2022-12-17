@@ -14,7 +14,7 @@ final class DevToBadge implements BadgeRepositoryInterface
 {
     private const DEV_TO_URL = 'https://dev.to/';
 
-    private const BADGE_NODE_PATH = '.js-profile-badges a';
+    private const BADGE_NODE_PATH = '.js-profile-badges .js-profile-badge';
 
     public function __construct(
         private HttpClientInterface $client,
@@ -24,20 +24,19 @@ final class DevToBadge implements BadgeRepositoryInterface
 
     public function getBadges(): BadgeCollection
     {
-        $response = $this->client->request(
-            'GET',
-            sprintf('%s%s', self::DEV_TO_URL, $this->githubUser)
-        );
+        $uri = sprintf('%s%s', self::DEV_TO_URL, $this->githubUser);
 
-        $crawler = new Crawler($response->getContent(), self::DEV_TO_URL, self::DEV_TO_URL);
+        $response = $this->client->request('GET', $uri);
+
+        $crawler = new Crawler($response->getContent(), $uri, self::DEV_TO_URL);
         $badges = $crawler
             ->filter(self::BADGE_NODE_PATH)
             ->each(fn (Crawler $node) => new Badge(
                 uniqid('', true),
                 $node->attr('title') ?? '',
-                $node->attr('title') ?? '',
+                $node->nextAll()->filter('.hidden')->first()->filter('p.description')->text(''),
                 $node->filter('img')->attr('src') ?? '',
-                self::DEV_TO_URL . $node->attr('href'),
+                $uri,
                 $this->getCategory(),
             ));
 
