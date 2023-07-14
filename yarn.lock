@@ -1965,6 +1965,11 @@ arg@^5.0.1:
   resolved "https://registry.yarnpkg.com/arg/-/arg-5.0.1.tgz#eb0c9a8f77786cad2af8ff2b862899842d7b6adb"
   integrity sha512-e0hDa9H2Z9AwFkk2qDlwhoMYE4eToKarchkQHovNdLTCYMHZHeRjI71crOh+dio4K6u1IcwubQqo79Ga4CyAQA==
 
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -2312,12 +2317,7 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297:
-  version "1.0.30001304"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001304.tgz#38af55ed3fc8220cb13e35e6e7309c8c65a05559"
-  integrity sha512-bdsfZd6K6ap87AGqSHJP/s1V+U6Z5lyrcbBu3ovbCCf8cSYpwTtGrCBObMpJqwxfTbLW6YTIdbb1jEeTelcpYQ==
-
-caniuse-lite@^1.0.30001503:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297, caniuse-lite@^1.0.30001503:
   version "1.0.30001515"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001515.tgz#418aefeed9d024cd3129bfae0ccc782d4cb8f12b"
   integrity sha512-eEFDwUOZbE24sb+Ecsx3+OvNETqjWIdabMy52oOkIgcUtAsQifjUG9q4U9dgTHJM2mfk4uEPxc0+xuFdJ629QA==
@@ -2620,7 +2620,7 @@ cors@2.8.5:
     object-assign "^4"
     vary "^1"
 
-cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
+cosmiconfig@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.1.tgz#714d756522cace867867ccb4474c5d01bbae5d6d"
   integrity sha512-a1YWNUV2HwGimB7dU2s1wUMurNKjpx60HxBB6xUM8Re+2s1g1IIfJvFR0/iCF+XHdE0GMTKTuLR32UQff4TEyQ==
@@ -2630,6 +2630,16 @@ cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+cosmiconfig@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-8.2.0.tgz#f7d17c56a590856cd1e7cee98734dca272b0d8fd"
+  integrity sha512-3rTMnFJA1tCOPwRxtgF4wd7Ab2qvDbL8jX+3smjIbS4HlZBagTlpERbdN7iAbWlrfxE3M8c27kTwTawQ7st+OQ==
+  dependencies:
+    import-fresh "^3.2.1"
+    js-yaml "^4.1.0"
+    parse-json "^5.0.0"
+    path-type "^4.0.0"
 
 cross-spawn@^7.0.3:
   version "7.0.3"
@@ -4197,6 +4207,11 @@ jest-worker@^29.4.3:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+jiti@^1.18.2:
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.19.1.tgz#fa99e4b76a23053e0e7cde098efe1704a14c16f1"
+  integrity sha512-oVhqoRDaBXf7sjkll95LHVS6Myyyb1zaunVwk4Z0+WPSW4gjS0pl01zYKHScTuyEhQsFxV5L4DR5r+YqSyqyyg==
+
 js-base64@^2.1.8:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.4.tgz#f4e686c5de1ea1f867dbcad3d46d969428df98c4"
@@ -4206,6 +4221,13 @@ js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+
+js-yaml@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
+  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
+  dependencies:
+    argparse "^2.0.1"
 
 jsbn@~0.1.0:
   version "0.1.1"
@@ -4320,11 +4342,6 @@ kind-of@^6.0.2, kind-of@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.3.tgz#07c05034a6c349fa06e24fa35aa76db4580ce4dd"
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
-
-klona@^2.0.4:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.5.tgz#d166574d90076395d9963aa7a928fabb8d76afbc"
-  integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
 launch-editor@^2.6.0:
   version "2.6.0"
@@ -5201,16 +5218,14 @@ postcss-load-config@^3.1.0:
     lilconfig "^2.0.4"
     yaml "^1.10.2"
 
-postcss-loader@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-4.3.0.tgz#2c4de9657cd4f07af5ab42bd60a673004da1b8cc"
-  integrity sha512-M/dSoIiNDOo8Rk0mUqoj4kpGq91gcxCfb9PoyZVdZ76/AuhxylHDYZblNE8o+EQ9AMSASeMFEKxZf5aU6wlx1Q==
+postcss-loader@^7.0.0:
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-7.3.3.tgz#6da03e71a918ef49df1bb4be4c80401df8e249dd"
+  integrity sha512-YgO/yhtevGO/vJePCQmTxiaEwER94LABZN0ZMT4A0vsak9TpO+RvKRs7EmJ8peIlB9xfXCsS7M8LjqncsUZ5HA==
   dependencies:
-    cosmiconfig "^7.0.0"
-    klona "^2.0.4"
-    loader-utils "^2.0.0"
-    schema-utils "^3.0.0"
-    semver "^7.3.4"
+    cosmiconfig "^8.2.0"
+    jiti "^1.18.2"
+    semver "^7.3.8"
 
 postcss-merge-longhand@^6.0.0:
   version "6.0.0"
@@ -5898,16 +5913,12 @@ sass-graph@2.2.5:
     scss-tokenizer "^0.2.3"
     yargs "^13.3.2"
 
-sass-loader@^10.0.0:
-  version "10.2.1"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-10.2.1.tgz#17e51df313f1a7a203889ce8ff91be362651276e"
-  integrity sha512-RRvWl+3K2LSMezIsd008ErK4rk6CulIMSwrcc2aZvjymUgKo/vjXGp1rSWmfTUX7bblEOz8tst4wBwWtCGBqKA==
+sass-loader@^13.0.0:
+  version "13.3.2"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-13.3.2.tgz#460022de27aec772480f03de17f5ba88fa7e18c6"
+  integrity sha512-CQbKl57kdEv+KDLquhC+gE3pXt74LEAzm+tzywcA0/aHZuub8wTErbjAoNI57rPUWRYRNC5WUnNl8eGJNbDdwg==
   dependencies:
-    klona "^2.0.4"
-    loader-utils "^2.0.0"
     neo-async "^2.6.2"
-    schema-utils "^3.0.0"
-    semver "^7.3.2"
 
 schema-utils@^2.6.5:
   version "2.7.1"
