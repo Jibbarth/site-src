@@ -4,10 +4,11 @@ parameters:
     paths:
         - %currentWorkingDirectory%/src/
     ergebnis:
-        classesAllowedToBeExtended:
-            - Twig\Extension\AbstractExtension
-            - Ramsey\Collection\AbstractCollection
-            - Symfony\Component\Console\Command\Command
+        noExtends:
+            classesAllowedToBeExtended:
+                - Twig\Extension\AbstractExtension
+                - Ramsey\Collection\AbstractCollection
+                - Symfony\Component\Console\Command\Command
 
     excludePaths:
         - %currentWorkingDirectory%/src/Kernel.php

@@ -9,29 +9,19 @@ use App\Gist\ArticleFromGistLoader;
 use App\Model\Article;
 use App\Repository\ArticleRepositoryInterface;
 use Github\Client;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 
 final class PublicGistArticleRepository implements ArticleRepositoryInterface
 {
-    private Client $client;
-
-    private CacheInterface $cache;
-
-    private ArticleFromGistLoader $gistArticleLoader;
-
-    private string $githubUser;
-
     public function __construct(
-        Client $client,
-        CacheInterface $cache,
-        ArticleFromGistLoader $gistArticleLoader,
-        string $githubUser
+        private Client $client,
+        private CacheInterface $cache,
+        private ArticleFromGistLoader $gistArticleLoader,
+        #[Autowire('%github_user%')]
+        private string $githubUser
     ) {
-        $this->client = $client;
-        $this->cache = $cache;
-        $this->gistArticleLoader = $gistArticleLoader;
-        $this->githubUser = $githubUser;
     }
 
     public function getAll(): ArticleCollection

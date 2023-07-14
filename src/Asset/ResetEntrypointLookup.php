@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace App\Asset;
 
+use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface;
 
+#[AsDecorator(decorates: 'webpack_encore.entrypoint_lookup[_default]')]
 final class ResetEntrypointLookup implements EntrypointLookupInterface
 {
-    private EntrypointLookupInterface $decorated;
-
-    public function __construct(EntrypointLookupInterface $decorated)
+    public function __construct(private EntrypointLookupInterface $decorated)
     {
-        $this->decorated = $decorated;
     }
 
     /**

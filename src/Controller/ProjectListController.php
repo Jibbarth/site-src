@@ -12,14 +12,10 @@ use Twig\Environment;
 
 final class ProjectListController
 {
-    private Environment $renderer;
-
-    private ProjectRepositoryInterface $repository;
-
-    public function __construct(Environment $renderer, ProjectRepositoryInterface $repository)
-    {
-        $this->renderer = $renderer;
-        $this->repository = $repository;
+    public function __construct(
+        private Environment $renderer,
+        private ProjectRepositoryInterface $repository,
+    ) {
     }
 
     #[Route('/projects', name: 'project_list')]

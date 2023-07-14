@@ -9,6 +9,7 @@ use App\Constant\ArticleStatus;
 use App\Model\Article;
 use App\Parser\FrontYamlParser;
 use App\Repository\ArticleRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,15 +20,12 @@ final class LocalArticleRepository implements ArticleRepositoryInterface
 
     private ArticleCollection $collection;
 
-    private string $projectDir;
-
-    private FrontYamlParser $parser;
-
-    public function __construct(FrontYamlParser $parser, string $projectDir)
-    {
+    public function __construct(
+        private FrontYamlParser $parser,
+        #[Autowire('%kernel.project_dir%')]
+        private string $projectDir
+    ) {
         $this->collection = new ArticleCollection([]);
-        $this->projectDir = $projectDir;
-        $this->parser = $parser;
     }
 
     public function getById(string $id): Article

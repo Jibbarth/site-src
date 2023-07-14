@@ -12,11 +12,8 @@ final class UnsplashExtension extends AbstractExtension
 {
     private const UNSPLASH_PATTERN = 'https://source.unsplash.com/%sx%s/?%s';
 
-    private HttpClientInterface $client;
-
-    public function __construct(HttpClientInterface $client)
+    public function __construct(private HttpClientInterface $client)
     {
-        $this->client = $client;
     }
 
     /**

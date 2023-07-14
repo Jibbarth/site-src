@@ -9,8 +9,10 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
 use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\MarkdownConverter;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Twig\Extra\Markdown\MarkdownInterface;
 
+#[AsAlias('twig.markdown.default')] // replace default markdown by our markdown configured
 final class Markdown implements MarkdownInterface
 {
     private MarkdownConverter $converter;

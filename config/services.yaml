@@ -35,61 +35,26 @@ parameters: &parameters
         job_position: Lead developer
         society: Synolia
         website: https://jibébarth.fr
+    min_diff_to_be_outdated: 365
+
+twig:
+    globals: *parameters
 
 services:
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        bind:
-            string $projectDir: '%kernel.project_dir%'
-            iterable $gifProviders: !tagged_iterator app.gif_provider
-            string $githubUser: '%github_user%'
-            string $sfConnectUser: '%sf_connect_uuid%'
-            string $websiteUrl: '%website_url%'
-            string $afupEmail: '%env(resolve:AFUP_USERNAME)%'
-            string $afupPassword: '%env(resolve:AFUP_PWD)%'
-            string $env: '%kernel.environment%'
-            int $minDiffInDayToBeOutdated: 365
-
-    _instanceof:
-        App\Gif\GifLinkProviderInterface:
-            tags: ['app.gif_provider']
+        autowire: true
+        autoconfigure: true
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Model,Migrations,Tests,Kernel.php}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Model/'
+            - '../src/Kernel.php'
 
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Repository\Article\:
-        resource: '../src/Repository/Article/*'
-        tags: ['app.article_repository']
-
-    App\Repository\Badge\:
-        resource: '../src/Repository/Badge/*'
-        tags: ['app.badge_repository']
-
-    App\Repository\ChainArticleRepository:
-        arguments:
-            - !tagged_iterator app.article_repository
-    App\Repository\ArticleRepositoryInterface: '@App\Repository\ChainArticleRepository'
-
-    App\Repository\ChainBadgeRepository:
-        arguments:
-            - !tagged_iterator app.badge_repository
-    App\Repository\BadgeRepositoryInterface: '@App\Repository\ChainBadgeRepository'
-
-    App\Asset\ResetEntrypointLookup:
-        decorates: 'webpack_encore.entrypoint_lookup[_default]'
-        arguments:
-            $decorated: '@App\Asset\ResetEntrypointLookup.inner'
-
-    # replace default markdown by our markdown configured
-    twig.markdown.default: '@App\Twig\Extra\Markdown'
-
     Psr\Container\ContainerInterface:
         alias: "service_container"
 
-twig:
-    globals: *parameters

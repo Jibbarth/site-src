@@ -7,6 +7,7 @@ namespace App\Repository\Badge;
 use App\Collection\BadgeCollection;
 use App\Model\Badge;
 use App\Repository\BadgeRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -18,6 +19,7 @@ final class DevToBadge implements BadgeRepositoryInterface
 
     public function __construct(
         private HttpClientInterface $client,
+        #[Autowire('%github_user%')]
         private string $githubUser
     ) {
     }

@@ -8,6 +8,7 @@ use App\Collection\BadgeCollection;
 use App\Model\Badge;
 use App\Parser\VndComSymfonyConnectXmlParser;
 use App\Repository\BadgeRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use SymfonyCorp\Connect\Api\Api;
 use SymfonyCorp\Connect\Api\Entity\Badge as SfBadge;
@@ -16,18 +17,13 @@ final class SymfonyBadge implements BadgeRepositoryInterface
 {
     private Api $api;
 
-    private HttpClientInterface $client;
-
-    private string $userUuid;
-
     public function __construct(
-        HttpClientInterface $client,
+        private HttpClientInterface $client,
+        #[Autowire('%sf_connect_uuid%')]
+        private string $userUuid,
         VndComSymfonyConnectXmlParser $parser,
-        string $sfConnectUser
     ) {
         $this->api = new Api(null, $client, $parser);
-        $this->client = $client;
-        $this->userUuid = $sfConnectUser;
     }
 
     public function getBadges(): BadgeCollection

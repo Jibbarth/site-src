@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Repository\ArticleRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -25,6 +26,7 @@ final class SitemapController
         private RoutesProvider $routesProvider,
         private ArticleRepositoryInterface $articleRepository,
         private Environment $renderer,
+        #[Autowire('%website_url%')]
         private string $websiteUrl,
     ) {
     }

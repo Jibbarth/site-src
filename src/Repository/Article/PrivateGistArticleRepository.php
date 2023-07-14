@@ -8,22 +8,20 @@ use App\Collection\ArticleCollection;
 use App\Gist\ArticleFromGistLoader;
 use App\Model\Article;
 use App\Repository\ArticleRepositoryInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Yaml\Yaml;
 
 final class PrivateGistArticleRepository implements ArticleRepositoryInterface
 {
     private const FILENAME = 'private_gists.yaml';
 
-    private ArticleFromGistLoader $gistArticleLoader;
-
-    private string $projectDir;
-
     private Yaml $yaml;
 
-    public function __construct(ArticleFromGistLoader $gistArticleLoader, string $projectDir)
-    {
-        $this->projectDir = $projectDir;
-        $this->gistArticleLoader = $gistArticleLoader;
+    public function __construct(
+        private ArticleFromGistLoader $gistArticleLoader,
+        #[Autowire('%kernel.project_dir%')]
+        private string $projectDir
+    ) {
         $this->yaml = new Yaml();
     }
 

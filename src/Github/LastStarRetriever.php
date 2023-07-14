@@ -8,11 +8,8 @@ use Github\Client;
 
 final class LastStarRetriever
 {
-    private Client $client;
-
-    public function __construct(Client $client)
+    public function __construct(private Client $client)
     {
-        $this->client = $client;
     }
 
     /**

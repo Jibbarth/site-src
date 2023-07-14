@@ -5,31 +5,26 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Collection\BadgeCollection;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 
+#[AsAlias(BadgeRepositoryInterface::class)]
 final class ChainBadgeRepository implements BadgeRepositoryInterface
 {
     /**
-     * @var array<\App\Repository\BadgeRepositoryInterface>
+     * @param iterable<\App\Repository\BadgeRepositoryInterface> $repositories
      */
-    private array $repositories;
-
-    /**
-     * @param iterable<\App\Repository\BadgeRepositoryInterface> $badgeRepositories
-     */
-    public function __construct(iterable $badgeRepositories)
-    {
-        \assert($badgeRepositories instanceof \Traversable);
-        $this->repositories = array_filter(
-            iterator_to_array($badgeRepositories),
-            static fn ($repository) => !$repository instanceof self
-        );
+    public function __construct(
+        #[TaggedIterator('app.badge_repository')]
+        private iterable $repositories
+    ) {
     }
 
     public function getBadges(): BadgeCollection
     {
         $badges = new BadgeCollection();
         $allBadges = [];
-        /** @var BadgeRepositoryInterface $repository */
+
         foreach ($this->repositories as $repository) {
             $allBadges[] = $repository->getBadges();
         }

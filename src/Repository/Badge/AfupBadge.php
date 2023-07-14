@@ -8,6 +8,7 @@ use App\Collection\BadgeCollection;
 use App\Model\Badge;
 use App\Repository\BadgeRepositoryInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -21,7 +22,9 @@ final class AfupBadge implements BadgeRepositoryInterface
 
     public function __construct(
         private HttpClientInterface $client,
+        #[Autowire(env: 'AFUP_USERNAME')]
         private string $afupEmail,
+        #[Autowire(env: 'AFUP_PWD')]
         private string $afupPassword
     ) {
     }

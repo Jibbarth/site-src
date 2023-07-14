@@ -6,29 +6,23 @@ namespace App\Repository;
 
 use App\Collection\ArticleCollection;
 use App\Model\Article;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+#[AsAlias(ArticleRepositoryInterface::class)]
 final class ChainArticleRepository implements ArticleRepositoryInterface
 {
     /**
-     * @var array<ArticleRepositoryInterface>
+     * @param iterable<\App\Repository\ArticleRepositoryInterface> $repositories
      */
-    private array $repositories = [];
-    private string $env;
-
-    /**
-     * @param iterable<\App\Repository\ArticleRepositoryInterface> $articleRepositories
-     */
-    public function __construct(iterable $articleRepositories, string $env)
-    {
-        foreach ($articleRepositories as $articleRepository) {
-            if ($articleRepository instanceof self) {
-                continue;
-            }
-
-            $this->repositories[] = $articleRepository;
-        }
-        $this->env = $env;
+    public function __construct(
+        #[TaggedIterator('app.article_repository')]
+        private iterable $repositories,
+        #[Autowire('%kernel.environment%')]
+        private string $env
+    ) {
     }
 
     public function getAll(): ArticleCollection

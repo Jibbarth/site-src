@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Article;
 
 use App\Repository\ArticleRepositoryInterface;
-use Ramsey\Collection\AbstractCollection;
+use Ramsey\Collection\Sort;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,20 +13,11 @@ use Twig\Environment;
 
 final class ListingController
 {
-    private Environment $renderer;
-
-    private ArticleRepositoryInterface $repository;
-
-    private RequestStack $requestStack;
-
     public function __construct(
-        Environment $renderer,
-        ArticleRepositoryInterface $repository,
-        RequestStack $requestStack
+        private Environment $renderer,
+        private ArticleRepositoryInterface $repository,
+        private RequestStack $requestStack
     ) {
-        $this->renderer = $renderer;
-        $this->repository = $repository;
-        $this->requestStack = $requestStack;
     }
 
     #[Route('/blog', name: 'article_list', defaults: ['_format' => 'html'], methods: ['GET'])]
@@ -44,7 +35,7 @@ final class ListingController
         }
 
         return new Response($this->renderer->render(sprintf('article/list.%s.twig', $format), [
-            'articles' => $this->repository->getAll()->sort('getDate', AbstractCollection::SORT_DESC),
+            'articles' => $this->repository->getAll()->sort('getDate', Sort::Descending),
         ]));
     }
 }

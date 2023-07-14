@@ -27,6 +27,8 @@ return [
         \SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff::class,
         // wrong detection of php8 attributes
         \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
+        // Conflict with latest php-cs-fixer Symfony ruleset
+        \SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff::class,
     ],
     'config' => [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff::class => [
@@ -35,6 +37,11 @@ return [
         ],
         \PhpCsFixer\Fixer\Import\OrderedImportsFixer::class => [
             'imports_order' => ['const', 'class', 'function'],
+        ],
+        \SlevomatCodingStandard\Sniffs\Namespaces\UseSpacingSniff::class => [
+            'linesCountBeforeFirstUse' => 1,
+            'linesCountBetweenUseTypes' => 1,
+            'linesCountAfterLastUse' => 1,
         ],
     ],
     'requirements' => [

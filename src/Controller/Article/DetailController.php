@@ -13,14 +13,10 @@ use Twig\Environment;
 
 final class DetailController implements ControllerWithDataProviderInterface
 {
-    private Environment $renderer;
-
-    private ArticleRepositoryInterface $articleRepository;
-
-    public function __construct(Environment $renderer, ArticleRepositoryInterface $articleRepository)
-    {
-        $this->renderer = $renderer;
-        $this->articleRepository = $articleRepository;
+    public function __construct(
+        private Environment $renderer,
+        private ArticleRepositoryInterface $articleRepository,
+    ) {
     }
 
     #[Route('/{type}/{article}', name: 'article_detail')]

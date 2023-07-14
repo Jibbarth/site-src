@@ -6,16 +6,16 @@ namespace App\Twig;
 
 use App\Model\Article;
 use Carbon\Carbon;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class IsOutdatedArticleExtension extends AbstractExtension
 {
-    private int $minDiffInDayToBeOutdated;
-
-    public function __construct(int $minDiffInDayToBeOutdated)
-    {
-        $this->minDiffInDayToBeOutdated = $minDiffInDayToBeOutdated;
+    public function __construct(
+        #[Autowire('%min_diff_to_be_outdated%')]
+        private int $minDiffInDayToBeOutdated
+    ) {
     }
 
     /**

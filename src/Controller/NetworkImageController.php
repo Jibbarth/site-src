@@ -12,16 +12,10 @@ use Twig\Environment;
 
 final class NetworkImageController implements ControllerWithDataProviderInterface
 {
-    private Environment $twig;
-
-    private HttpClientInterface $client;
-
     public function __construct(
-        Environment $twig,
-        HttpClientInterface $client,
+        private Environment $twig,
+        private HttpClientInterface $client,
     ) {
-        $this->twig = $twig;
-        $this->client = $client;
     }
 
     #[Route('/img/fa/{type}-{collection}-{size}.svg', name: 'image')]

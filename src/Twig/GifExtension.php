@@ -4,23 +4,21 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
+use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class GifExtension extends AbstractExtension
 {
     private const BAD_KEYWORDS = ['lost', 'sad'];
-    /**
-     * @var iterable<\App\Gif\GifLinkProviderInterface>
-     */
-    private iterable $gifProviders;
 
     /**
      * @param iterable<\App\Gif\GifLinkProviderInterface> $gifProviders
      */
-    public function __construct(iterable $gifProviders)
-    {
-        $this->gifProviders = $gifProviders;
+    public function __construct(
+        #[TaggedIterator('app.gif_provider')]
+        private iterable $gifProviders
+    ) {
     }
 
     /**
