@@ -4,6 +4,15 @@ date: 2023-02-12
 state: published
 ---
 
+<div class="bg-blue-100 border-l-4 border-blue-500 text-gray-700 p-4 mb-8" role="alert">
+    <p class="font-bold">👍 Heads up</p>
+    <p>Since <a href="https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/tag/v3.18.0">PHP-CS-Fixer v3.18.0</a>,
+        the issue showed in this article is no longer relevant as the FinalFixer can now read doctrine attributes.
+        <br>However, the custom rule showed in this article can still be used to configure any rule with except paths.
+    </p>
+</div>
+
+
 > Based on a true story.
 
 <p></p>

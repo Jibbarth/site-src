@@ -1,6 +1,7 @@
 module.exports = {
     content: [
         './templates/**/*.html.twig',
+        './data/_posts/*.md',
     ],
     theme: { // import color from v1
         colors: {
