@@ -10,7 +10,7 @@ use App\Github\LastPrRetriever;
 use App\Github\LastStarRetriever;
 use App\Repository\ArticleRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
-use Ramsey\Collection\CollectionInterface;
+use Ramsey\Collection\Sort;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Environment;
 
@@ -35,7 +35,7 @@ final class ReadmeGenerator
             $featuredProjects = $featuredProjects->slice(0, 3);
         }
         $latestPosts = $this->articleRepository->getAll()
-            ->sort('getDate', CollectionInterface::SORT_DESC);
+            ->sort('getDate', Sort::Descending);
 
         if ($latestPosts instanceof SliceableCollection) {
             $latestPosts = $latestPosts->slice(0, 2);

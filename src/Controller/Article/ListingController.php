@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller\Article;
 
 use App\Repository\ArticleRepositoryInterface;
-use Ramsey\Collection\AbstractCollection;
+use Ramsey\Collection\Sort;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +35,7 @@ final class ListingController
         }
 
         return new Response($this->renderer->render(sprintf('article/list.%s.twig', $format), [
-            'articles' => $this->repository->getAll()->sort('getDate', AbstractCollection::SORT_DESC),
+            'articles' => $this->repository->getAll()->sort('getDate', Sort::Descending),
         ]));
     }
 }

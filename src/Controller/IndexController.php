@@ -9,7 +9,7 @@ use App\Constant\ProjectCategory;
 use App\Repository\ArticleRepositoryInterface;
 use App\Repository\BadgeRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
-use Ramsey\Collection\CollectionInterface;
+use Ramsey\Collection\Sort;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -37,7 +37,7 @@ final class IndexController
         }
 
         $articleCollection = $this->articleRepository->getAll()
-            ->sort('getDate', CollectionInterface::SORT_DESC);
+            ->sort('getDate', Sort::Descending);
 
         if ($articleCollection instanceof SliceableCollection) {
             $articleCollection = $articleCollection->slice(0, self::MAX_ARTICLE_DISPLAY);
