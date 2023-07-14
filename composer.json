@@ -119,7 +119,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.*|^6.3@beta"
+            "require": "5.4.*|^6.3"
         }
     },
     "prefer-stable": true,
