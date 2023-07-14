@@ -41,7 +41,7 @@
         "symfony/ux-lazy-image": "^2.0",
         "symfony/ux-turbo": "^2.0",
         "symfony/validator": "^6.0",
-        "symfony/webpack-encore-bundle": "^1.11",
+        "symfony/webpack-encore-bundle": "^2.0",
         "symfony/yaml": "^5.4|^6.0",
         "symfonycorp/connect": "^8.0",
         "symplify/symfony-static-dumper": "^9.0",
