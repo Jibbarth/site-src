@@ -15,8 +15,8 @@ Encore
     .setOutputPath('public/dist/')
     // public path used by the web server to access the output path
     .setPublicPath('/dist')
-    // only needed for CDN's or sub-directory deploy
-    //.setManifestKeyPrefix('dist/')
+    // only needed for CDN's or subdirectory deploy
+    //.setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG
@@ -58,6 +58,17 @@ Encore
     // .configureBabelPresetEnv((config) => {
     //     config.useBuiltIns = 'usage';
     //     config.corejs = 3;
+    // })
+
+    // configure Babel
+    // .configureBabel((config) => {
+    //     config.plugins.push('@babel/a-babel-plugin');
+    // })
+
+    // enables and configure @babel/preset-env polyfills
+    // .configureBabelPresetEnv((config) => {
+    //     config.useBuiltIns = 'usage';
+    //     config.corejs = '3.23';
     // })
 
     // enables Sass/SCSS support
