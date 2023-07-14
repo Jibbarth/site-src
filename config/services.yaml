@@ -45,8 +45,11 @@ services:
         autowire: true
         autoconfigure: true
     App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Model,Migrations,Tests,Kernel.php}'
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Model/'
+            - '../src/Kernel.php'
 
     App\Controller\:
         resource: '../src/Controller'
