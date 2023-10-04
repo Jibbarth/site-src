@@ -19,7 +19,7 @@
     "autoprefixer": "^10.4.0",
     "core-js": "^3.23.0",
     "node-sass": "^7.0.0",
-    "postcss": "^8.4.5",
+    "postcss": "^8.4.31",
     "postcss-loader": "^7.0.0",
     "regenerator-runtime": "^0.13.9",
     "sass-loader": "^13.0.0",
