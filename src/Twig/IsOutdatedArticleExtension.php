@@ -14,7 +14,7 @@ final class IsOutdatedArticleExtension extends AbstractExtension
 {
     public function __construct(
         #[Autowire('%min_diff_to_be_outdated%')]
-        private int $minDiffInDayToBeOutdated
+        private int $daysUntilOutdated
     ) {}
 
     /**
@@ -33,6 +33,6 @@ final class IsOutdatedArticleExtension extends AbstractExtension
 
         $diff = Carbon::now()->diffInDays($articleDate);
 
-        return $diff >= $this->minDiffInDayToBeOutdated;
+        return $diff >= $this->daysUntilOutdated;
     }
 }

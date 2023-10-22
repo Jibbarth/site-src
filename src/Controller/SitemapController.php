@@ -34,7 +34,7 @@ final class SitemapController
     public function __invoke(): Response
     {
         $urls = [];
-        foreach ($this->routesProvider->provideRoutesWithoutArguments() as $routeName => $route) {
+        foreach (array_keys($this->routesProvider->provideRoutesWithoutArguments()) as $routeName) {
             if (u($routeName)->containsAny(self::$toExclude)) {
                 continue;
             }
