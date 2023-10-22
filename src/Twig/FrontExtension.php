@@ -11,9 +11,7 @@ use Twig\TwigFunction;
 
 final class FrontExtension extends AbstractExtension
 {
-    public function __construct(private Environment $renderer, private ParameterBagInterface $parameterBag)
-    {
-    }
+    public function __construct(private Environment $renderer, private ParameterBagInterface $parameterBag) {}
 
     /**
      * @return array<\Twig\TwigFunction>

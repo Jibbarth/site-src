@@ -8,9 +8,7 @@ use Github\Client;
 
 final class LastStarRetriever
 {
-    public function __construct(private Client $client)
-    {
-    }
+    public function __construct(private Client $client) {}
 
     /**
      * @return array<string, string>

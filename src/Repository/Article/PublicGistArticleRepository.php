@@ -21,8 +21,7 @@ final class PublicGistArticleRepository implements ArticleRepositoryInterface
         private ArticleFromGistLoader $gistArticleLoader,
         #[Autowire('%github_user%')]
         private string $githubUser
-    ) {
-    }
+    ) {}
 
     public function getAll(): ArticleCollection
     {

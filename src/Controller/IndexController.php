@@ -24,8 +24,7 @@ final class IndexController
         private ProjectRepositoryInterface $projectRepository,
         private ArticleRepositoryInterface $articleRepository,
         private BadgeRepositoryInterface $badgeRepository
-    ) {
-    }
+    ) {}
 
     #[Route('/', name: 'home')]
     public function __invoke(): Response

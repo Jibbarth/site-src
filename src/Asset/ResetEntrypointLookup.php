@@ -10,9 +10,7 @@ use Symfony\WebpackEncoreBundle\Asset\EntrypointLookupInterface;
 #[AsDecorator(decorates: 'webpack_encore.entrypoint_lookup[_default]')]
 final class ResetEntrypointLookup implements EntrypointLookupInterface
 {
-    public function __construct(private EntrypointLookupInterface $decorated)
-    {
-    }
+    public function __construct(private EntrypointLookupInterface $decorated) {}
 
     /**
      * @return array<string>

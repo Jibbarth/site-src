@@ -11,9 +11,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 final class ArticleFromGistLoader
 {
-    public function __construct(private CacheInterface $cache, private Client $client)
-    {
-    }
+    public function __construct(private CacheInterface $cache, private Client $client) {}
 
     public function retrieve(string $gistId): Article
     {

@@ -26,8 +26,7 @@ final class AfupBadge implements BadgeRepositoryInterface
         private string $afupEmail,
         #[Autowire(env: 'AFUP_PWD')]
         private string $afupPassword
-    ) {
-    }
+    ) {}
 
     public function getBadges(): BadgeCollection
     {

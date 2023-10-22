@@ -15,8 +15,7 @@ final class ProjectListController
     public function __construct(
         private Environment $renderer,
         private ProjectRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     #[Route('/projects', name: 'project_list')]
     public function __invoke(): Response

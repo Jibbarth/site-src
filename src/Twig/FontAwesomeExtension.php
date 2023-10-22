@@ -10,9 +10,7 @@ use Twig\TwigFunction;
 
 final class FontAwesomeExtension extends AbstractExtension
 {
-    public function __construct(private Environment $twig)
-    {
-    }
+    public function __construct(private Environment $twig) {}
 
     /**
      * @return array<\Twig\TwigFunction>

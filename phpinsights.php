@@ -29,6 +29,9 @@ return [
         \SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class,
         // Conflict with latest php-cs-fixer Symfony ruleset
         \SlevomatCodingStandard\Sniffs\TypeHints\NullableTypeForNullDefaultValueSniff::class,
+        // Closing brace style
+        \PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ScopeClosingBraceSniff::class,
+        \PhpCsFixer\Fixer\Basic\BracesFixer::class,
     ],
     'config' => [
         \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\LineLengthSniff::class => [

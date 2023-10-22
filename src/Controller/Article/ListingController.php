@@ -17,8 +17,7 @@ final class ListingController
         private Environment $renderer,
         private ArticleRepositoryInterface $repository,
         private RequestStack $requestStack
-    ) {
-    }
+    ) {}
 
     #[Route('/blog', name: 'article_list', defaults: ['_format' => 'html'], methods: ['GET'])]
     #[Route('/rss.xml', name: 'blog_rss', methods: ['GET'])]

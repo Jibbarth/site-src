@@ -16,8 +16,7 @@ final class DetailController implements ControllerWithDataProviderInterface
     public function __construct(
         private Environment $renderer,
         private ArticleRepositoryInterface $articleRepository,
-    ) {
-    }
+    ) {}
 
     #[Route('/{type}/{article}', name: 'article_detail')]
     public function __invoke(string $type, string $article): Response

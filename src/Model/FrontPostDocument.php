@@ -12,6 +12,5 @@ final class FrontPostDocument
         public \DateTimeInterface $date,
         public string $state,
         public ?string $image,
-    ) {
-    }
+    ) {}
 }

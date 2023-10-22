@@ -13,6 +13,5 @@ final class Badge
         public string $image,
         public string $link,
         public string $category,
-    ) {
-    }
+    ) {}
 }
