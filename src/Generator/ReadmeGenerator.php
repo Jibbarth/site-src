@@ -24,8 +24,7 @@ final class ReadmeGenerator
         private ArticleRepositoryInterface $articleRepository,
         private LastPrRetriever $lastPrRetriever,
         private LastStarRetriever $lastStarRetriever
-    ) {
-    }
+    ) {}
 
     public function generate(): void
     {

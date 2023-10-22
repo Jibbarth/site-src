@@ -28,8 +28,7 @@ final class SitemapController
         private Environment $renderer,
         #[Autowire('%website_url%')]
         private string $websiteUrl,
-    ) {
-    }
+    ) {}
 
     #[Route('/sitemap.xml', name: 'sitemap', defaults: ['_format' => 'xml'])]
     public function __invoke(): Response

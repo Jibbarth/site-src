@@ -18,6 +18,8 @@ grumphp:
         - 'tests'
       exclude:
         - 'PSR12.Files.FileHeader'
+        - 'Squiz.WhiteSpace.ScopeClosingBrace'
+        - 'Squiz.Functions.MultiLineFunctionDeclaration'
     phpcsfixer2:
       config: '.php-cs-fixer.dist.php'
       verbose: true
@@ -27,8 +29,8 @@ grumphp:
       exclude: ['vendor']
       triggered_by: ['php']
 # Temporarily disable (see https://github.com/phpmd/phpmd/issues/853)
-#    phpmd:
-#      ruleset: [".php_md.xml"]
+    phpmd:
+      ruleset: [".php_md.xml"]
     phpstan:
       level: ~
       configuration: phpstan.neon

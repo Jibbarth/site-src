@@ -15,8 +15,7 @@ final class IsOutdatedArticleExtension extends AbstractExtension
     public function __construct(
         #[Autowire('%min_diff_to_be_outdated%')]
         private int $minDiffInDayToBeOutdated
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<\Twig\TwigFunction>

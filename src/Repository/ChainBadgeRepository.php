@@ -17,8 +17,7 @@ final class ChainBadgeRepository implements BadgeRepositoryInterface
     public function __construct(
         #[TaggedIterator('app.badge_repository')]
         private iterable $repositories
-    ) {
-    }
+    ) {}
 
     public function getBadges(): BadgeCollection
     {

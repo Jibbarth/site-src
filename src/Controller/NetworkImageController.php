@@ -15,8 +15,7 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
     public function __construct(
         private Environment $twig,
         private HttpClientInterface $client,
-    ) {
-    }
+    ) {}
 
     #[Route('/img/fa/{type}-{collection}-{size}.svg', name: 'image')]
     public function __invoke(string $type, string $collection, int $size): Response

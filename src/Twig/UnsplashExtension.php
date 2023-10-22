@@ -12,9 +12,7 @@ final class UnsplashExtension extends AbstractExtension
 {
     private const UNSPLASH_PATTERN = 'https://source.unsplash.com/%sx%s/?%s';
 
-    public function __construct(private HttpClientInterface $client)
-    {
-    }
+    public function __construct(private HttpClientInterface $client) {}
 
     /**
      * @return array<\Twig\TwigFunction>

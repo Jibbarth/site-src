@@ -21,8 +21,7 @@ final class DevToBadge implements BadgeRepositoryInterface
         private HttpClientInterface $client,
         #[Autowire('%github_user%')]
         private string $githubUser
-    ) {
-    }
+    ) {}
 
     public function getBadges(): BadgeCollection
     {

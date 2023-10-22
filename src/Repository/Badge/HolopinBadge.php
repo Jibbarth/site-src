@@ -18,8 +18,7 @@ final class HolopinBadge implements BadgeRepositoryInterface
         private HttpClientInterface $client,
         #[Autowire('%github_user%')]
         private string $username,
-    ) {
-    }
+    ) {}
 
     public function getBadges(): BadgeCollection
     {
