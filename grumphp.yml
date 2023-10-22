@@ -28,7 +28,6 @@ grumphp:
     phplint:
       exclude: ['vendor']
       triggered_by: ['php']
-# Temporarily disable (see https://github.com/phpmd/phpmd/issues/853)
     phpmd:
       ruleset: [".php_md.xml"]
     phpstan:
