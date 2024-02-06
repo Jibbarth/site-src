@@ -29,7 +29,7 @@ final class Project
         string $url,
         string $category,
         string $role,
-        string $image = null
+        ?string $image = null
     ) {
         $this->name = $name;
         $this->description = $description;

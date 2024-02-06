@@ -8,8 +8,6 @@ grumphp:
       no_check_all: true
     jsonlint:
       detect_key_conflicts: true
-    phpcpd:
-      directory: ['src']
     phpcs:
       standard: "PSR12"
       warning_severity: 0

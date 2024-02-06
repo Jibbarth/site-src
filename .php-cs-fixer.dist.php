@@ -13,6 +13,7 @@ return (new PhpCsFixer\Config())
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'array_syntax' => ['syntax' => 'short'],
+        'braces_position' => false, // TODO check how to make it working with single_line_empty_body
         'concat_space' => ['spacing' => 'one'],
         'comment_to_phpdoc' => true,
         'declare_strict_types' => true,

@@ -9,5 +9,5 @@ use Ramsey\Collection\CollectionInterface;
 interface SliceableCollection
 {
     /** @phpstan-ignore-next-line */
-    public function slice(int $offset, int $length = null): CollectionInterface;
+    public function slice(int $offset, ?int $length = null): CollectionInterface;
 }
