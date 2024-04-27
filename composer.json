@@ -17,6 +17,7 @@
         "nesbot/carbon": "^2.53",
         "nikic/php-parser": "^4.15",
         "nyholm/psr7": "^1.2",
+        "php-http/message-factory": "^1.1",
         "phpdocumentor/reflection-docblock": "^5.2",
         "ramsey/collection": "^2.0",
         "symfony/asset": "^6.0",
