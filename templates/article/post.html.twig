@@ -26,13 +26,13 @@
             </div>
             <div class="mt-6 mb-0 text-right">
                 <a href="#" {{ stimulus_controller('share') }} class="share hidden mr-2 px-4 py-2 bg-gray-100 text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white" data-title="{{ article.title }}">
-                    <i class="fas fa-share-alt"></i>
+                    {{ ux_icon('fa-solid:share-alt', {'class': 'icon-inline'}) }}
                     Share
                 </a>
                 <a href="https://github.com/{{ github_user }}/site-src/edit/master/data/_posts/{{ article.id }}.md"
                    target="_blank" rel="nofollow,noopener"
                    class="px-4 py-2 bg-gray-100 text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white">
-                    <i class="fab fa-github-alt"></i>
+                    {{ ux_icon('fa6-brands:github-alt', {'class': 'icon-inline'}) }}
                     Found a typo ?
                 </a>
             </div>

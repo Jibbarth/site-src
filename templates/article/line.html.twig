@@ -10,7 +10,7 @@
         {% endif %}
     >
         {% if article.type == constant('App\\Constant\\ArticleType::EXTERNAL') %}
-            <i class="fa fa-external-link-alt"></i>
+            {{ ux_icon('fa-solid:external-link-alt', {'class': 'icon-inline'}) }}
         {% endif %}
         {{ article.title }}
     </a>
@@ -23,7 +23,7 @@
             </span>
         </div>
         <div class="text-right text-sm text-gray-500">
-            <i class="fa fa-calendar-day"></i>
+            {{ ux_icon('fa-solid:calendar-day', {'class': 'icon-inline'}) }}
             {{ article.date|format_date() }}
         </div>
     </div>

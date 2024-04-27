@@ -3,7 +3,8 @@
         href="https://{{ value.prefix ?? '' }}{{ type }}.com/{{ value.username }}"
         title="{{ type|capitalize }}"
         target="_blank"
-        rel="nofollow,noopener">
-        <i class="fab fa-{{ type }} text-gray-600 hover:text-black"></i>
+        rel="nofollow,noopener"
+    >
+        {{ ux_icon('fa6-brands:' ~ type, {'class': 'icon-inline text-gray-600 hover:text-black'}) }}
     </a>
 {% endfor %}
