@@ -2,12 +2,11 @@ import { Controller } from '@hotwired/stimulus';
 
 import jsonp from "jsonp";
 
-const gist_css = 'https://github.githubassets.com/assets/gist-embed-b4e1b64ab37d0cf7698bb0c5008263fe.css';
+const gist_css = 'https://github.githubassets.com/assets/gist-embed-1831e7b47678.css';
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
     connect() {
-        console.log(this.articleValue, this.fileValue, this.githubUserValue)
         const gistLink = `https://gist.github.com/${this.githubUserValue}/${this.articleValue}.json?file=${this.fileValue}`;
 
         jsonp(gistLink, { timeout: 20000 }, (err, response) => {
