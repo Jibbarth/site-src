@@ -1,4 +1,4 @@
 symfonycasts_tailwind:
-    input_css: '%kernel.project_dir%/assets/css/tailwind.css'
+    input_css: '%kernel.project_dir%/assets/css/app.css'
     # Tailwind CLI version to download - null means the latest version
     binary_version: 'v3.4.3'
