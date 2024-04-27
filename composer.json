@@ -44,7 +44,6 @@
         "symfony/ux-lazy-image": "^2.0",
         "symfony/ux-turbo": "^2.0",
         "symfony/validator": "^6.0",
-        "symfony/webpack-encore-bundle": "^2.0",
         "symfony/yaml": "^5.4|^6.0",
         "symfonycasts/tailwind-bundle": "^0.5.1",
         "symfonycorp/connect": "^8.0",
@@ -110,7 +109,7 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd",
-            "tailwind:build": "symfony-cmd",
+            "tailwind:build --minify": "symfony-cmd",
             "asset-map:compile": "symfony-cmd"
         },
         "post-install-cmd": [

@@ -5,8 +5,6 @@
  * which should already be in your base.html.twig.
  */
 import './css/app.css';
-
 import './bootstrap.js';
-
 
 window.addEventListener('load', () => twemoji.parse(document.body), false);

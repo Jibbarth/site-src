@@ -25,9 +25,6 @@ jobs:
                     php-version: 8.2
                     coverage: none
                     extensions: gd, imagick
-            -   uses: actions/setup-node@v2
-                with:
-                    node-version: '18'
             -   run: composer install --no-progress
             -   name: Grumphp
                 run: vendor/bin/grumphp run --ansi
@@ -51,8 +48,6 @@ jobs:
                 with:
                     node-version: '18'
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
-            -   run: yarn install --force
-            -   run: yarn encore prod
             -   name: Build 📦
                 run: bin/console dump-static-site --ansi
                 env:
@@ -81,11 +76,7 @@ jobs:
                     php-version: 8.2
                     coverage: none
                     extensions: gd, imagick
-            -   uses: actions/setup-node@v2
-                with:
-                    node-version: '18'
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
-            -   run: yarn install --force
             -   name: Build 📦
                 run: bin/console generate-readme --ansi
                 env:

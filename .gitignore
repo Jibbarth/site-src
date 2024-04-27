@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -10,14 +9,6 @@
 ###< symfony/framework-bundle ###
 output
 .idea
-
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-/public/dist/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
 .php_cs.cache
 
 ###> friendsofphp/php-cs-fixer ###
