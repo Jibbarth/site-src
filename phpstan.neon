@@ -16,6 +16,7 @@ parameters:
         - %currentWorkingDirectory%/tests
         - %currentWorkingDirectory%/config
         - %currentWorkingDirectory%/public
+        - %currentWorkingDirectory%/importmap.php
         - %currentWorkingDirectory%/phpinsights.php
         - %currentWorkingDirectory%/.php-cs-fixer.dist.php
     bootstrapFiles:
