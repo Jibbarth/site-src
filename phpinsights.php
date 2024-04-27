@@ -7,6 +7,7 @@ return [
     'ide' => null,
     'exclude' => [
         'src/Kernel.php',
+        'importmap.php',
     ],
     'add' => [
         \NunoMaduro\PhpInsights\Domain\Metrics\Code\Code::class => [
