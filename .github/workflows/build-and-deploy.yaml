@@ -27,7 +27,7 @@ jobs:
                     extensions: gd, imagick
             -   uses: actions/setup-node@v2
                 with:
-                    node-version: '14'
+                    node-version: '18'
             -   run: composer install --no-progress
             -   name: Grumphp
                 run: vendor/bin/grumphp run --ansi
@@ -83,7 +83,7 @@ jobs:
                     extensions: gd, imagick
             -   uses: actions/setup-node@v2
                 with:
-                    node-version: '14'
+                    node-version: '18'
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
             -   run: yarn install --force
             -   name: Build 📦

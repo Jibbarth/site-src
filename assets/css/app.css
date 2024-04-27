@@ -9,3 +9,12 @@ img.emoji {
 .badge-container:hover .badge-info {
     @apply -translate-y-32;
 }
+
+.icon-inline {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+    width: 1em;
+}
