@@ -93,9 +93,6 @@
     "gitonomy/gitlib": {
         "version": "v1.2.3"
     },
-    "guzzlehttp/psr7": {
-        "version": "2.1.0"
-    },
     "intervention/image": {
         "version": "2.7.1"
     },
@@ -260,9 +257,6 @@
     },
     "psr/simple-cache": {
         "version": "1.0.1"
-    },
-    "ralouphie/getallheaders": {
-        "version": "3.0.3"
     },
     "ramsey/collection": {
         "version": "1.1.3"
