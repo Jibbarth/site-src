@@ -1,20 +1,18 @@
-<svg viewBox="0 0 {{ size }} {{ size }}" width="{{ size }}" height="{{ size }}" xmlns="http://www.w3.org/2000/svg">
-    <foreignObject width="{{ size }}" height="{{ size }}">
-        <div xmlns="http://www.w3.org/1999/xhtml">
-            <style>
-                @media (prefers-color-scheme: dark) {
-                    svg {
-                        fill:  #C3C3C3;
-                    }
-                }
-                @media (prefers-color-scheme: light) {
-                    svg {
-                        fill:  #3C3C3C;
-                    }
-                }
-            </style>
-            {{ ux_icon(fa_ux_icon) }}
-        </div>
-    </foreignObject>
+<svg viewBox="{{ icon.attributes.viewBox }}" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        @media (prefers-color-scheme: dark) {
+            svg {
+                fill:  white;
+                color: white;
+            }
+        }
+        @media (prefers-color-scheme: light) {
+            svg {
+                fill:  #3C3C3C;
+                color:  #3C3C3C;
+            }
+        }
+    </style>
+    {{ icon.innerSvg|raw }}
 </svg>
 
