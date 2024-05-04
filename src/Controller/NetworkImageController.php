@@ -19,15 +19,13 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
         private IconRegistryInterface $iconRegistry
     ) {}
 
-    #[Route('/img/fa/{type}-{collection}-{size}.svg', name: 'image')]
-    public function __invoke(string $type, string $collection, int $size): Response
+    #[Route('/img/fa/{type}-{collection}.svg', name: 'image')]
+    public function __invoke(string $type, string $collection): Response
     {
         $icon = $this->iconRegistry->get(sprintf('fa-%s:%s', $collection, $type));
 
         return new Response($this->twig->render('_partials/font_awesome_svg.svg.twig', [
-            'size' => $size,
             'icon' => $icon,
-            'fa_ux_icon' => sprintf('fa-%s:%s', $collection, $type),
         ]), 200, ['Content-Type' => 'image/svg+xml']);
     }
 
@@ -47,12 +45,12 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
     public function getArguments(): array
     {
         return [
-            ['rss', 'solid', 100],
-            ['facebook', 'brands', 100],
-            ['github', 'brands', 100],
-            ['twitter', 'brands', 100],
-            ['symfony', 'brands', 100],
-            ['linkedin', 'brands', 100],
+            ['rss', 'solid'],
+            ['facebook', 'brands'],
+            ['github', 'brands'],
+            ['twitter', 'brands'],
+            ['symfony', 'brands'],
+            ['linkedin', 'brands'],
         ];
     }
 }
