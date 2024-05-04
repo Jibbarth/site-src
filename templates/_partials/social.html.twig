@@ -4,7 +4,9 @@
         title="{{ type|capitalize }}"
         target="_blank"
         rel="nofollow,noopener"
+        class="text-gray-600 hover:text-black"
     >
-        {{ ux_icon('fa6-brands:' ~ type, {'class': 'icon-inline text-gray-600 hover:text-black'}) }}
+        {{ ux_icon('fa6-brands:' ~ type, {'class': 'icon-inline'}) }}
     </a>
 {% endfor %}
+
