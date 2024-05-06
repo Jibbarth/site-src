@@ -51,7 +51,7 @@ final class StaticSiteBuilderCommand extends Command
         }
         $this->outputDirectory = $outputDirectory;
 
-        $symfonyStyle->info('Building the static site in ' . $this->outputDirectory . ' directory');
+        $symfonyStyle->title('Building the static site in ' . $this->outputDirectory . ' directory');
 
         // Load a prod kernel
         $kernel = new Kernel('prod', false);
