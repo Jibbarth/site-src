@@ -37,7 +37,7 @@ final class StaticSiteBuilderCommand extends Command
 
     protected function configure(): void
     {
-        $this->addOption('output_dir', 'o', InputOption::VALUE_REQUIRED, 'Output directory', 'new_output');
+        $this->addOption('output_dir', 'o', InputOption::VALUE_REQUIRED, 'Output directory', 'output');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
