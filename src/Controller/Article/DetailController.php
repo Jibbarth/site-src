@@ -29,7 +29,7 @@ final class DetailController implements ControllerWithDataProviderInterface
     }
 
     /**
-     * @return array<array<string>>
+     * @return array<array<string, string>>
      */
     public function getArguments(): array
     {

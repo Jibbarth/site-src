@@ -16,6 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 
 use function Symfony\Component\String\u;
@@ -28,6 +29,9 @@ final class StaticSiteBuilderCommand extends Command
 {
     private string $outputDirectory;
 
+    /**
+     * @param iterable<ControllerWithDataProviderInterface> $controllersWithData
+     */
     public function __construct(
         #[TaggedIterator(ControllerWithDataProviderInterface::class)]
         private iterable $controllersWithData
@@ -66,10 +70,16 @@ final class StaticSiteBuilderCommand extends Command
         $progress::setFormatDefinition('custom', $format . ' -- %message%');
         $progress->setFormat('custom');
 
-        /** @var \Symfony\Component\Routing\Route[] $routesWithoutParam */
-        $routesWithoutParam = array_filter($routesCollection->all(), fn ($route) => !str_contains($route->getPath(), '{'));
-        /** @var \Symfony\Component\Routing\Route[] $routesWithParam */
-        $routesWithParam = array_filter($routesCollection->all(), fn ($route) => str_contains($route->getPath(), '{'));
+        /** @var array<Route> $routesWithoutParam */
+        $routesWithoutParam = array_filter(
+            $routesCollection->all(),
+            static fn ($route) => !str_contains($route->getPath(), '{')
+        );
+        /** @var array<Route> $routesWithParam */
+        $routesWithParam = array_filter(
+            $routesCollection->all(),
+            static fn ($route) => str_contains($route->getPath(), '{')
+        );
 
         $client = new KernelBrowser($kernel);
         $client->enableReboot();
@@ -98,7 +108,12 @@ final class StaticSiteBuilderCommand extends Command
             $arguments = $routeController->getArguments();
             $progress->advance();
             foreach ($arguments as $routeArgument) {
-                $progress->setMessage(sprintf('Processing route %s (%s) with arguments (%s)', $routeName, $route->getPath(), implode(', ', $routeArgument)));
+                $progress->setMessage(sprintf(
+                    'Processing route %s (%s) with arguments (%s)',
+                    $routeName,
+                    $route->getPath(),
+                    implode(', ', $routeArgument)
+                ));
                 $progress->display();
                 $client->request('GET', $router->generate($routeName, $routeArgument));
                 $this->dumpResponse($client->getRequest(), $client->getResponse());

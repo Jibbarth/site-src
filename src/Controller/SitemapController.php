@@ -33,8 +33,8 @@ final class SitemapController
     {
         $urls = [];
 
-        /** @var \Symfony\Component\Routing\Route[] $routesWithoutParam */
-        $routesWithoutParam = array_filter($this->router->getRouteCollection()->all(), fn ($route) => !str_contains($route->getPath(), '{'));
+        /** @var array<\Symfony\Component\Routing\Route> $routesWithoutParam */
+        $routesWithoutParam = array_filter($this->router->getRouteCollection()->all(), static fn ($route) => !str_contains($route->getPath(), '{'));
 
         foreach (array_keys($routesWithoutParam) as $routeName) {
             if (u($routeName)->containsAny(self::$toExclude)) {
