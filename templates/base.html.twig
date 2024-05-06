@@ -34,15 +34,10 @@
     {% endblock %}
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}
-            <script async src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" rel="prefetch" crossorigin="anonymous"></script>
             {% block importmap %}
                 {{ importmap('app') }}
             {% endblock %}
-
-            {% if app.environment is same as('prod') %}
-            <script async src="https://analytics.xn--jibbarth-d1a.fr/script.js" data-website-id="caa51ea4-63ea-44b1-bf0d-8403b639829b"></script>
-            {% endif %}
-
+            <script async src="https://analytics.xn--jibbarth-d1a.fr/script.js" data-website-id="{{ analytic_website_id }}" data-auto-track="false"></script>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         {% endblock %}
     </head>

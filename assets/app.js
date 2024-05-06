@@ -7,4 +7,16 @@
 import './css/app.css';
 import './bootstrap.js';
 
-window.addEventListener('load', () => twemoji.parse(document.body), false);
+import twemoji from 'twemoji';
+
+let current_url = null;
+document.addEventListener("turbo:load", (evt) => {
+    twemoji.parse(document.body);
+
+    window.umami.track(props => ({ ...props,
+        'referrer': current_url !== null ? current_url : document.referrer,
+        'title': document.getElementsByTagName('title')[0].innerText,
+        'url': window.location.pathname
+    }));
+    current_url = window.location.pathname;
+})
