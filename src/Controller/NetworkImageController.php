@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\StaticSiteBuilder\ControllerWithDataProviderInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Icons\IconRegistryInterface;
-use Symplify\SymfonyStaticDumper\Contract\ControllerWithDataProviderInterface;
 use Twig\Environment;
 
 final class NetworkImageController implements ControllerWithDataProviderInterface
@@ -29,28 +29,18 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
         ]), 200, ['Content-Type' => 'image/svg+xml']);
     }
 
-    public function getControllerClass(): string
-    {
-        return self::class;
-    }
-
-    public function getControllerMethod(): string
-    {
-        return '__invoke';
-    }
-
     /**
-     * @return array<array<int|string>>
+     * @return array<array<string, string>>
      */
     public function getArguments(): array
     {
         return [
-            ['rss', 'solid'],
-            ['facebook', 'brands'],
-            ['github', 'brands'],
-            ['twitter', 'brands'],
-            ['symfony', 'brands'],
-            ['linkedin', 'brands'],
+            ['type' => 'rss', 'collection' => 'solid'],
+            ['type' => 'facebook', 'collection' => 'brands'],
+            ['type' => 'github', 'collection' => 'brands'],
+            ['type' => 'twitter', 'collection' => 'brands'],
+            ['type' => 'symfony', 'collection' => 'brands'],
+            ['type' => 'linkedin', 'collection' => 'brands'],
         ];
     }
 }
