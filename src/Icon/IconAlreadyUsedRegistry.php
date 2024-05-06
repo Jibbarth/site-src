@@ -49,6 +49,6 @@ final class IconAlreadyUsedRegistry implements IconRegistryInterface
         }
 
         // Return a reusable icon, take only viewBox attribute to avoid rendering issues
-        return new Icon('<use xlink:href="#' . $id . '"/>', [$icon->getAttributes()['viewBox']]);
+        return new Icon('<use href="#' . $id . '"/>', [$icon->getAttributes()['viewBox']]);
     }
 }
