@@ -97,4 +97,7 @@ return [
     'prismjs/components/prism-core.min.js' => [
         'version' => '1.29.0',
     ],
+    'twemoji' => [
+        'version' => '14.0.2',
+    ],
 ];

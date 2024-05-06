@@ -6,7 +6,7 @@ twig:
         gravatar_hash: '%gravatar_hash%'
         website_url: '%website_url%'
         ga: '%ga%'
-
+        analytic_website_id: '%analytic_website_id%'
 when@test:
     twig:
         strict_variables: true
