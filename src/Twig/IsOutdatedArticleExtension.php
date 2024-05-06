@@ -31,7 +31,7 @@ final class IsOutdatedArticleExtension extends AbstractExtension
     {
         $articleDate = new Carbon($article->getDate());
 
-        $diff = Carbon::now()->diffInDays($articleDate);
+        $diff = Carbon::now()->diffInDays($articleDate, true);
 
         return $diff >= $this->daysUntilOutdated;
     }
