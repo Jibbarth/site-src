@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\RouterInterface;
-use Symplify\SymfonyStaticDumper\Routing\RoutesProvider;
 use Twig\Environment;
 
 use function Symfony\Component\String\u;
@@ -23,7 +22,6 @@ final class SitemapController
 
     public function __construct(
         private RouterInterface $router,
-        private RoutesProvider $routesProvider,
         private ArticleRepositoryInterface $articleRepository,
         private Environment $renderer,
         #[Autowire('%website_url%')]
@@ -34,7 +32,11 @@ final class SitemapController
     public function __invoke(): Response
     {
         $urls = [];
-        foreach (array_keys($this->routesProvider->provideRoutesWithoutArguments()) as $routeName) {
+
+        /** @var array<\Symfony\Component\Routing\Route> $routesWithoutParam */
+        $routesWithoutParam = array_filter($this->router->getRouteCollection()->all(), static fn ($route) => !str_contains($route->getPath(), '{'));
+
+        foreach (array_keys($routesWithoutParam) as $routeName) {
             if (u($routeName)->containsAny(self::$toExclude)) {
                 continue;
             }

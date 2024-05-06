@@ -6,9 +6,9 @@ namespace App\Controller\Article;
 
 use App\Constant\ArticleType;
 use App\Repository\ArticleRepositoryInterface;
+use App\StaticSiteBuilder\ControllerWithDataProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symplify\SymfonyStaticDumper\Contract\ControllerWithDataProviderInterface;
 use Twig\Environment;
 
 final class DetailController implements ControllerWithDataProviderInterface
@@ -28,18 +28,8 @@ final class DetailController implements ControllerWithDataProviderInterface
         ]));
     }
 
-    public function getControllerClass(): string
-    {
-        return self::class;
-    }
-
-    public function getControllerMethod(): string
-    {
-        return '__invoke';
-    }
-
     /**
-     * @return array<array<string>>
+     * @return array<array<string, string>>
      */
     public function getArguments(): array
     {
@@ -52,7 +42,7 @@ final class DetailController implements ControllerWithDataProviderInterface
             if (ArticleType::EXTERNAL === $article->getType()) {
                 continue;
             }
-            $arguments[] = [$article->getType(), $article->getId()];
+            $arguments[] = ['type' => $article->getType(), 'article' => $article->getId()];
         }
 
         return [...$arguments];

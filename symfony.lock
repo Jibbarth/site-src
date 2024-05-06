@@ -135,9 +135,6 @@
     "nesbot/carbon": {
         "version": "2.57.0"
     },
-    "nette/neon": {
-        "version": "v3.2.2"
-    },
     "nette/schema": {
         "version": "v1.2.1"
     },
@@ -589,30 +586,6 @@
             "config/packages/symfony_connect.yaml",
             "config/routes/symfony_connect.yaml"
         ]
-    },
-    "symplify/autowire-array-parameter": {
-        "version": "v9.3.26"
-    },
-    "symplify/composer-json-manipulator": {
-        "version": "v9.3.26"
-    },
-    "symplify/console-package-builder": {
-        "version": "v9.3.26"
-    },
-    "symplify/easy-testing": {
-        "version": "v9.3.26"
-    },
-    "symplify/package-builder": {
-        "version": "v9.3.26"
-    },
-    "symplify/smart-file-system": {
-        "version": "v9.3.26"
-    },
-    "symplify/symfony-static-dumper": {
-        "version": "v9.3.26"
-    },
-    "symplify/symplify-kernel": {
-        "version": "v9.3.26"
     },
     "thecodingmachine/safe": {
         "version": "v1.3.3"
