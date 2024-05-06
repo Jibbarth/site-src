@@ -12,6 +12,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,6 +42,7 @@ final class StaticSiteBuilderCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $symfonyStyle = new SymfonyStyle($input, $output);
         $outputDirectory = $input->getOption('output_dir');
         if (!\is_string($outputDirectory)) {
             $output->writeln('Output directory must be a string');
@@ -48,13 +50,21 @@ final class StaticSiteBuilderCommand extends Command
             return Command::FAILURE;
         }
         $this->outputDirectory = $outputDirectory;
-        $output->writeln('Building the static site...');
 
+        $symfonyStyle->info('Building the static site in ' . $this->outputDirectory . ' directory');
+
+        // Load a prod kernel
         $kernel = new Kernel('prod', false);
         $kernel->boot();
         /** @var RouterInterface $router */
         $router = $kernel->getContainer()->get('router');
         $routesCollection = $router->getRouteCollection();
+
+        $progress = $symfonyStyle->createProgressBar($routesCollection->count());
+        $format = $progress::getFormatDefinition('normal');
+
+        $progress::setFormatDefinition('custom', $format . ' -- %message%');
+        $progress->setFormat('custom');
 
         /** @var \Symfony\Component\Routing\Route[] $routesWithoutParam */
         $routesWithoutParam = array_filter($routesCollection->all(), fn ($route) => !str_contains($route->getPath(), '{'));
@@ -64,7 +74,9 @@ final class StaticSiteBuilderCommand extends Command
         $client = new KernelBrowser($kernel);
         $client->enableReboot();
 
-        foreach ($routesWithoutParam as $route) {
+        foreach ($routesWithoutParam as $routeName => $route) {
+            $progress->setMessage(sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
+            $progress->advance();
             $client->request('GET', $route->getPath());
             $this->dumpResponse($client->getRequest(), $client->getResponse());
         }
@@ -84,17 +96,30 @@ final class StaticSiteBuilderCommand extends Command
             }
 
             $arguments = $routeController->getArguments();
+            $progress->advance();
             foreach ($arguments as $routeArgument) {
+                $progress->setMessage(sprintf('Processing route %s (%s) with arguments (%s)', $routeName, $route->getPath(), implode(', ', $routeArgument)));
+                $progress->display();
                 $client->request('GET', $router->generate($routeName, $routeArgument));
                 $this->dumpResponse($client->getRequest(), $client->getResponse());
             }
         }
 
+        $progress->setMessage('✅ Routes processed');
+        $progress->finish();
+        $symfonyStyle->newLine(2);
+
+        $symfonyStyle->info('⏳ Copying assets...');
         // Copy Assets
         $fileSystem = new Filesystem();
         $fileSystem->mirror('public', $this->outputDirectory);
         // Clean index file
         $fileSystem->remove($this->outputDirectory . '/index.php');
+
+        $symfonyStyle->info('✅ Assets copied');
+
+        $symfonyStyle->success('🥳 Static site built successfully!');
+        $symfonyStyle->note('Run local server to see the output: "php -S localhost:8001 -t ' . $this->outputDirectory . '"');
 
         // Build the static site
         return Command::SUCCESS;
