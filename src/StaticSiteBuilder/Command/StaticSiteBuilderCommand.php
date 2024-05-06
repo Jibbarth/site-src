@@ -21,7 +21,7 @@ use Symfony\Component\Routing\RouterInterface;
 use function Symfony\Component\String\u;
 
 #[AsCommand(
-    name: 'static-site-build',
+    name: 'dump-static-site',
     description: 'Build the static site',
 )]
 final class StaticSiteBuilderCommand extends Command
