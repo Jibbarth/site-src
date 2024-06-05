@@ -44,6 +44,11 @@ final class StaticSiteBuilderCommand extends Command
         $this->addOption('output_dir', 'o', InputOption::VALUE_REQUIRED, 'Output directory', 'output');
     }
 
+    /**
+     * @suppressWarnings(PHPMD.CyclomaticComplexity)
+     * @suppressWarnings(PHPMD.ExcessiveMethodLength)
+     * TODO: refactor this method
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $symfonyStyle = new SymfonyStyle($input, $output);
@@ -88,6 +93,10 @@ final class StaticSiteBuilderCommand extends Command
             $progress->setMessage(sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
             $progress->advance();
             $client->request('GET', $route->getPath());
+            if (!$client->getResponse()->isSuccessful()) {
+                $symfonyStyle->error(sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
+                continue;
+            }
             $this->dumpResponse($client->getRequest(), $client->getResponse());
         }
 
@@ -116,6 +125,15 @@ final class StaticSiteBuilderCommand extends Command
                 ));
                 $progress->display();
                 $client->request('GET', $router->generate($routeName, $routeArgument));
+                if (!$client->getResponse()->isSuccessful()) {
+                    $symfonyStyle->error(sprintf(
+                        'Error processing route %s (%s) with arguments (%s)',
+                        $routeName,
+                        $route->getPath(),
+                        implode(', ', $routeArgument)
+                    ));
+                    continue;
+                }
                 $this->dumpResponse($client->getRequest(), $client->getResponse());
             }
         }
