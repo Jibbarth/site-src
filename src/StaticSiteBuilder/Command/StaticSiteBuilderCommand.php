@@ -95,7 +95,8 @@ final class StaticSiteBuilderCommand extends Command
             $client->request('GET', $route->getPath());
             if (!$client->getResponse()->isSuccessful()) {
                 $symfonyStyle->error(sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
-                continue;
+
+                return Command::FAILURE;
             }
             $this->dumpResponse($client->getRequest(), $client->getResponse());
         }
@@ -132,7 +133,8 @@ final class StaticSiteBuilderCommand extends Command
                         $route->getPath(),
                         implode(', ', $routeArgument)
                     ));
-                    continue;
+
+                    return Command::FAILURE;
                 }
                 $this->dumpResponse($client->getRequest(), $client->getResponse());
             }

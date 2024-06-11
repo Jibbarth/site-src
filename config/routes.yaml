@@ -1,11 +1,11 @@
-not_found:
-    path: /404.html
-    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
-    defaults:
-        template:  '404.html.twig'
-
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+not_found:
+    path: /404.html
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template:  '404.html.twig'
