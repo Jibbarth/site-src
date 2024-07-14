@@ -6,6 +6,7 @@ namespace App\Twig;
 
 use App\Model\Photo;
 use App\Photo\UnsplashRandomPhotoProvider;
+use Symfony\Contracts\Cache\CacheInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -13,6 +14,7 @@ final class UnsplashExtension extends AbstractExtension
 {
     public function __construct(
         private UnsplashRandomPhotoProvider $photoProvider,
+        private CacheInterface $cache,
     ) {}
 
     /**
@@ -52,6 +54,9 @@ final class UnsplashExtension extends AbstractExtension
 
     public function getUnsplashPhotoObject(string $keyword, int $width = 1600, int $height = 900): Photo
     {
-        return $this->photoProvider->find($keyword, $width, $height);
+        return $this->cache->get(
+            'unsplash_' . $keyword . $width . $height,
+            fn () => $this->photoProvider->find($keyword, $width, $height)
+        );
     }
 }
