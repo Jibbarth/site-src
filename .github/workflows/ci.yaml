@@ -29,7 +29,11 @@ jobs:
               run: bin/console dump-static-site --ansi
               env:
                   GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
+                  UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+
             - name: Assert README build
               run: bin/console generate-readme --ansi
               env:
                   GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
+                  UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+

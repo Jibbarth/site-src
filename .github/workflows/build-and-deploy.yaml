@@ -51,6 +51,7 @@ jobs:
                     GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
                     AFUP_USERNAME: ${{ secrets.AFUP_USERNAME }}
                     AFUP_PWD: ${{ secrets.AFUP_PWD }}
+                    UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
             -   name: Deploy 🚀
                 uses: JamesIves/github-pages-deploy-action@releases/v3
                 with:
@@ -78,6 +79,7 @@ jobs:
                 run: bin/console generate-readme --ansi
                 env:
                     GITHUB_USERNAME: ${{ secrets.ACCESS_TOKEN }}
+                    UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
             -   name: Deploy 🚀
                 uses: JamesIves/github-pages-deploy-action@releases/v3
                 with:
