@@ -4,7 +4,14 @@
 {% block description %}{% endblock %}
 {% block meta_image %}{{ unsplash_url('project', 600, 300) }}{% endblock %}
 {% block header_image %}
-    <img class="h-full w-full object-cover" src="{{ unsplash('project', 1600, 300) }}" alt="Banner image for this project list, an unsplash image with Project theme">
+    {% set banner = unsplash_photo('project', 1600, 300) %}
+    <img
+        class="h-full w-full object-cover"
+        src="{{ banner.blurhash }}"
+        {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
+            src: banner.fullUrl
+        }) }}
+        alt="Banner image for this project list, an unsplash image with Project theme">
 {% endblock %}
 
 {% block sub_profile %}

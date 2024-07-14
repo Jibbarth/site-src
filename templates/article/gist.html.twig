@@ -6,7 +6,14 @@
 {% block description %}{{ article.getAbstract()|markdown_to_html|striptags|raw }}{% endblock %}
 {% block meta_image %}{{ meta_img }}{% endblock %}
 {% block header_image %}
-    <img class="h-full w-full object-cover" src="{{ unsplash('coding', 1600, 300) }}" alt="Banner image for this article, an unsplash image with coding theme">
+    {% set banner = unsplash_photo('coding', 1600, 300) %}
+    <img
+        class="h-full w-full object-cover"
+        src="{{ banner.blurhash }}"
+        {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
+            src: banner.fullUrl
+        }) }}
+        alt="Banner image for this article, an unsplash image with coding theme">
 {% endblock %}
 
 {% block sub_profile %}
