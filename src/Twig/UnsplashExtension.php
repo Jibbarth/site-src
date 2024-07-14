@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use Symfony\Contracts\HttpClient\HttpClientInterface;
+use App\Model\Photo;
+use App\Photo\UnsplashRandomPhotoProvider;
+use Symfony\Contracts\Cache\CacheInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class UnsplashExtension extends AbstractExtension
 {
-    private const UNSPLASH_PATTERN = 'https://source.unsplash.com/%sx%s/?%s';
-
-    public function __construct(private HttpClientInterface $client) {}
+    public function __construct(
+        private UnsplashRandomPhotoProvider $photoProvider,
+        private CacheInterface $cache,
+    ) {}
 
     /**
      * @return array<\Twig\TwigFunction>
@@ -22,35 +25,38 @@ final class UnsplashExtension extends AbstractExtension
         return [
             new TwigFunction('unsplash', [$this, 'getUnsplashImage']),
             new TwigFunction('unsplash_url', [$this, 'getUnsplashUrl']),
+            new TwigFunction('unsplash_photo', [$this, 'getUnsplashPhotoObject']),
         ];
     }
 
     /**
      * Return a base64encoded image
+     *
+     * @deprecated, use unsplash_photo instead with blurhash as base64 and lazy load full url
      */
     public function getUnsplashImage(string $keyword, int $width = 1600, int $height = 900): string
     {
-        $response = $this->client->request(
-            'GET',
-            sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
-        );
+        $url = $this->getUnsplashUrl($keyword, $width, $height);
+        $content = file_get_contents($url);
+        if (false === $content) {
+            throw new \LogicException('Unable to download ' . $url);
+        }
 
-        return 'data:image/png;base64, ' . base64_encode($response->getContent());
+        return 'data:image/png;base64, ' . base64_encode($content);
     }
 
     public function getUnsplashUrl(string $keyword, int $width = 1600, int $height = 900): string
     {
-        $response = $this->client->request(
-            'GET',
-            sprintf(self::UNSPLASH_PATTERN, $width, $height, $keyword)
+        $photo = $this->getUnsplashPhotoObject($keyword, $width, $height);
+
+        return $photo->fullUrl;
+    }
+
+    public function getUnsplashPhotoObject(string $keyword, int $width = 1600, int $height = 900): Photo
+    {
+        return $this->cache->get(
+            'unsplash_' . $keyword . $width . $height,
+            fn () => $this->photoProvider->find($keyword, $width, $height)
         );
-
-        $response->getStatusCode(); // Retrieve info
-        $url = $response->getInfo('url');
-        if (!\is_string($url)) {
-            throw new \RuntimeException('Unable to retrieve URL');
-        }
-
-        return $url;
     }
 }
