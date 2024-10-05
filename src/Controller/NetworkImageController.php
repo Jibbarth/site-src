@@ -16,13 +16,13 @@ final class NetworkImageController implements ControllerWithDataProviderInterfac
     public function __construct(
         private Environment $twig,
         #[Autowire(service: '.ux_icons.icon_registry')]
-        private IconRegistryInterface $iconRegistry
+        private IconRegistryInterface $iconRegistry,
     ) {}
 
     #[Route('/img/fa/{type}-{collection}.svg', name: 'image')]
     public function __invoke(string $type, string $collection): Response
     {
-        $icon = $this->iconRegistry->get(sprintf('fa-%s:%s', $collection, $type));
+        $icon = $this->iconRegistry->get(\sprintf('fa-%s:%s', $collection, $type));
 
         return new Response($this->twig->render('_partials/font_awesome_svg.svg.twig', [
             'icon' => $icon,

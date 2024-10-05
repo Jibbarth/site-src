@@ -23,7 +23,7 @@ final class ReadmeGenerator
         private ProjectRepositoryInterface $projectRepository,
         private ArticleRepositoryInterface $articleRepository,
         private LastPrRetriever $lastPrRetriever,
-        private LastStarRetriever $lastStarRetriever
+        private LastStarRetriever $lastStarRetriever,
     ) {}
 
     public function generate(): void

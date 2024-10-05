@@ -25,7 +25,7 @@ final class UrlSanitizerExtension extends AbstractExtension
     {
         $host = \Safe\parse_url($url, \PHP_URL_HOST);
         if (null === $host || !\is_string($host)) {
-            throw new \InvalidArgumentException(sprintf('"%s" is not an absolute url', $url));
+            throw new \InvalidArgumentException(\sprintf('"%s" is not an absolute url', $url));
         }
 
         $sanitizedHost = idn_to_ascii($host, \IDNA_NONTRANSITIONAL_TO_ASCII, \INTL_IDNA_VARIANT_UTS46);

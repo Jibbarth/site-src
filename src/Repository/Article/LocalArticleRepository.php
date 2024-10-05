@@ -23,7 +23,7 @@ final class LocalArticleRepository implements ArticleRepositoryInterface
     public function __construct(
         private FrontYamlParser $parser,
         #[Autowire('%kernel.project_dir%')]
-        private string $projectDir
+        private string $projectDir,
     ) {
         $this->collection = new ArticleCollection([]);
     }

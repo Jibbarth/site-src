@@ -23,7 +23,7 @@ final class IndexController
         private Environment $twig,
         private ProjectRepositoryInterface $projectRepository,
         private ArticleRepositoryInterface $articleRepository,
-        private BadgeRepositoryInterface $badgeRepository
+        private BadgeRepositoryInterface $badgeRepository,
     ) {}
 
     #[Route('/', name: 'home')]

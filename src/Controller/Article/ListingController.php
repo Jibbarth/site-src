@@ -16,7 +16,7 @@ final class ListingController
     public function __construct(
         private Environment $renderer,
         private ArticleRepositoryInterface $repository,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
     ) {}
 
     #[Route('/blog', name: 'article_list', defaults: ['_format' => 'html'], methods: ['GET'])]
@@ -33,7 +33,7 @@ final class ListingController
             $format = 'xml';
         }
 
-        return new Response($this->renderer->render(sprintf('article/list.%s.twig', $format), [
+        return new Response($this->renderer->render(\sprintf('article/list.%s.twig', $format), [
             'articles' => $this->repository->getAll()->sort('getDate', Sort::Descending),
         ]));
     }

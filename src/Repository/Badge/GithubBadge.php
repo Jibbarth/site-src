@@ -21,12 +21,12 @@ final class GithubBadge implements BadgeRepositoryInterface
     public function __construct(
         private HttpClientInterface $client,
         #[Autowire('%github_user%')]
-        private string $githubUser
+        private string $githubUser,
     ) {}
 
     public function getBadges(): BadgeCollection
     {
-        $baseUrl = sprintf('%s/%s%s', self::GITHUB_URL, $this->githubUser, self::TAB_QUERY_PARAM);
+        $baseUrl = \sprintf('%s/%s%s', self::GITHUB_URL, $this->githubUser, self::TAB_QUERY_PARAM);
         $response = $this->client->request('GET', $baseUrl);
 
         $crawler = new Crawler($response->getContent(), self::GITHUB_URL, self::GITHUB_URL);

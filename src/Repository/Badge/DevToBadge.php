@@ -20,12 +20,12 @@ final class DevToBadge implements BadgeRepositoryInterface
     public function __construct(
         private HttpClientInterface $client,
         #[Autowire('%github_user%')]
-        private string $githubUser
+        private string $githubUser,
     ) {}
 
     public function getBadges(): BadgeCollection
     {
-        $uri = sprintf('%s%s', self::DEV_TO_URL, $this->githubUser);
+        $uri = \sprintf('%s%s', self::DEV_TO_URL, $this->githubUser);
 
         $response = $this->client->request('GET', $uri);
 

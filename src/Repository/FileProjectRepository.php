@@ -25,7 +25,7 @@ final class FileProjectRepository implements ProjectRepositoryInterface
         private SluggerInterface $slugger,
         SerializerInterface $serializer,
         #[Autowire('%kernel.project_dir%')]
-        string $projectDir
+        string $projectDir,
     ) {
         $filename = $projectDir . \DIRECTORY_SEPARATOR . 'data' . \DIRECTORY_SEPARATOR . self::FILENAME;
 
