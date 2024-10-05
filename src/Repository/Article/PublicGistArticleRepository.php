@@ -20,7 +20,7 @@ final class PublicGistArticleRepository implements ArticleRepositoryInterface
         private CacheInterface $cache,
         private ArticleFromGistLoader $gistArticleLoader,
         #[Autowire('%github_user%')]
-        private string $githubUser
+        private string $githubUser,
     ) {}
 
     public function getAll(): ArticleCollection

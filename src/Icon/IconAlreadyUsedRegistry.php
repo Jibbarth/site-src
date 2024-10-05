@@ -41,7 +41,7 @@ final class IconAlreadyUsedRegistry implements IconRegistryInterface
         if (null === $request) {
             return $icon;
         }
-        $id = md5(sprintf('%s-%s', $id, spl_object_id($request)));
+        $id = md5(\sprintf('%s-%s', $id, spl_object_id($request)));
         if (!\array_key_exists($id, $this->alreadyUsed)) {
             $this->alreadyUsed[$id] = $id;
 

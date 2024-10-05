@@ -14,7 +14,7 @@ final class BlurHashToBase64Converter
 {
     public function __construct(
         #[Autowire(service: 'lazy_image.image_manager')]
-        private ImageManager $imageManager
+        private ImageManager $imageManager,
     ) {}
 
     public function convert(string $blurhash, int $width, int $height): string

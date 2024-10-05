@@ -21,7 +21,7 @@ final class ChainArticleRepository implements ArticleRepositoryInterface
         #[TaggedIterator('app.article_repository')]
         private iterable $repositories,
         #[Autowire('%kernel.environment%')]
-        private string $env
+        private string $env,
     ) {}
 
     public function getAll(): ArticleCollection

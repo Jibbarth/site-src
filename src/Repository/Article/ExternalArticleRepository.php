@@ -20,7 +20,7 @@ final class ExternalArticleRepository implements ArticleRepositoryInterface
     public function __construct(
         private SerializerInterface $serializer,
         #[Autowire('%kernel.project_dir%')]
-        private string $projectDir
+        private string $projectDir,
     ) {
         $this->collection = new ArticleCollection([]);
     }

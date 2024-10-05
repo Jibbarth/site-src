@@ -20,7 +20,7 @@ final class PrivateGistArticleRepository implements ArticleRepositoryInterface
     public function __construct(
         private ArticleFromGistLoader $gistArticleLoader,
         #[Autowire('%kernel.project_dir%')]
-        private string $projectDir
+        private string $projectDir,
     ) {
         $this->yaml = new Yaml();
     }

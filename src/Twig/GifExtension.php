@@ -17,7 +17,7 @@ final class GifExtension extends AbstractExtension
      */
     public function __construct(
         #[TaggedIterator('app.gif_provider')]
-        private iterable $gifProviders
+        private iterable $gifProviders,
     ) {}
 
     /**

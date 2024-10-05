@@ -34,7 +34,7 @@ final class StaticSiteBuilderCommand extends Command
      */
     public function __construct(
         #[TaggedIterator(ControllerWithDataProviderInterface::class)]
-        private iterable $controllersWithData
+        private iterable $controllersWithData,
     ) {
         parent::__construct();
     }
@@ -90,11 +90,11 @@ final class StaticSiteBuilderCommand extends Command
         $client->enableReboot();
 
         foreach ($routesWithoutParam as $routeName => $route) {
-            $progress->setMessage(sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
+            $progress->setMessage(\sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
             $progress->advance();
             $client->request('GET', $route->getPath());
             if (!$client->getResponse()->isSuccessful()) {
-                $symfonyStyle->error(sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
+                $symfonyStyle->error(\sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
 
                 return Command::FAILURE;
             }
@@ -111,14 +111,14 @@ final class StaticSiteBuilderCommand extends Command
                 $routeController = $controller;
             }
             if (null === $routeController) {
-                $output->writeln(sprintf('No controller found for route %s', $route->getPath()));
+                $output->writeln(\sprintf('No controller found for route %s', $route->getPath()));
                 continue;
             }
 
             $arguments = $routeController->getArguments();
             $progress->advance();
             foreach ($arguments as $routeArgument) {
-                $progress->setMessage(sprintf(
+                $progress->setMessage(\sprintf(
                     'Processing route %s (%s) with arguments (%s)',
                     $routeName,
                     $route->getPath(),
@@ -127,7 +127,7 @@ final class StaticSiteBuilderCommand extends Command
                 $progress->display();
                 $client->request('GET', $router->generate($routeName, $routeArgument));
                 if (!$client->getResponse()->isSuccessful()) {
-                    $symfonyStyle->error(sprintf(
+                    $symfonyStyle->error(\sprintf(
                         'Error processing route %s (%s) with arguments (%s)',
                         $routeName,
                         $route->getPath(),
@@ -176,7 +176,7 @@ final class StaticSiteBuilderCommand extends Command
 
         $fileSystem = new Filesystem();
         $fileSystem->dumpFile(
-            sprintf(
+            \sprintf(
                 '%s%s%s',
                 $this->outputDirectory,
                 u($folder)->ensureStart('/')->ensureEnd('/')->toString(),
