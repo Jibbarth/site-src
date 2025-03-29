@@ -18,7 +18,7 @@ final class UnsplashExtension extends AbstractExtension
     ) {}
 
     /**
-     * @return array<\Twig\TwigFunction>
+     * @return array<TwigFunction>
      */
     public function getFunctions(): array
     {
