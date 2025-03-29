@@ -10,7 +10,7 @@ use Unsplash\HttpClient;
 use Unsplash\Photo as UnsplashPhoto;
 
 /**
- * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings(StaticAccess)
  */
 final class UnsplashRandomPhotoProvider
 {
@@ -52,7 +52,7 @@ final class UnsplashRandomPhotoProvider
         $appPhoto->blurhash = $this->blurhashConverter->convert($blurhash, $width, $height);
 
         $urls = $photo->__get('urls');
-        if (!\is_array($urls) || !\array_key_exists('full', $urls)) {
+        if (!\is_array($urls) || !\array_key_exists('full', $urls) || !\is_string($urls['full'])) {
             throw new \LogicException('Unable to get full url');
         }
         $appPhoto->fullUrl = $urls['full'] . strtr(self::QUERY_PARAM_PATTERN, ['{width}' => $width, '{height}' => $height]);

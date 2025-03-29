@@ -45,8 +45,8 @@ final class StaticSiteBuilderCommand extends Command
     }
 
     /**
-     * @suppressWarnings(PHPMD.CyclomaticComplexity)
-     * @suppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @suppressWarnings(CyclomaticComplexity)
+     * @suppressWarnings(ExcessiveMethodLength)
      * TODO: refactor this method
      */
     protected function execute(InputInterface $input, OutputInterface $output): int

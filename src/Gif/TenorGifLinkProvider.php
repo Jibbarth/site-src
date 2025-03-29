@@ -21,6 +21,11 @@ final class TenorGifLinkProvider implements GifLinkProviderInterface
     {
         $response = $this->client->request('GET', self::RANDOM_URL . $search);
 
-        return $response->toArray()['results'][0]['media'][0]['gif']['url'];
+        $imageUrl = $response->toArray()['results'][0]['media'][0]['gif']['url'];
+        if (!\is_string($imageUrl)) {
+            throw new \LogicException('Unable to find gif url for the search: ' . $search);
+        }
+
+        return $imageUrl;
     }
 }

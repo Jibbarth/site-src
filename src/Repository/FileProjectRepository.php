@@ -19,7 +19,7 @@ final class FileProjectRepository implements ProjectRepositoryInterface
     private ProjectCollection $projects;
 
     /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(StaticAccess)
      */
     public function __construct(
         private SluggerInterface $slugger,
@@ -48,13 +48,7 @@ final class FileProjectRepository implements ProjectRepositoryInterface
     {
         $key = $this->slugger->slug($name)->toString();
 
-        /** @var ?Project $project */
-        $project = $this->projects->offsetGet($key);
-        if (null === $project) {
-            throw new \InvalidArgumentException('Unable to find project with name ' . $name);
-        }
-
-        return $project;
+        return $this->projects->offsetGet($key);
     }
 
     public function getAll(): ProjectCollection

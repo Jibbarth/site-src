@@ -1,6 +1,5 @@
 parameters:
-    level: max
-    checkMissingIterableValueType: false
+    level: 9
     paths:
         - %currentWorkingDirectory%/src/
     ergebnis:
@@ -22,3 +21,4 @@ parameters:
     ignoreErrors:
         - "#^Method App\\\\Model\\\\.* has a nullable return type declaration\\.$#" # Authorize nullable return type for App\Model
         - "#^Method App\\\\Model\\\\.* has parameter .* with a nullable type declaration\\.$#" # Authorize nullable return type for App\Model
+        - identifier: offsetAccess.nonOffsetAccessible
