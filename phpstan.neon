@@ -12,12 +12,9 @@ parameters:
 
     excludePaths:
         - %currentWorkingDirectory%/src/Kernel.php
-        - %currentWorkingDirectory%/src/Migrations
-        - %currentWorkingDirectory%/tests
         - %currentWorkingDirectory%/config
         - %currentWorkingDirectory%/public
         - %currentWorkingDirectory%/importmap.php
-        - %currentWorkingDirectory%/phpinsights.php
         - %currentWorkingDirectory%/.php-cs-fixer.dist.php
     bootstrapFiles:
         - %currentWorkingDirectory%/vendor/autoload.php
