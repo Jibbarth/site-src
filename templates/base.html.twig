@@ -43,7 +43,7 @@
     <body class="flex flex-col min-h-screen bg-gray-300 font-sans">
         <header>
             {% block header %}
-            <div class="bg-gray-100 mb-6 pb-6 w-full h-auto flex flex-col items-center shadow-sm">
+            <div class="bg-gray-100 mb-6 pb-6 w-full h-auto flex flex-col items-center shadow-xs">
                 <div class="h-64 xl:h-full w-full">
                     {% block header_image %}
                     {% set bannerPhoto = unsplash_photo('website', 1600, 300) %}
@@ -58,7 +58,7 @@
                     {% endblock %}
                 </div>
                 <div class="-ml-56 sm:w-64">
-                    <div class="shadow h-32 w-32 -my-16 border-white rounded-full overflow-hidden border-4">
+                    <div class="shadow-sm h-32 w-32 -my-16 border-white rounded-full overflow-hidden border-4">
                         <a href="/">
                             {% set profile_path = 'https://gravatar.com/avatar/'~ gravatar_hash ~'?s=200' %}
                             <img class="object-cover w-full h-full"
@@ -92,7 +92,7 @@
             </div>
             {% endblock %}
         </header>
-        <main class="flex-grow">
+        <main class="grow">
             {% block body %}{% endblock %}
         </main>
         <footer class="m-auto border-t border-gray-400 py-4 w-full max-w-5xl px-2 md:px-12 md:text-sm text-gray-600">

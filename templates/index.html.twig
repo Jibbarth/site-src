@@ -21,7 +21,7 @@
                 <a href="{{ path('article_list') }}">Writings</a>
             </h2>
         </div>
-        <div class="bg-gray-100 mt-4 sm:rounded overflow-hidden shadow">
+        <div class="bg-gray-100 mt-4 sm:rounded-sm overflow-hidden shadow-sm">
             {% for article in articles %}
                 {{ include('article/line.html.twig', [article]) }}
             {% endfor %}
