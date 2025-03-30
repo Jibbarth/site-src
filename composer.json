@@ -44,7 +44,7 @@
         "symfony/ux-turbo": "^2.23",
         "symfony/validator": "^7.2.5",
         "symfony/yaml": "^7.2.5",
-        "symfonycasts/tailwind-bundle": "^0.6.1",
+        "symfonycasts/tailwind-bundle": "^0.9.0",
         "symfonycorp/connect": "^8.1.5",
         "thecodingmachine/safe": "^2.5",
         "twig/extra-bundle": "^3.20",
