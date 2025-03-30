@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cf9ba15ea72c7333099f2251197eedc",
+    "content-hash": "efad936f5c8beeebad771645c67d6890",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -7434,16 +7434,16 @@
         },
         {
             "name": "symfonycasts/tailwind-bundle",
-            "version": "v0.6.1",
+            "version": "v0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/tailwind-bundle.git",
-                "reference": "28db7cfe23758cffc79f25a7c75cdb2fca52e9d9"
+                "reference": "408c65b9ed0a7a25e17f9f86d5d5d60bbbfcc464"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/tailwind-bundle/zipball/28db7cfe23758cffc79f25a7c75cdb2fca52e9d9",
-                "reference": "28db7cfe23758cffc79f25a7c75cdb2fca52e9d9",
+                "url": "https://api.github.com/repos/SymfonyCasts/tailwind-bundle/zipball/408c65b9ed0a7a25e17f9f86d5d5d60bbbfcc464",
+                "reference": "408c65b9ed0a7a25e17f9f86d5d5d60bbbfcc464",
                 "shasum": ""
             },
             "require": {
@@ -7451,6 +7451,7 @@
                 "symfony/asset-mapper": "^6.3|^7.0",
                 "symfony/cache": "^6.3|^7.0",
                 "symfony/console": "^5.4|^6.3|^7.0",
+                "symfony/deprecation-contracts": "^2.2|^3.0",
                 "symfony/http-client": "^5.4|^6.3|^7.0",
                 "symfony/process": "^5.4|^6.3|^7.0"
             },
@@ -7483,9 +7484,9 @@
             ],
             "support": {
                 "issues": "https://github.com/SymfonyCasts/tailwind-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/tailwind-bundle/tree/v0.6.1"
+                "source": "https://github.com/SymfonyCasts/tailwind-bundle/tree/v0.9.0"
             },
-            "time": "2024-11-06T18:41:22+00:00"
+            "time": "2025-03-22T13:36:15+00:00"
         },
         {
             "name": "symfonycorp/connect",
