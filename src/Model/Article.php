@@ -58,7 +58,7 @@ final class Article
         return $this->title;
     }
 
-    public function getContent(): ?string
+    public function getContent(): string
     {
         return $this->content;
     }

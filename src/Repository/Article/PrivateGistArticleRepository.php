@@ -40,6 +40,7 @@ final class PrivateGistArticleRepository implements ArticleRepositoryInterface
         }
 
         $articles = [];
+        /** @var array<string> $listIds */
         foreach ($listIds as $id) {
             $articles[] = $this->gistArticleLoader->retrieve($id);
         }

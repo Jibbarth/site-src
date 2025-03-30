@@ -16,7 +16,7 @@ use function Symfony\Component\String\u;
 final class ChainBadgeRepository implements BadgeRepositoryInterface
 {
     /**
-     * @param iterable<\App\Repository\BadgeRepositoryInterface> $repositories
+     * @param iterable<BadgeRepositoryInterface> $repositories
      */
     public function __construct(
         #[TaggedIterator('app.badge_repository')]

@@ -23,7 +23,7 @@ final class LocalImageStore
     }
 
     /**
-     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings(StaticAccess)
      */
     public function store(string $content, string $name, string $folder = 'images'): string
     {

@@ -11,7 +11,7 @@ use Twig\TwigFilter;
 final class TimeDiffExtension extends AbstractExtension
 {
     /**
-     * @return array<\Twig\TwigFilter>
+     * @return array<TwigFilter>
      */
     public function getFilters(): array
     {

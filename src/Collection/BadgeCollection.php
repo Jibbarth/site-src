@@ -18,7 +18,7 @@ final class BadgeCollection extends AbstractCollection
     }
 
     /**
-     * @return \App\Collection\BadgeCollection<Badge>
+     * @return BadgeCollection<Badge>
      */
     public function shuffle(): self
     {

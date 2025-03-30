@@ -13,7 +13,7 @@ final class FontAwesomeExtension extends AbstractExtension
     public function __construct(private Environment $twig) {}
 
     /**
-     * @return array<\Twig\TwigFunction>
+     * @return array<TwigFunction>
      */
     public function getFunctions(): array
     {

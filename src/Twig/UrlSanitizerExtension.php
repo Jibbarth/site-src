@@ -12,7 +12,7 @@ use function Symfony\Component\String\u;
 final class UrlSanitizerExtension extends AbstractExtension
 {
     /**
-     * @return array<\Twig\TwigFilter>
+     * @return array<TwigFilter>
      */
     public function getFilters(): array
     {

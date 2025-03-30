@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 final class ChainArticleRepository implements ArticleRepositoryInterface
 {
     /**
-     * @param iterable<\App\Repository\ArticleRepositoryInterface> $repositories
+     * @param iterable<ArticleRepositoryInterface> $repositories
      */
     public function __construct(
         #[TaggedIterator('app.article_repository')]

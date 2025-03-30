@@ -15,6 +15,14 @@ final class ArticleFromGistLoader
 
     public function retrieve(string $gistId): Article
     {
+        /** @var array{
+         *     id: string,
+         *     description: string,
+         *     created_at: string,
+         *     html_url: string,
+         *     files: array<string, array<string, string>>
+         * } $gist
+         */
         $gist = $this->cache->get(
             'gist_' . $gistId,
             function (ItemInterface $item) use ($gistId): array {
@@ -28,7 +36,7 @@ final class ArticleFromGistLoader
         $article = new Article(
             $gist['id'],
             $gist['description'],
-            $file['content'],
+            $file['content'] ?? '',
             new \DateTime($gist['created_at']),
             $gist['html_url']
         );

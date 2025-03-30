@@ -22,6 +22,11 @@ final class GiphyLinkProvider implements GifLinkProviderInterface
     {
         $response = $this->client->request('GET', self::RANDOM_URL . $search);
 
-        return $response->toArray()['data']['image_url'];
+        $imageUrl = $response->toArray()['data']['image_url'];
+        if (!\is_string($imageUrl)) {
+            throw new \LogicException('Unable to find gif url for the search: ' . $search);
+        }
+
+        return $imageUrl;
     }
 }

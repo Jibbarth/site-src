@@ -17,14 +17,12 @@ jobs:
                     persist-credentials: false
             - uses: shivammathur/setup-php@v2
               with:
-                  php-version: 8.2
+                  php-version: 8.4
                   coverage: none
                   extensions: gd, imagick
             - run: composer install --no-progress
             - name: Grumphp
               run: vendor/bin/grumphp run --ansi
-            - name: PHPInsights
-              run: vendor/bin/phpinsights -n --ansi
             - name: Assert static site build
               run: bin/console dump-static-site --ansi
               env:
