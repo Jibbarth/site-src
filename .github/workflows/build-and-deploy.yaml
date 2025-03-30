@@ -22,7 +22,7 @@ jobs:
                     persist-credentials: false
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.2
+                    php-version: 8.4
                     coverage: none
                     extensions: gd, imagick
             -   run: composer install --no-progress
@@ -41,7 +41,7 @@ jobs:
                     persist-credentials: false
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.2
+                    php-version: 8.4
                     coverage: none
                     extensions: gd, imagick
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
@@ -71,7 +71,7 @@ jobs:
                     persist-credentials: false
             -   uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 8.2
+                    php-version: 8.4
                     coverage: none
                     extensions: gd, imagick
             -   run: composer install --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader --no-suggest
