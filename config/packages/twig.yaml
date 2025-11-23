@@ -3,7 +3,6 @@ twig:
     globals:
         github_user: '%github_user%'
         author: '%author%'
-        gravatar_hash: '%gravatar_hash%'
         website_url: '%website_url%'
         ga: '%ga%'
         analytic_website_id: '%analytic_website_id%'

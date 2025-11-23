@@ -6,7 +6,6 @@ parameters: &parameters
     lastname: Barth
     author: '%firstname% %lastname%'
     website_url: https://jibébarth.fr
-    gravatar_hash: f7a23636c530faa0ceca6199226902e7
     ga: UA-39521443-1
     analytic_website_id: '%env(ANALYTIC_WEBSITE_ID)%'
     sf_connect_uuid: 7cc4c670-541e-4006-a488-6366794d54dd
