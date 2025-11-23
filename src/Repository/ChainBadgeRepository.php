@@ -7,7 +7,7 @@ namespace App\Repository;
 use App\Collection\BadgeCollection;
 use App\Storage\LocalImageStore;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 use function Symfony\Component\String\u;
@@ -19,7 +19,7 @@ final class ChainBadgeRepository implements BadgeRepositoryInterface
      * @param iterable<BadgeRepositoryInterface> $repositories
      */
     public function __construct(
-        #[TaggedIterator('app.badge_repository')]
+        #[AutowireIterator('app.badge_repository')]
         private iterable $repositories,
         private LocalImageStore $imageStore,
         private HttpClientInterface $client,

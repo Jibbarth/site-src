@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,7 +16,7 @@ final class GifExtension extends AbstractExtension
      * @param iterable<\App\Gif\GifLinkProviderInterface> $gifProviders
      */
     public function __construct(
-        #[TaggedIterator('app.gif_provider')]
+        #[AutowireIterator('app.gif_provider')]
         private iterable $gifProviders,
     ) {}
 

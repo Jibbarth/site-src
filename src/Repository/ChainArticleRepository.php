@@ -8,7 +8,7 @@ use App\Collection\ArticleCollection;
 use App\Model\Article;
 use Symfony\Component\DependencyInjection\Attribute\AsAlias;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 #[AsAlias(ArticleRepositoryInterface::class)]
@@ -18,7 +18,7 @@ final class ChainArticleRepository implements ArticleRepositoryInterface
      * @param iterable<ArticleRepositoryInterface> $repositories
      */
     public function __construct(
-        #[TaggedIterator('app.article_repository')]
+        #[AutowireIterator('app.article_repository')]
         private iterable $repositories,
         #[Autowire('%kernel.environment%')]
         private string $env,
