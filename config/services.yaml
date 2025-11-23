@@ -1,12 +1,14 @@
 # This file is the entry point to configure your own services.
 # Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters: &parameters
     github_user: Jibbarth
     firstname: Jibé
     lastname: Barth
     author: '%firstname% %lastname%'
     website_url: https://jibébarth.fr
-    gravatar_hash: f7a23636c530faa0ceca6199226902e7
     ga: UA-39521443-1
     analytic_website_id: '%env(ANALYTIC_WEBSITE_ID)%'
     sf_connect_uuid: 7cc4c670-541e-4006-a488-6366794d54dd
@@ -42,20 +44,24 @@ twig:
     globals: *parameters
 
 services:
+    # default configuration for services in *this* file
     _defaults:
-        autowire: true
-        autoconfigure: true
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
             - '../src/Model/'
-            - '../src/Kernel.php'
+
 
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
     Psr\Container\ContainerInterface:
         alias: "service_container"
-

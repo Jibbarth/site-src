@@ -1,9 +1,8 @@
 twig:
-    default_path: '%kernel.project_dir%/templates'
+    file_name_pattern: '*.twig'
     globals:
         github_user: '%github_user%'
         author: '%author%'
-        gravatar_hash: '%gravatar_hash%'
         website_url: '%website_url%'
         ga: '%ga%'
         analytic_website_id: '%analytic_website_id%'

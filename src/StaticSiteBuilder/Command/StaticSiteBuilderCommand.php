@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -33,7 +33,7 @@ final class StaticSiteBuilderCommand extends Command
      * @param iterable<ControllerWithDataProviderInterface> $controllersWithData
      */
     public function __construct(
-        #[TaggedIterator(ControllerWithDataProviderInterface::class)]
+        #[AutowireIterator(ControllerWithDataProviderInterface::class)]
         private iterable $controllersWithData,
     ) {
         parent::__construct();
