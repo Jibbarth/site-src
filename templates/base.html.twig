@@ -34,9 +34,7 @@
     {% endblock %}
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}
-            {% block importmap %}
-                {{ importmap('app') }}
-            {% endblock %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
             <script async src="https://analytics.xn--jibbarth-d1a.fr/script.js" data-website-id="{{ analytic_website_id }}" data-auto-track="false"></script>
         {% endblock %}
     </head>
