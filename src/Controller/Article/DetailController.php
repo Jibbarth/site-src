@@ -23,7 +23,7 @@ final class DetailController implements ControllerWithDataProviderInterface
     {
         $post = $this->articleRepository->getById($article);
 
-        return new Response($this->renderer->render(\Safe\sprintf('article/%s.html.twig', $type), [
+        return new Response($this->renderer->render(\sprintf('article/%s.html.twig', $type), [
             'article' => $post,
         ]));
     }
