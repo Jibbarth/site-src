@@ -8,7 +8,8 @@ parameters:
                 - Twig\Extension\AbstractExtension
                 - Ramsey\Collection\AbstractCollection
                 - Symfony\Component\Console\Command\Command
-
+        testCaseWithSuffix:
+            enabled: false
     excludePaths:
         - %currentWorkingDirectory%/src/Kernel.php
         - %currentWorkingDirectory%/config
@@ -21,4 +22,3 @@ parameters:
     ignoreErrors:
         - "#^Method App\\\\Model\\\\.* has a nullable return type declaration\\.$#" # Authorize nullable return type for App\Model
         - "#^Method App\\\\Model\\\\.* has parameter .* with a nullable type declaration\\.$#" # Authorize nullable return type for App\Model
-        - identifier: offsetAccess.nonOffsetAccessible
