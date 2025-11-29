@@ -72,9 +72,6 @@
             "ref": "87424683adc81d7dc305eefec1fced883084aab9"
         }
     },
-    "doctrine/inflector": {
-        "version": "2.0.3"
-    },
     "doctrine/lexer": {
         "version": "1.2.1"
     },
@@ -385,10 +382,10 @@
         "version": "v5.3.0"
     },
     "symfony/maker-bundle": {
-        "version": "1.0",
+        "version": "1.65",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }

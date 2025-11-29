@@ -37,4 +37,5 @@
             <property name="exceptions" value="up"/>
         </properties>
     </rule>
+    <exclude-pattern>config/*</exclude-pattern>
 </ruleset>
