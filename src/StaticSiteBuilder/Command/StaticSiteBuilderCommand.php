@@ -8,9 +8,8 @@ use App\Kernel;
 use App\StaticSiteBuilder\ControllerWithDataProviderInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
@@ -25,7 +24,7 @@ use function Symfony\Component\String\u;
     name: 'dump-static-site',
     description: 'Build the static site',
 )]
-final class StaticSiteBuilderCommand extends Command
+final class StaticSiteBuilderCommand
 {
     private string $outputDirectory;
 
@@ -36,12 +35,6 @@ final class StaticSiteBuilderCommand extends Command
         #[AutowireIterator(ControllerWithDataProviderInterface::class)]
         private iterable $controllersWithData,
     ) {
-        parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        $this->addOption('output_dir', 'o', InputOption::VALUE_REQUIRED, 'Output directory', 'output');
     }
 
     /**
@@ -49,17 +42,17 @@ final class StaticSiteBuilderCommand extends Command
      * @suppressWarnings(ExcessiveMethodLength)
      * TODO: refactor this method
      */
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $symfonyStyle = new SymfonyStyle($input, $output);
-        $outputDirectory = $input->getOption('output_dir');
-        if (!\is_string($outputDirectory)) {
-            $output->writeln('Output directory must be a string');
-
-            return Command::FAILURE;
-        }
+    public function __invoke(
+        OutputInterface $output,
+        SymfonyStyle $symfonyStyle,
+        #[Option(
+            description: 'Output directory',
+            name: 'output_dir',
+            shortcut: 'o',
+        )]
+        string $outputDirectory = 'output',
+    ): int {
         $this->outputDirectory = $outputDirectory;
-
         $symfonyStyle->title('Building the static site in ' . $this->outputDirectory . ' directory');
 
         // Load a prod kernel

@@ -8,7 +8,7 @@ use App\Constant\ArticleType;
 use App\Repository\ArticleRepositoryInterface;
 use App\StaticSiteBuilder\ControllerWithDataProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Twig\Environment;
 
 final class DetailController implements ControllerWithDataProviderInterface
