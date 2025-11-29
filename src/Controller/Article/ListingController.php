@@ -20,7 +20,7 @@ final class ListingController
     ) {}
 
     #[Route('/blog', name: 'article_list', defaults: ['_format' => 'html'], methods: ['GET'])]
-    #[Route('/rss.xml', name: 'blog_rss', methods: ['GET'])]
+    #[Route('/rss.xml', name: 'blog_rss', defaults: ['_format' => 'xml'], methods: ['GET'])]
     public function __invoke(): Response
     {
         $format = 'html';
