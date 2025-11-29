@@ -11,7 +11,7 @@ use App\Repository\BadgeRepositoryInterface;
 use App\Repository\ProjectRepositoryInterface;
 use Ramsey\Collection\Sort;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Twig\Environment;
 
 final class IndexController
