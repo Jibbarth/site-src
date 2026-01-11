@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}💻 Projects // {{ author }}{% endblock %}
-{% block description %}{% endblock %}
+{% block description %}Projects by {{ author }}{% endblock %}
 {% block meta_image %}{{ unsplash_url('project', 600, 300) }}{% endblock %}
 {% block header_image %}
     {% set banner = unsplash_photo('project', 1600, 300) %}

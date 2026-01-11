@@ -3,7 +3,7 @@
 {% block body %}
 <div class="container mx-auto px-4 py-8">
     <div class="max-w-5xl mx-auto space-y-16">
-        
+
         {# Projects Section #}
         <section>
             <div class="flex items-center justify-between mb-8 pb-4 border-b border-border">
@@ -16,7 +16,7 @@
                     {{ ux_icon('ri:arrow-right-line', {class: 'ml-1 w-4 h-4 transition-transform group-hover:translate-x-1'}) }}
                 </a>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% for project in projects %}
                     <twig:project_card project="{{ project }}" />
@@ -31,7 +31,7 @@
                      <h2 class="text-3xl font-bold tracking-tight text-foreground">Latest Writings</h2>
                      <p class="text-muted-foreground mt-1">Thoughts on Symfony, web development, and more.</p>
                 </div>
-                <a href="{{ path('article_list') }}" class="group flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                <a href="{{ path('article_list') }}" aria-label="View all articles" class="group flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors">
                     Read more
                     {{ ux_icon('ri:arrow-right-line', {class: 'ml-1 w-4 h-4 transition-transform group-hover:translate-x-1'}) }}
                 </a>
@@ -54,7 +54,7 @@
             <div class="mb-8 pb-4 border-b border-border">
                 <h2 class="text-3xl font-bold tracking-tight text-foreground">Achievements</h2>
             </div>
-            
+
             <div class="flex flex-wrap gap-6 justify-center md:justify-start">
                  {% for badge in badges %}
                     <twig:achievement_badge badge="{{ badge }}" />
