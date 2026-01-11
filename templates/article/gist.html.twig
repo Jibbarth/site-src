@@ -8,7 +8,7 @@
 {% block header_image %}
     {% set banner = unsplash_photo('coding', 1600, 300) %}
     <img
-        class="h-full w-full object-cover"
+        class="absolute inset-0 w-full h-full object-cover opacity-20"
         src="{{ banner.blurhash }}"
         {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
             src: banner.fullUrl
@@ -18,43 +18,50 @@
 
 {% block sub_profile %}
     <div class="text-center mt-1">
-        <h2 class="block text-foreground text-2xl font-semibold">{{ article.title }}</h2>
-        <p class="inline-block text-muted-foreground text-sm font-base">Published {{ article.date|format_date() }}</p>
+        <h1 class="block text-foreground text-3xl md:text-5xl font-bold mb-2 leading-tight">{{ article.title }}</h1>
+        <p class="inline-block text-muted-foreground text-lg font-medium">Published {{ article.date|format_date(pattern='MMMM d, Y') }}</p>
     </div>
 {% endblock %}
 {% block body %}
-    <div class="flex flex-col items-center">
-        <div class="bg-secondary p-6 w-full max-w-4xl">
-            <div class="markdown" {{ stimulus_controller('code-highlight') }}>
-                {% if is_outdated_article(article) %}
-                    {{ include('_partials/outdated.html.twig') }}
-                {% endif %}
-                {{ article.content | markdown_to_html }}
-            </div>
-            {% for file in article.files %}
-                <div class="pt-6 pb-3 border-t ">
-                    {% if file.type == "text/markdown" %}
-                        <div class="markdown">
-                            {{ file.content | markdown_to_html }}
-                        </div>
-                    {% else %}
-                        <div {{ stimulus_controller('gist_file', {githubUser: github_user, article: article.id, file: file.filename}) }}></div>
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+             <div class="rounded-xl border border-border bg-muted/30 dark:bg-muted/40 p-6 md:p-10 shadow-sm">
+                <div class="markdown prose dark:prose-invert max-w-none" {{ stimulus_controller('code-highlight') }}>
+                    {% if is_outdated_article(article) %}
+                        {{ include('_partials/outdated.html.twig') }}
                     {% endif %}
+                    {{ article.content | markdown_to_html }}
                 </div>
-            {% endfor %}
-            <div class="mt-6 mb-0 text-right">
-                <a href="#" {{ stimulus_controller('share') }} class="share hidden mr-2 px-4 py-2 bg-secondary text-primary border border-primary hover:bg-primary hover:text-primary-foreground" data-title="{{ article.title }}">
-                    {{ ux_icon('fa-solid:share-alt', {'class': 'icon-inline'}) }}
-                    Share
-                </a>
-                <a href="{{ article.url }}"
-                   target="_blank" rel="nofollow,noopener"
-                   class="px-4 py-2 bg-secondary text-primary border border-primary hover:bg-primary hover:text-primary-foreground">
-                    {{ ux_icon('fa-solid:external-link-alt', {'class': 'icon-inline'}) }}
-                    React on gist.github.com
-                </a>
+
+                {% for file in article.files %}
+                    <div class="pt-6 pb-3 border-t border-border mt-6">
+                        {% if file.type == "text/markdown" %}
+                            <div class="markdown prose dark:prose-invert max-w-none">
+                                {{ file.content | markdown_to_html }}
+                            </div>
+                        {% else %}
+                            <div {{ stimulus_controller('gist_file', {githubUser: github_user, article: article.id, file: file.filename}) }}></div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="mt-8 pt-6 border-t border-border flex flex-wrap gap-4 justify-end">
+                    <a href="#" {{ stimulus_controller('share') }} class="share hide inline-flex items-center px-4 py-2 rounded-md bg-secondary text-secondary-foreground hover:bg-secondary/80 transition-colors text-sm font-medium" data-title="{{ article.title }}">
+                        {{ ux_icon('fa-solid:share-alt', {'class': 'mr-2 w-4 h-4'}) }}
+                        Share
+                    </a>
+                    <a href="{{ article.url }}"
+                       target="_blank" rel="nofollow,noopener"
+                       class="inline-flex items-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent hover:text-accent-foreground transition-colors text-sm font-medium">
+                        {{ ux_icon('fa-solid:external-link-alt', {'class': 'mr-2 w-4 h-4'}) }}
+                        React on gist.github.com
+                    </a>
+                </div>
+            </div>
+
+             <div class="mt-8 text-center">
+                {{ include('_partials/back_home.html.twig') }}
             </div>
         </div>
-        {{ include('_partials/back_home.html.twig') }}
     </div>
 {% endblock %}

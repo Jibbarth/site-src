@@ -81,18 +81,27 @@
                         {# Text & Info Area #}
                         <div class="text-center md:text-left max-w-2xl flex-1">
                             {{ partial('certifications') }}
-                            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-foreground">
+                            <p class="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-foreground">
                                 {{ author }}
-                            </h1>
+                            </p>
                             <div class="text-xl text-muted-foreground mb-6 leading-relaxed">
                                 🇫🇷 Web developer
                                 <div>{{ partial('social') }}</div>
                             </div>
-
-                             {% block sub_profile %}
-                                {{ partial('interests') }}
-                             {% endblock %}
                         </div>
+                    </div>
+
+                    {# Sub-profile / Page Title Area (Full Width, Centered if needed) #}
+                    <div class="">
+                        {% block sub_profile %}
+                            <h1 class="hide">{{ author }}</h1>
+                            {# Default: Interests (Left aligned relative to container, or centered?) #}
+                            {# The original was inside the right column. If we move it out, we might want to keep it centered or align it with the text above? #}
+                            {# Homepage interests usually looked good under the bio. Let's start with centering it or checking its content. #}
+                             <div class="text-center md:text-left md:ml-[calc(14rem+4rem)]"> {# Attempt to align with right column on desktop? 14rem(56) + 4rem(gap-16) #}
+                                {{ partial('interests') }}
+                            </div>
+                        {% endblock %}
                     </div>
                 </div>
             </div>

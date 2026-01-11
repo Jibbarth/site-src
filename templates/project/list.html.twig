@@ -16,40 +16,47 @@
 
 {% block sub_profile %}
     <div class="text-center">
-        <h2 class="inline-block text-foreground text-2xl font-semibold">My Projects 💻</h2>
+        <h1 class="block text-foreground text-3xl md:text-5xl font-bold mb-2 tracking-tight">My Projects 💻</h1>
     </div>
 {% endblock %}
-{% block body %}
-    <div class="flex flex-col items-center">
-        {% if featured_projects|length > 0 %}
-        <div class="w-full sm:max-w-3xl border-b border-border px-2 pb-3 mb-3">
-            <div class="text-center mx-auto">
-                <h2 class="inline-block text-2xl text-foreground font-semibold ">Featured projects</h2>
-                <p class="text-sm text-muted-foreground italic">Packages I'm proud to be part in</p>
-            </div>
-            <div class="sm:w-1/3 mx-auto border-b border-border pb-3"></div>
-            <div class="flex flex-wrap justify-center sm:-mx-2 mt-4">
-                {% for project in featured_projects %}
-                    {{ include('project/card.html.twig', [project]) }}
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-        {% if old_projects|length > 0 %}
-        <div class="w-full sm:max-w-3xl border-b border-border px-2 pb-3 mb-3">
-            <div class="text-center mx-auto">
-                <h2 class="inline-block text-2xl text-foreground font-semibold ">Oldstuff</h2>
-                <p class="text-sm text-muted-foreground italic">Old projects created while ago, experiments, web design integration...</p>
-            </div>
-            <div class="sm:w-1/3 mx-auto border-b border-border pb-3"></div>
-            <div class="flex flex-wrap justify-center sm:-mx-2 mt-4">
-                {% for project in old_projects %}
-                    {{ include('project/card.html.twig', [project]) }}
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
 
-        {{ include('_partials/back_home.html.twig') }}
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-5xl mx-auto space-y-16">
+
+            {% if featured_projects|length > 0 %}
+            <section>
+                <div class="mb-8 pb-4 border-b border-border">
+                    <h2 class="text-3xl font-bold tracking-tight text-foreground">Featured Projects</h2>
+                    <p class="text-muted-foreground mt-1">Packages I'm proud to be part in</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for project in featured_projects %}
+                        <twig:project_card project="{{ project }}" />
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            {% if old_projects|length > 0 %}
+            <section>
+                <div class="mb-8 pb-4 border-b border-border">
+                    <h2 class="text-3xl font-bold tracking-tight text-foreground">Old Stuff</h2>
+                    <p class="text-muted-foreground mt-1">Old projects created a while ago, experiments, web design integration...</p>
+                </div>
+
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {% for project in old_projects %}
+                        <twig:project_card project="{{ project }}" />
+                    {% endfor %}
+                </div>
+            </section>
+            {% endif %}
+
+            <div class="pt-8 border-t border-border">
+                 {{ include('_partials/back_home.html.twig') }}
+            </div>
+        </div>
     </div>
 {% endblock %}

@@ -122,6 +122,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
     /** Previous */
     *,
     ::after,
@@ -130,6 +131,7 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+
     /** Toolkit */
     * {
         @apply border-border outline-ring/50;
@@ -141,14 +143,14 @@
 }
 
 @layer base {
-  .icon-inline {
-    display: inline-block;
-    font-size: inherit;
-    height: 1em;
-    overflow: visible;
-    vertical-align: -0.125em;
-    width: 1em;
-  }
+    .icon-inline {
+        display: inline-block;
+        font-size: inherit;
+        height: 1em;
+        overflow: visible;
+        vertical-align: -0.125em;
+        width: 1em;
+    }
 }
 
 .py-05 {
@@ -161,22 +163,22 @@
 }
 
 .markdown {
-    @apply text-gray-900 leading-normal break-words;
+    @apply text-foreground leading-normal break-words;
 }
 
 .markdown .heading-permalink {
     @apply mr-2
 }
 
-.markdown > * + * {
+.markdown>*+* {
     @apply mt-0 mb-4;
 }
 
-.markdown li + li {
+.markdown li+li {
     @apply mt-1;
 }
 
-.markdown li > p + p {
+.markdown li>p+p {
     @apply mt-6;
 }
 
@@ -185,8 +187,9 @@
 }
 
 .markdown a {
-    @apply text-blue-600 font-semibold;
+    @apply text-primary font-semibold underline decoration-primary/30 underline-offset-2 hover:decoration-primary;
 }
+
 .markdown a svg {
     @apply inline;
 }
@@ -196,68 +199,78 @@
 }
 
 .markdown h1 {
-    @apply leading-tight border-b text-4xl font-semibold mb-4 mt-6 pb-2;
+    @apply leading-tight border-b border-border text-4xl font-semibold mb-4 mt-6 pb-2 text-foreground;
 }
 
 /** Hide H1, already displayed in subheader */
-body .markdown> h1:first-child  {
+body .markdown>h1:first-child {
     display: none;
 }
 
 .markdown h2 {
-    @apply leading-tight border-b text-2xl font-semibold mb-4 mt-6 pb-2;
+    @apply leading-tight border-b border-border text-2xl font-semibold mb-4 mt-6 pb-2 text-foreground;
 }
 
 .markdown h3 {
-    @apply leading-snug text-lg font-semibold mb-4 mt-6;
+    @apply leading-snug text-lg font-semibold mb-4 mt-6 text-foreground;
 }
 
 .markdown h4 {
-    @apply leading-none text-base font-semibold mb-4 mt-6;
+    @apply leading-none text-base font-semibold mb-4 mt-6 text-foreground;
 }
 
 .markdown h5 {
-    @apply leading-tight text-sm font-semibold mb-4 mt-6;
+    @apply leading-tight text-sm font-semibold mb-4 mt-6 text-foreground;
 }
 
 .markdown h6 {
-    @apply leading-tight text-sm font-semibold text-gray-600 mb-4 mt-6;
+    @apply leading-tight text-sm font-semibold text-muted-foreground mb-4 mt-6;
 }
 
 .markdown blockquote {
-    @apply text-base border-l-4 border-gray-300 pl-4 pr-4 text-gray-600;
+    @apply text-base border-l-4 border-border pl-4 pr-4 text-muted-foreground italic;
 }
 
 .markdown ul {
-    @apply text-base pl-8 list-disc;
+    @apply text-base pl-8 list-disc text-foreground;
 }
 
 .markdown ol {
-    @apply text-base pl-8 list-decimal;
+    @apply text-base pl-8 list-decimal text-foreground;
 }
 
 .markdown kbd {
-    @apply text-xs inline-block rounded-sm border px-1 py-5 align-middle font-normal font-mono shadow-sm;
+    @apply text-xs inline-block rounded-sm border border-border px-1 py-0.5 align-middle font-normal font-mono shadow-sm bg-muted text-foreground;
 }
 
 .markdown table {
-    @apply text-base border-gray-600;
+    @apply text-base border-border w-full;
 }
 
 .markdown th {
-    @apply border py-1 px-3;
+    @apply border border-border py-2 px-3 bg-muted font-semibold text-left;
 }
 
 .markdown td {
-    @apply border py-1 px-3;
+    @apply border border-border py-2 px-3;
 }
 
 .markdown img {
-    @apply m-auto;
+    @apply m-auto rounded-lg shadow-sm border border-border;
     @apply my-8;
 }
+
 .markdown :not(pre) code {
-    @apply font-mono text-xs font-semibold inline border border-gray-300 bg-gray-200 rounded-sm px-1 py-1 text-red-600;
+    @apply font-mono text-sm inline border border-border bg-muted rounded-md px-1.5 py-0.5 text-primary;
+}
+
+/** Override legacy gist link styles */
+.markdown a.bg-gray-100.text-blue-500.border-blue-500 {
+    @apply inline-flex items-center px-4 py-2 rounded-md border border-border bg-background hover:bg-accent hover:text-accent-foreground transition-colors text-sm font-medium text-foreground no-underline;
+}
+
+.markdown a.bg-gray-100.text-blue-500.border-blue-500:hover {
+    @apply text-accent-foreground;
 }
 
 .markdown pre {
@@ -265,13 +278,17 @@ body .markdown> h1:first-child  {
     @apply border p-4 mb-10 text-base;
 }
 
-@media (width >= theme(--breakpoint-lg)) {
+@media (width >=theme(--breakpoint-lg)) {
     .markdown pre {
         overflow: auto;
         @apply mx-8;
     }
 }
 
-.markdown pre[class*="language-"] > code[class*="language-"] {
+.markdown pre[class*="language-"]>code[class*="language-"] {
     @apply text-base font-mono;
+}
+
+.hide {
+    display: none;
 }
