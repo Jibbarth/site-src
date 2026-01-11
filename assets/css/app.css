@@ -292,3 +292,7 @@ body .markdown>h1:first-child {
 .hide {
     display: none;
 }
+
+.dark .gist {
+    filter: invert(0.92) hue-rotate(180deg);
+}
