@@ -2,9 +2,9 @@
 
 {% block body %}
 <div class="flex flex-col items-center">
-    <div class="w-full sm:max-w-3xl border-b border-gray-400 px-2 pb-3 mb-3">
-        <div class="text-center sm:w-1/3 mx-auto border-b border-gray-400 pb-3">
-            <h2 class="inline-block text-2xl text-gray-700 font-semibold ">Featured projects</h2>
+    <div class="w-full sm:max-w-3xl border-b border-border px-2 pb-3 mb-3">
+        <div class="text-center sm:w-1/3 mx-auto border-b border-border pb-3">
+            <h2 class="inline-block text-2xl text-muted-foreground font-semibold ">Featured projects</h2>
         </div>
         <div class="flex flex-wrap justify-center sm:-mx-2 mt-4">
             {% for project in projects %}
@@ -12,28 +12,28 @@
             {% endfor %}
         </div>
         <div class="text-center p-2">
-            <a href="{{ path('project_list') }}" class="underline text-md text-gray-600">See all projects</a>
+            <a href="{{ path('project_list') }}" class="underline text-md text-muted-foreground">See all projects</a>
         </div>
     </div>
-    <div class="w-full sm:max-w-3xl mb-4 border-b border-gray-400 px-2 pb-4 mb-3">
-        <div class="text-center sm:w-1/3 mx-auto border-b border-gray-400 pb-3">
-            <h2 class="inline-block text-2xl font-semibold text-gray-700 ">
+    <div class="w-full sm:max-w-3xl mb-4 border-b border-border px-2 pb-4 mb-3">
+        <div class="text-center sm:w-1/3 mx-auto border-b border-border pb-3">
+            <h2 class="inline-block text-2xl font-semibold text-muted-foreground ">
                 <a href="{{ path('article_list') }}">Writings</a>
             </h2>
         </div>
-        <div class="bg-gray-100 mt-4 sm:rounded-sm overflow-hidden shadow-sm">
+        <div class="bg-secondary mt-4 sm:rounded-sm overflow-hidden shadow-sm">
             {% for article in articles %}
                 {{ include('article/line.html.twig', [article]) }}
             {% endfor %}
             <div class="text-center p-2">
-                <a href="{{ path('article_list') }}" class="underline text-md text-gray-600">See all</a>
+                <a href="{{ path('article_list') }}" class="underline text-md text-muted-foreground">See all</a>
             </div>
         </div>
     </div>
 
     <div class="w-full sm:max-w-3xl mb-4">
-        <div class="text-center sm:w-1/3 mx-auto border-b border-gray-400 pb-3">
-            <h2 class="inline-block text-2xl font-semibold text-gray-700 ">
+        <div class="text-center sm:w-1/3 mx-auto border-b border-border pb-3">
+            <h2 class="inline-block text-2xl font-semibold text-muted-foreground ">
                 Achievements
             </h2>
         </div>
@@ -41,7 +41,7 @@
             {% for badge in badges %}
             <div class="mb-4 sm:px-2">
                 <div class="badge-container transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-110
-                relative bg-white shadow h-32 w-32 rounded-full overflow-hidden border-2 border-white">
+                relative bg-background shadow-sm h-32 w-32 rounded-full overflow-hidden border-2 border-background">
                     <img class="object-cover w-full h-full"
                          loading="lazy"
                          src="{{ asset(badge.image) }}"
@@ -49,10 +49,10 @@
                          width="125"
                          height="125"
                     />
-                    <div class="badge-info absolute transition-all transform duration-200 delay-150 ease-in-out mt-1 flex bg-gray-300 rounded-full bg-opacity-75 w-full h-full">
+                    <div class="badge-info absolute transition-all transform duration-200 delay-150 ease-in-out mt-1 flex bg-secondary rounded-full bg-opacity-75 w-full h-full">
                         <a href="{{ badge.link }}" class="block p-2 m-auto text-center self-center" target="_blank" rel="noopener,noreferrer">
-                            <p class="text-sm font-semibold text-gray-800">{{ badge.name }}</p>
-                            <span class="text-xs font-light text-gray-700">{{ badge.category }}</span>
+                            <p class="text-sm font-semibold text-foreground">{{ badge.name }}</p>
+                            <span class="text-xs font-light text-muted-foreground">{{ badge.category }}</span>
                         </a>
                     </div>
                 </div>
