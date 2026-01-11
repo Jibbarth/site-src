@@ -29,7 +29,7 @@ final class ListingController
             throw new \LogicException('No request');
         }
 
-        if ('blog_rss' === $request->get('_route')) {
+        if ('blog_rss' === $request->attributes->get('_route')) {
             $format = 'xml';
         }
 
