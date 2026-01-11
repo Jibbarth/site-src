@@ -33,6 +33,9 @@ parameters: &parameters
         - Code Quality
         - Tailwind
         - Docker
+    certifications:
+        - 'Symfony 4 Certified Developer'
+        - 'Sylius Certified Developer'
     readme:
         town: Bordeaux
         banner_keywords: 'programming,developer,design'

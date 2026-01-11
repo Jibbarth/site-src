@@ -1,0 +1,32 @@
+{# templates/components/article_line.html.twig #}
+{% props article %}
+
+{% set url = path('article_detail', {type: article.type, article: article.id}) %}
+{% if article.type == constant('App\\Constant\\ArticleType::EXTERNAL') %}
+    {% set url = article.url %}
+{% endif %}
+
+<div class="group relative flex items-center justify-between p-4 transition-colors hover:bg-muted/50 border-b border-border last:border-0">
+    <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 overflow-hidden">
+        <a href="{{ url }}" 
+           class="text-base font-medium text-foreground hover:text-primary transition-colors truncate block"
+           {% if article.type == constant('App\\Constant\\ArticleType::EXTERNAL') %}target="_blank" rel="noopener noreferrer"{% endif %}
+        >
+             {% if article.type == constant('App\\Constant\\ArticleType::EXTERNAL') %}
+                {{ ux_icon('ri:external-link-line', {class: 'w-4 h-4 inline mr-1 text-muted-foreground'}) }}
+            {% endif %}
+            <span class="absolute inset-0 z-10"></span> {# Stretched link #}
+            {{ article.title }}
+        </a>
+        
+        {# Type Badge #}
+         <span class="inline-flex w-fit items-center rounded-md border border-border bg-background px-2 py-0.5 text-xs font-medium text-muted-foreground group-hover:border-primary/30 transition-colors">
+            {{ article.type }}
+        </span>
+    </div>
+
+    <div class="flex-shrink-0 ml-4 flex items-center text-sm text-muted-foreground tabular-nums">
+        {{ ux_icon('heroicons:calendar-days-20-solid', {class: 'w-4 h-4 mr-1.5 opacity-70'}) }}
+        {{ article.date|format_date(pattern='MMM d, Y') }}
+    </div>
+</div>

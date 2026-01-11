@@ -1,0 +1,49 @@
+{# templates/components/project_card.html.twig #}
+{% props project %}
+
+<div class="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md hover:border-primary/50 h-full">
+    {# Image Section #}
+    <div class="relative h-48 w-full overflow-hidden border-b border-border/50">
+        {% if project.image is not null %}
+            <img src="{{ project.image }}" alt="{{ project.name }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+        {% else %}
+             {% set projectImage = unsplash_photo(project.name ~',programming', 600, 400) %}
+            <img 
+                src="{{ projectImage.blurhash }}"
+                {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: projectImage.fullUrl }) }}
+                alt="{{ project.name }}" 
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            >
+        {% endif %}
+        {# Role Badge (Overlay) #}
+        <div class="absolute top-2 right-2">
+             {% set roleColors = {
+                (constant('App\\Constant\\Role::CONTRIBUTOR')): 'bg-green-500/90 text-white shadow-sm',
+                (constant('App\\Constant\\Role::MAINTENER')): 'bg-blue-500/90 text-white shadow-sm',
+                (constant('App\\Constant\\Role::FRONT_END')): 'bg-purple-500/90 text-white shadow-sm',
+                'default': 'bg-gray-500/90 text-white shadow-sm'
+            } %}
+            {% set badgeClass = roleColors[project.role] ?? roleColors['default'] %}
+            
+            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium backdrop-blur-sm {{ badgeClass }}">
+                {{ project.role }}
+            </span>
+        </div>
+    </div>
+
+    {# Content Section #}
+    <div class="flex flex-1 flex-col p-5">
+        <div class="flex items-start justify-between gap-2 mb-2">
+            <h3 class="text-xl font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+                <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="focus:outline-none">
+                    <span aria-hidden="true" class="absolute inset-0"></span>
+                    {{ project.name }}
+                </a>
+            </h3>
+        </div>
+        
+        <p class="mb-4 flex-1 text-sm text-muted-foreground leading-relaxed">
+            {{ project.description }}
+        </p>
+    </div>
+</div>

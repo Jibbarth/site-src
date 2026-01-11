@@ -19,7 +19,7 @@
 {% endblock %}
 {% block body %}
 <div class="flex flex-col items-center">
-    <img class="w-auto h-auto bg-white border border-black p-2" src="{{ gif(random(['sad', 'lost'])) }}" alt="sad">
+    <img class="w-auto h-auto bg-background border border-foreground p-2" src="{{ gif(random(['sad', 'lost'])) }}" alt="sad">
     {{ include('_partials/back_home.html.twig') }}
 </div>
 {% endblock %}
