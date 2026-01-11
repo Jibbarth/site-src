@@ -153,9 +153,6 @@
     "ondram/ci-detector": {
         "version": "3.5.1"
     },
-    "pdepend/pdepend": {
-        "version": "2.9.1"
-    },
     "php-cs-fixer/diff": {
         "version": "v1.3.1"
     },
@@ -194,9 +191,6 @@
     },
     "phploc/phploc": {
         "version": "7.0.2"
-    },
-    "phpmd/phpmd": {
-        "version": "2.10.1"
     },
     "phpro/grumphp": {
         "version": "v1.3.3"
@@ -555,16 +549,16 @@
         "version": "v0.5.1"
     },
     "symfonycorp/connect": {
-        "version": "7.0",
+        "version": "8.2",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "7.0",
-            "ref": "882c945750a86da9e87b297509c3068bf1479c2b"
+            "branch": "main",
+            "version": "8.2",
+            "ref": "69728fc48c2a654a1c27151fd45f537bf46eebe9"
         },
         "files": [
-            "config/packages/symfony_connect.yaml",
-            "config/routes/symfony_connect.yaml"
+            "configpackages/symfony_connect.yaml",
+            "configroutes/symfony_connect.yaml"
         ]
     },
     "thecodingmachine/safe": {

@@ -26,8 +26,9 @@ grumphp:
     phplint:
       exclude: ['vendor']
       triggered_by: ['php']
-    phpmd:
-      ruleset: [".php_md.xml"]
+    # Waiting for compat pdepend with SF8
+#    phpmd:
+#      ruleset: [".php_md.xml"]
     phpstan:
       level: ~
       configuration: phpstan.neon

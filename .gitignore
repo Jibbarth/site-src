@@ -26,3 +26,5 @@ output
 /assets/vendor/
 ###< symfony/asset-mapper ###
 public/badges
+
+config/reference.php
