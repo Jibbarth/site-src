@@ -48,61 +48,62 @@
     <body class="flex flex-col min-h-screen bg-background font-sans">
         <header>
             {% block header %}
-            <div class="absolute top-2 right-2 z-10" data-controller="theme">
-                <button data-action="theme#toggle" class="text-white hover:text-gray-300 cursor-pointer py-2 px-3 rounded-full bg-black/20 backdrop-blur-sm transition-colors" aria-label="Toggle theme">
-                         <span class="dark:hidden">
-                           {{ ux_icon('ri:moon-clear-line', {class: 'icon-inline'}) }}
-                       </span>
-                    <span class="hidden dark:inline">
-                           {{ ux_icon('ri:sun-line', {class: 'icon-inline'}) }}
-                       </span>
-                </button>
-            </div>
-            <div class="bg-secondary mb-6 pb-6 w-full h-auto flex flex-col items-center shadow-sm">
-                <div class="h-64 xl:h-full w-full">
+            <twig:navbar />
+            <div class="relative pt-24 pb-12 overflow-hidden bg-background">
+                 {# Background Image / Effect Area #}
+                <div class="absolute inset-0 z-0">
                     {% block header_image %}
-                    {% set bannerPhoto = unsplash_photo('website', 1600, 300) %}
-                    <img
-                        class="h-full w-full object-cover"
-                        src="{{ bannerPhoto.blurhash }}"
-                        {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
-                            src: bannerPhoto.fullUrl
-                        }) }}
-                        alt="Banner Image, it doesn't really matter"
-                    >
+                         {% set bannerPhoto = unsplash_photo('website', 1600, 200) %}
+                         <img
+                            class="absolute inset-0 w-full h-full object-cover opacity-50"
+                            src="{{ bannerPhoto.blurhash }}"
+                            {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
+                                src: bannerPhoto.fullUrl
+                            }) }}
+                            alt="Banner"
+                        >
                     {% endblock %}
+                    {# Overlay to ensure text readability over potential banners #}
+                     <div class="absolute inset-0 bg-background/60 backdrop-blur-[2px]"></div>
                 </div>
-                <div class="-ml-56 sm:w-64">
-                    <div class="shadow-sm h-32 w-32 -my-16 border-background rounded-full overflow-hidden border-4">
-                        <a href="/">
-                            {% set profile_path = 'https://avatars.githubusercontent.com/u/3168281?v=4' %}
-                            <img class="object-cover w-full h-full"
-                                 alt="profile picture"
-                                 src="{{ data_uri_thumbnail(profile_path, 120, 120) }}"
-                                 {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
-                                    src: profile_path
-                                 }) }}
-                                 width="120"
-                                 height="120"
-                            />
-                        </a>
-                    </div>
-                </div>
-                <div class="mt-16 sm:mt-4">
-                    <h1 class="text-3xl text-center font-bold">
-                        {{ author }}
-                    </h1>
-                    <p class="text-sm text-muted-foreground text-center">
-                        🇫🇷 Web developer
-                        <div class="text-center">
-                        {{ partial('social') }}
+
+                <div class="container mx-auto px-4 relative z-10">
+                    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                        {# Profile Picture (Constant) #}
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-full blur opacity-50 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                            <div class="relative w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-background ring-2 ring-border">
+                                    {% set profile_path = 'https://avatars.githubusercontent.com/u/3168281?v=4' %}
+                                    <img src="{{ profile_path }}" alt="{{ author }}" class="w-full h-full object-cover">
+                            </div>
                         </div>
-                    </p>
-                </div>
-                <div class="mt-4 pt-3 flex flex-wrap mx-6 border-t justify-center">
-                    {% block sub_profile %}
-                        {{ partial('interests') }}
-                    {% endblock %}
+
+                        {# Text & Info Area #}
+                        <div class="text-center md:text-left max-w-2xl flex-1">
+                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-4">
+                                <span class="relative flex h-2 w-2">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                                Available for Freelance
+                            </div>
+
+                            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-foreground">
+                                {{ author }}
+                            </h1>
+
+                            <div class="text-xl text-muted-foreground mb-6 leading-relaxed">
+                                🇫🇷 Web developer
+                                <div>
+                                    {{ partial('social') }}
+                                </div>
+                            </div>
+
+                             {% block sub_profile %}
+                                {{ partial('interests') }}
+                             {% endblock %}
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endblock %}
@@ -110,7 +111,8 @@
         <main class="grow">
             {% block body %}{% endblock %}
         </main>
-        <footer class="m-auto border-t border-border py-4 w-full max-w-5xl px-2 md:px-12 md:text-sm text-muted-foreground">
+        <twig:Separator></twig:Separator>
+        <footer class="m-auto py-4 w-full max-w-5xl px-2 md:px-12 md:text-sm text-muted-foreground">
             <div class="sm:flex justify-between text-center">
                 <div class="sm:w-1/2 sm:text-left">
                     © <a href="{{ website_url }}">{{ author }}</a>
@@ -118,15 +120,7 @@
                 <div class="w-full sm:text-center">
                     Last generation: {{ 'now'|format_datetime() }}
                 </div>
-                <div class="sm:w-1/2 sm:text-right flex items-center justify-end gap-3" data-controller="theme">
-                    <button data-action="theme#toggle" class="text-muted-foreground hover:text-foreground cursor-pointer" aria-label="Toggle theme">
-                        <span class="dark:hidden">
-                           {{ ux_icon('ri:moon-clear-line', {class: 'icon-inline'}) }}
-                       </span>
-                       <span class="hidden dark:inline">
-                           {{ ux_icon('ri:sun-line', {class: 'icon-inline'}) }}
-                       </span>
-                    </button>
+                <div class="sm:w-1/2 sm:text-right flex items-center justify-end gap-3">
                     {{ partial('social') }}
                 </div>
             </div>
