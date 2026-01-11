@@ -37,10 +37,27 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
             <script async src="https://analytics.xn--jibbarth-d1a.fr/script.js" data-website-id="{{ analytic_website_id }}" data-auto-track="false"></script>
         {% endblock %}
+        <script>
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark')
+            } else {
+                document.documentElement.classList.remove('dark')
+            }
+        </script>
     </head>
     <body class="flex flex-col min-h-screen bg-background font-sans">
         <header>
             {% block header %}
+            <div class="absolute top-2 right-2 z-10" data-controller="theme">
+                <button data-action="theme#toggle" class="text-white hover:text-gray-300 cursor-pointer py-2 px-3 rounded-full bg-black/20 backdrop-blur-sm transition-colors" aria-label="Toggle theme">
+                         <span class="dark:hidden">
+                           {{ ux_icon('ri:moon-clear-line', {class: 'icon-inline'}) }}
+                       </span>
+                    <span class="hidden dark:inline">
+                           {{ ux_icon('ri:sun-line', {class: 'icon-inline'}) }}
+                       </span>
+                </button>
+            </div>
             <div class="bg-secondary mb-6 pb-6 w-full h-auto flex flex-col items-center shadow-sm">
                 <div class="h-64 xl:h-full w-full">
                     {% block header_image %}
@@ -101,7 +118,15 @@
                 <div class="w-full sm:text-center">
                     Last generation: {{ 'now'|format_datetime() }}
                 </div>
-                <div class="sm:w-1/2 sm:text-right">
+                <div class="sm:w-1/2 sm:text-right flex items-center justify-end gap-3" data-controller="theme">
+                    <button data-action="theme#toggle" class="text-muted-foreground hover:text-foreground cursor-pointer" aria-label="Toggle theme">
+                        <span class="dark:hidden">
+                           {{ ux_icon('ri:moon-clear-line', {class: 'icon-inline'}) }}
+                       </span>
+                       <span class="hidden dark:inline">
+                           {{ ux_icon('ri:sun-line', {class: 'icon-inline'}) }}
+                       </span>
+                    </button>
                     {{ partial('social') }}
                 </div>
             </div>
