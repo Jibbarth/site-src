@@ -19,22 +19,14 @@ final class FrontExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('interests', [$this, 'interests'], ['is_safe' => ['html']]),
-            new TwigFunction('social_link', [$this, 'socialLink'], ['is_safe' => ['html']]),
+            new TwigFunction('partial', [$this, 'partialWithParam'], ['is_safe' => ['html']]),
         ];
     }
 
-    public function interests(): string
+    public function partialWithParam(string $parameter): string
     {
-        return $this->renderer->render('_partials/interests.html.twig', [
-            'interests' => $this->parameterBag->get('interests'),
-        ]);
-    }
-
-    public function socialLink(): string
-    {
-        return $this->renderer->render('_partials/social.html.twig', [
-            'data' => $this->parameterBag->get('social'),
+        return $this->renderer->render("_partials/{$parameter}.html.twig", [
+            'data' => $this->parameterBag->get($parameter),
         ]);
     }
 }
