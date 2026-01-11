@@ -163,7 +163,16 @@
         "version": "2.3.0"
     },
     "php-http/discovery": {
-        "version": "1.14.0"
+        "version": "1.20",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.18",
+            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+        },
+        "files": [
+            "config/packages/http_discovery.yaml"
+        ]
     },
     "php-http/httplug": {
         "version": "2.2.0"
@@ -202,7 +211,16 @@
         "version": "0.5.4"
     },
     "phpstan/phpstan": {
-        "version": "0.12.89"
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "5e490cc197fb6bb1ae22e5abbc531ddc633b6767"
+        },
+        "files": [
+            "phpstan.dist.neon"
+        ]
     },
     "phpstan/phpstan-strict-rules": {
         "version": "0.12.9"
@@ -415,7 +433,16 @@
         "version": "v5.3.0"
     },
     "symfony/property-info": {
-        "version": "v5.3.1"
+        "version": "8.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
+        },
+        "files": [
+            "config/packages/property_info.yaml"
+        ]
     },
     "symfony/routing": {
         "version": "7.4",
@@ -506,10 +533,28 @@
         ]
     },
     "symfony/ux-lazy-image": {
-        "version": "v2.0.1"
+        "version": "2.32",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.18",
+            "ref": "f6554b7efe60280645ac979c80700f66b8432131"
+        },
+        "files": [
+            "config/packages/lazy_image.yaml"
+        ]
     },
     "symfony/ux-turbo": {
-        "version": "1.3.x-dev"
+        "version": "2.32",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.20",
+            "ref": "287f7c6eb6e9b65e422d34c00795b360a787380b"
+        },
+        "files": [
+            "config/packages/ux_turbo.yaml"
+        ]
     },
     "symfony/validator": {
         "version": "7.3",
@@ -546,7 +591,16 @@
         "version": "v5.3.0"
     },
     "symfonycasts/tailwind-bundle": {
-        "version": "v0.5.1"
+        "version": "0.12",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.8",
+            "ref": "d0bd0276f74de90adfaa4c6cd74cc0caacd77e0a"
+        },
+        "files": [
+            "config/packages/symfonycasts_tailwind.yaml"
+        ]
     },
     "symfonycorp/connect": {
         "version": "8.2",
