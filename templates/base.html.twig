@@ -80,23 +80,13 @@
 
                         {# Text & Info Area #}
                         <div class="text-center md:text-left max-w-2xl flex-1">
-                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium mb-4">
-                                <span class="relative flex h-2 w-2">
-                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                                </span>
-                                Available for Freelance
-                            </div>
-
+                            {{ partial('certifications') }}
                             <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4 text-foreground">
                                 {{ author }}
                             </h1>
-
                             <div class="text-xl text-muted-foreground mb-6 leading-relaxed">
                                 🇫🇷 Web developer
-                                <div>
-                                    {{ partial('social') }}
-                                </div>
+                                <div>{{ partial('social') }}</div>
                             </div>
 
                              {% block sub_profile %}
