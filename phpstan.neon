@@ -10,6 +10,8 @@ parameters:
                 - Symfony\Component\Console\Command\Command
         testCaseWithSuffix:
             enabled: false
+        noPhpstanIgnore:
+            enabled: false
     excludePaths:
         - %currentWorkingDirectory%/src/Kernel.php
         - %currentWorkingDirectory%/config
