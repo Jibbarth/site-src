@@ -9,9 +9,9 @@
         {% else %}
              {% set projectImage = unsplash_photo(project.name ~',programming', 600, 400) %}
             <img 
-                src="{{ projectImage.blurhash }}"
-                {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', { src: projectImage.fullUrl }) }}
+                src="{{ projectImage.fullUrl }}"
                 alt="{{ project.name }}" 
+                loading="lazy"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             >
         {% endif %}
