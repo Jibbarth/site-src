@@ -110,9 +110,9 @@ final class StaticSiteBuilderCommand
     }
 
     /**
-     * @param array<string, Route>                          $routes
-     * @param callable(string): void                        $onAdvance
-     * @param callable(string): never                      $onError
+     * @param array<string, Route> $routes
+     * @param callable(string): void $onAdvance
+     * @param callable(string): never $onError
      */
     private function dumpRoutesWithoutParams(
         KernelBrowser $client,
@@ -131,9 +131,9 @@ final class StaticSiteBuilderCommand
     }
 
     /**
-     * @param array<string, Route>                          $routes
-     * @param callable(string): void                        $onAdvance
-     * @param callable(string): never                      $onError
+     * @param array<string, Route> $routes
+     * @param callable(string): void $onAdvance
+     * @param callable(string): never $onError
      */
     private function dumpRoutesWithParams(
         KernelBrowser $client,
@@ -143,9 +143,9 @@ final class StaticSiteBuilderCommand
         callable $onError,
     ): void {
         foreach ($routes as $routeName => $route) {
-            $routeController = $this->findControllerForRoute($route);
-
-            if (null === $routeController) {
+            try {
+                $routeController = $this->findControllerForRoute($route);
+            } catch (\RuntimeException $e) {
                 $onAdvance(\sprintf('No controller found for route %s', $route->getPath()));
                 continue;
             }
@@ -171,7 +171,7 @@ final class StaticSiteBuilderCommand
         }
     }
 
-    private function findControllerForRoute(Route $route): ?ControllerWithDataProviderInterface
+    private function findControllerForRoute(Route $route): ControllerWithDataProviderInterface
     {
         foreach ($this->controllersWithData as $controller) {
             if ($controller::class === $route->getDefault('_controller')) {
@@ -179,7 +179,7 @@ final class StaticSiteBuilderCommand
             }
         }
 
-        return null;
+        throw new \RuntimeException(\sprintf('No data-provider controller for route %s', $route->getPath()));
     }
 
     private function createProgressBar(SymfonyStyle $symfonyStyle, int $count): \Symfony\Component\Console\Helper\ProgressBar
