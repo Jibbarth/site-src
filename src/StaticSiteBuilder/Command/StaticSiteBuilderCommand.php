@@ -50,7 +50,7 @@ final class StaticSiteBuilderCommand
         string $outputDirectory = 'output',
     ): int {
         $this->outputDirectory = $outputDirectory;
-        $symfonyStyle->title('Building the static site in '.$this->outputDirectory.' directory');
+        $symfonyStyle->title('Building the static site in ' . $this->outputDirectory . ' directory');
 
         $kernel = new Kernel('prod', false);
         $kernel->boot();
@@ -60,20 +60,23 @@ final class StaticSiteBuilderCommand
 
         $progress = $this->createProgressBar($symfonyStyle, $routes->count());
 
+        $onAdvance = static function (string $message) use ($progress): void {
+            $progress->setMessage($message);
+            $progress->advance();
+        };
+        $onError = static function (string $message) use ($symfonyStyle): never {
+            $symfonyStyle->error($message);
+
+            throw new \RuntimeException($message);
+        };
+
         $client = new KernelBrowser($kernel);
         $client->enableReboot();
 
         [$routesWithoutParam, $routesWithParam] = $this->splitRoutes($routes);
 
-        $status = $this->dumpRoutesWithoutParams($client, $routesWithoutParam, $symfonyStyle, $progress);
-        if (Command::FAILURE === $status) {
-            return $status;
-        }
-
-        $status = $this->dumpRoutesWithParams($client, $router, $routesWithParam, $symfonyStyle, $progress);
-        if (Command::FAILURE === $status) {
-            return $status;
-        }
+        $this->dumpRoutesWithoutParams($client, $routesWithoutParam, $onAdvance, $onError);
+        $this->dumpRoutesWithParams($client, $router, $routesWithParam, $onAdvance, $onError);
 
         $progress->setMessage('✅ Routes processed');
         $progress->finish();
@@ -82,7 +85,7 @@ final class StaticSiteBuilderCommand
         $this->copyAssets($symfonyStyle);
 
         $symfonyStyle->success('🥳 Static site built successfully!');
-        $symfonyStyle->note('Run local server to see the output: "php -S localhost:8001 -t '.$this->outputDirectory.'"');
+        $symfonyStyle->note('Run local server to see the output: "php -S localhost:8001 -t ' . $this->outputDirectory . '"');
 
         return Command::SUCCESS;
     }
@@ -107,72 +110,65 @@ final class StaticSiteBuilderCommand
     }
 
     /**
-     * @param array<string, Route>   $routes
+     * @param array<string, Route>                          $routes
+     * @param callable(string): void                        $onAdvance
+     * @param callable(string): never                      $onError
      */
     private function dumpRoutesWithoutParams(
         KernelBrowser $client,
         array $routes,
-        SymfonyStyle $symfonyStyle,
-        \Symfony\Component\Console\Helper\ProgressBar $progress,
-    ): int {
+        callable $onAdvance,
+        callable $onError,
+    ): void {
         foreach ($routes as $routeName => $route) {
-            $progress->setMessage(\sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
-            $progress->advance();
+            $onAdvance(\sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
             $client->request('GET', $route->getPath());
             if (!$client->getResponse()->isSuccessful()) {
-                $symfonyStyle->error(\sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
-
-                return Command::FAILURE;
+                $onError(\sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
             }
             $this->dumpResponse($client->getRequest(), $client->getResponse());
         }
-
-        return Command::SUCCESS;
     }
 
     /**
-     * @param array<string, Route>    $routes
+     * @param array<string, Route>                          $routes
+     * @param callable(string): void                        $onAdvance
+     * @param callable(string): never                      $onError
      */
     private function dumpRoutesWithParams(
         KernelBrowser $client,
         RouterInterface $router,
         array $routes,
-        SymfonyStyle $symfonyStyle,
-        \Symfony\Component\Console\Helper\ProgressBar $progress,
-    ): int {
+        callable $onAdvance,
+        callable $onError,
+    ): void {
         foreach ($routes as $routeName => $route) {
             $routeController = $this->findControllerForRoute($route);
 
             if (null === $routeController) {
-                $symfonyStyle->writeln(\sprintf('No controller found for route %s', $route->getPath()));
+                $onAdvance(\sprintf('No controller found for route %s', $route->getPath()));
                 continue;
             }
 
-            $progress->advance();
             foreach ($routeController->getArguments() as $routeArgument) {
-                $progress->setMessage(\sprintf(
+                $onAdvance(\sprintf(
                     'Processing route %s (%s) with arguments (%s)',
                     $routeName,
                     $route->getPath(),
                     implode(', ', $routeArgument)
                 ));
-                $progress->display();
                 $client->request('GET', $router->generate($routeName, $routeArgument));
                 if (!$client->getResponse()->isSuccessful()) {
-                    $symfonyStyle->error(\sprintf(
+                    $onError(\sprintf(
                         'Error processing route %s (%s) with arguments (%s)',
                         $routeName,
                         $route->getPath(),
                         implode(', ', $routeArgument)
                     ));
-
-                    return Command::FAILURE;
                 }
                 $this->dumpResponse($client->getRequest(), $client->getResponse());
             }
         }
-
-        return Command::SUCCESS;
     }
 
     private function findControllerForRoute(Route $route): ?ControllerWithDataProviderInterface
@@ -190,7 +186,7 @@ final class StaticSiteBuilderCommand
     {
         $progress = $symfonyStyle->createProgressBar($count);
         $format = $progress::getFormatDefinition('normal');
-        $progress::setFormatDefinition('custom', $format.' -- %message%');
+        $progress::setFormatDefinition('custom', $format . ' -- %message%');
         $progress->setFormat('custom');
 
         return $progress;
@@ -201,7 +197,7 @@ final class StaticSiteBuilderCommand
         $symfonyStyle->info('⏳ Copying assets...');
         $fileSystem = new Filesystem();
         $fileSystem->mirror('public', $this->outputDirectory);
-        $fileSystem->remove($this->outputDirectory.'/index.php');
+        $fileSystem->remove($this->outputDirectory . '/index.php');
         $symfonyStyle->info('✅ Assets copied');
     }
 
