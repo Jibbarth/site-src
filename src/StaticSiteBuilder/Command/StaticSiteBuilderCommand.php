@@ -15,7 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
 use function Symfony\Component\String\u;
@@ -37,11 +39,6 @@ final class StaticSiteBuilderCommand
     ) {
     }
 
-    /**
-     * @suppressWarnings(CyclomaticComplexity)
-     * @suppressWarnings(ExcessiveMethodLength)
-     * TODO: refactor this method
-     */
     public function __invoke(
         OutputInterface $output,
         SymfonyStyle $symfonyStyle,
@@ -55,105 +52,156 @@ final class StaticSiteBuilderCommand
         $this->outputDirectory = $outputDirectory;
         $symfonyStyle->title('Building the static site in ' . $this->outputDirectory . ' directory');
 
-        // Load a prod kernel
         $kernel = new Kernel('prod', false);
         $kernel->boot();
         /** @var RouterInterface $router */
         $router = $kernel->getContainer()->get('router');
-        $routesCollection = $router->getRouteCollection();
+        $routes = $router->getRouteCollection();
 
-        $progress = $symfonyStyle->createProgressBar($routesCollection->count());
-        $format = $progress::getFormatDefinition('normal');
+        $progress = $this->createProgressBar($symfonyStyle, $routes->count());
 
-        $progress::setFormatDefinition('custom', $format . ' -- %message%');
-        $progress->setFormat('custom');
+        $onAdvance = static function (string $message) use ($progress): void {
+            $progress->setMessage($message);
+            $progress->advance();
+        };
+        $onError = static function (string $message) use ($symfonyStyle): never {
+            $symfonyStyle->error($message);
 
-        /** @var array<Route> $routesWithoutParam */
-        $routesWithoutParam = array_filter(
-            $routesCollection->all(),
-            static fn ($route) => !str_contains($route->getPath(), '{')
-        );
-        /** @var array<Route> $routesWithParam */
-        $routesWithParam = array_filter(
-            $routesCollection->all(),
-            static fn ($route) => str_contains($route->getPath(), '{')
-        );
+            throw new \RuntimeException($message);
+        };
 
         $client = new KernelBrowser($kernel);
         $client->enableReboot();
 
-        foreach ($routesWithoutParam as $routeName => $route) {
-            $progress->setMessage(\sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
-            $progress->advance();
-            $client->request('GET', $route->getPath());
-            if (!$client->getResponse()->isSuccessful()) {
-                $symfonyStyle->error(\sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
+        [$routesWithoutParam, $routesWithParam] = $this->splitRoutes($routes);
 
-                return Command::FAILURE;
-            }
-            $this->dumpResponse($client->getRequest(), $client->getResponse());
-        }
-
-        foreach ($routesWithParam as $routeName => $route) {
-            $routeController = null;
-            foreach ($this->controllersWithData as $controller) {
-                if ($controller::class !== $route->getDefault('_controller')) {
-                    continue;
-                }
-
-                $routeController = $controller;
-            }
-            if (null === $routeController) {
-                $output->writeln(\sprintf('No controller found for route %s', $route->getPath()));
-                continue;
-            }
-
-            $arguments = $routeController->getArguments();
-            $progress->advance();
-            foreach ($arguments as $routeArgument) {
-                $progress->setMessage(\sprintf(
-                    'Processing route %s (%s) with arguments (%s)',
-                    $routeName,
-                    $route->getPath(),
-                    implode(', ', $routeArgument)
-                ));
-                $progress->display();
-                $client->request('GET', $router->generate($routeName, $routeArgument));
-                if (!$client->getResponse()->isSuccessful()) {
-                    $symfonyStyle->error(\sprintf(
-                        'Error processing route %s (%s) with arguments (%s)',
-                        $routeName,
-                        $route->getPath(),
-                        implode(', ', $routeArgument)
-                    ));
-
-                    return Command::FAILURE;
-                }
-                $this->dumpResponse($client->getRequest(), $client->getResponse());
-            }
-        }
+        $this->dumpRoutesWithoutParams($client, $routesWithoutParam, $onAdvance, $onError);
+        $this->dumpRoutesWithParams($client, $router, $routesWithParam, $onAdvance, $onError);
 
         $progress->setMessage('✅ Routes processed');
         $progress->finish();
         $symfonyStyle->newLine(2);
 
-        $symfonyStyle->info('⏳ Copying assets...');
-        // Copy Assets
-        $fileSystem = new Filesystem();
-        $fileSystem->mirror('public', $this->outputDirectory);
-        // Clean index file
-        $fileSystem->remove($this->outputDirectory . '/index.php');
-
-        $symfonyStyle->info('✅ Assets copied');
+        $this->copyAssets($symfonyStyle);
 
         $symfonyStyle->success('🥳 Static site built successfully!');
         $symfonyStyle->note('Run local server to see the output: "php -S localhost:8001 -t ' . $this->outputDirectory . '"');
 
-        // Build the static site
         return Command::SUCCESS;
     }
 
-    private function dumpResponse(Request $request, \Symfony\Component\HttpFoundation\Response $response): void
+    /**
+     * @return array{0: array<string, Route>, 1: array<string, Route>}
+     */
+    private function splitRoutes(RouteCollection $routes): array
+    {
+        $without = [];
+        $with = [];
+
+        foreach ($routes->all() as $name => $route) {
+            if (str_contains($route->getPath(), '{')) {
+                $with[$name] = $route;
+            } else {
+                $without[$name] = $route;
+            }
+        }
+
+        return [$without, $with];
+    }
+
+    /**
+     * @param array<string, Route> $routes
+     * @param callable(string): void $onAdvance
+     * @param callable(string): never $onError
+     */
+    private function dumpRoutesWithoutParams(
+        KernelBrowser $client,
+        array $routes,
+        callable $onAdvance,
+        callable $onError,
+    ): void {
+        foreach ($routes as $routeName => $route) {
+            $onAdvance(\sprintf('Processing route %s (%s)', $routeName, $route->getPath()));
+            $client->request('GET', $route->getPath());
+            if (!$client->getResponse()->isSuccessful()) {
+                $onError(\sprintf('Error processing route %s (%s)', $routeName, $route->getPath()));
+            }
+            $this->dumpResponse($client->getRequest(), $client->getResponse());
+        }
+    }
+
+    /**
+     * @param array<string, Route> $routes
+     * @param callable(string): void $onAdvance
+     * @param callable(string): never $onError
+     */
+    private function dumpRoutesWithParams(
+        KernelBrowser $client,
+        RouterInterface $router,
+        array $routes,
+        callable $onAdvance,
+        callable $onError,
+    ): void {
+        foreach ($routes as $routeName => $route) {
+            try {
+                $routeController = $this->findControllerForRoute($route);
+            } catch (\RuntimeException $e) {
+                $onAdvance(\sprintf('No controller found for route %s', $route->getPath()));
+                continue;
+            }
+
+            foreach ($routeController->getArguments() as $routeArgument) {
+                $onAdvance(\sprintf(
+                    'Processing route %s (%s) with arguments (%s)',
+                    $routeName,
+                    $route->getPath(),
+                    implode(', ', $routeArgument)
+                ));
+                $client->request('GET', $router->generate($routeName, $routeArgument));
+                if (!$client->getResponse()->isSuccessful()) {
+                    $onError(\sprintf(
+                        'Error processing route %s (%s) with arguments (%s)',
+                        $routeName,
+                        $route->getPath(),
+                        implode(', ', $routeArgument)
+                    ));
+                }
+                $this->dumpResponse($client->getRequest(), $client->getResponse());
+            }
+        }
+    }
+
+    private function findControllerForRoute(Route $route): ControllerWithDataProviderInterface
+    {
+        foreach ($this->controllersWithData as $controller) {
+            if ($controller::class === $route->getDefault('_controller')) {
+                return $controller;
+            }
+        }
+
+        throw new \RuntimeException(\sprintf('No data-provider controller for route %s', $route->getPath()));
+    }
+
+    private function createProgressBar(SymfonyStyle $symfonyStyle, int $count): \Symfony\Component\Console\Helper\ProgressBar
+    {
+        $progress = $symfonyStyle->createProgressBar($count);
+        $format = $progress::getFormatDefinition('normal');
+        $progress::setFormatDefinition('custom', $format . ' -- %message%');
+        $progress->setFormat('custom');
+
+        return $progress;
+    }
+
+    private function copyAssets(SymfonyStyle $symfonyStyle): void
+    {
+        $symfonyStyle->info('⏳ Copying assets...');
+        $fileSystem = new Filesystem();
+        $fileSystem->mirror('public', $this->outputDirectory);
+        $fileSystem->remove($this->outputDirectory . '/index.php');
+        $symfonyStyle->info('✅ Assets copied');
+    }
+
+    private function dumpResponse(Request $request, Response $response): void
     {
         $content = $response->getContent();
         if (false === $content) {
