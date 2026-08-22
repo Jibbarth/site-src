@@ -74,6 +74,8 @@
 }
 
 @theme {
+    --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+
     /** Toolkit */
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -199,7 +201,7 @@
 }
 
 .markdown h1 {
-    @apply leading-tight border-b border-border text-4xl font-semibold mb-4 mt-6 pb-2 text-foreground;
+    @apply [font-family:var(--font-display)] leading-tight border-b border-border text-4xl font-semibold mb-4 mt-6 pb-2 text-foreground;
 }
 
 /** Hide H1, already displayed in subheader */
