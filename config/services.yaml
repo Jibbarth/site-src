@@ -11,7 +11,7 @@ parameters: &parameters
     firstname: Jibé
     lastname: Barth
     author: '%firstname% %lastname%'
-    website_url: https://jibébarth.fr
+    website_url: https://xn--jibbarth-d1a.fr # jibébarth.fr in punycode — keeps sitemap/og:url/canonical consistent with the served GitHub Pages host
     ga: UA-39521443-1
     analytic_website_id: '%env(ANALYTIC_WEBSITE_ID)%'
     sf_connect_uuid: 7cc4c670-541e-4006-a488-6366794d54dd
