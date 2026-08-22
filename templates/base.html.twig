@@ -51,11 +51,11 @@
             <twig:navbar />
             <div class="relative pt-24 pb-12 overflow-hidden bg-background">
                  {# Background Image / Effect Area #}
-                <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 z-0 [mask-image:linear-gradient(to_bottom,black_65%,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black_65%,transparent)]">
                     {% block header_image %}
                          {% set bannerPhoto = unsplash_photo('website', 1600, 200) %}
                          <img
-                            class="absolute inset-0 w-full h-full object-cover opacity-50"
+                            class="absolute inset-0 w-full h-full object-cover opacity-70"
                             src="{{ bannerPhoto.blurhash }}"
                             {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
                                 src: bannerPhoto.fullUrl
