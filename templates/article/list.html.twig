@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}✍ Writings // {{ author }}{% endblock %}
-{% block description %}{% endblock %}
+{% block description %}Articles and tutorials about PHP, Symfony and open-source by {{ author }}.{% endblock %}
 {% block meta_image %}{{ unsplash_url('writing', 600, 300) }}{% endblock %}
 {% block header_image %}
     {% set banner = unsplash_photo('writing', 1600, 300) %}

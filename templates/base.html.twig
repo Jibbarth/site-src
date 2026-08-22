@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -13,6 +12,7 @@
         {# Search Engine #}
         <meta name="author" content="{{ author }}">
         <meta name="description" content="{% block description %}Personal website{% endblock %}">
+        <link rel="canonical" href="{{ (website_url ~ app.request.requestUri)|sanitize_url }}">
         <meta name="image" content="{% block meta_image %}{{ (website_url ~ asset('img/site_preview.png'))|sanitize_url }}{% endblock %}">
         {# Schema.org for Google #}
         <meta itemprop="name" content="{{ block('title') }}">
