@@ -90,7 +90,11 @@ final class Article
         $cut = $abstract->truncate(200, '');
         $spacePos = $cut->indexOfLast(' ');
 
-        return ($spacePos ? $cut->truncate($spacePos, '') : $cut)->trimEnd()->append('…')->toString();
+        if (null === $spacePos) {
+            return $cut->trimEnd()->append('…')->toString();
+        }
+
+        return $cut->truncate($spacePos, '')->trimEnd()->append('…')->toString();
     }
 
     /**

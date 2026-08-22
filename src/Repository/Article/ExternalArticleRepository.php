@@ -14,16 +14,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class ExternalArticleRepository implements ArticleRepositoryInterface
 {
     private const FILENAME = 'external_articles.yaml';
+    private const CACHE_TTL = 30 * 24 * 3600;
 
     private ArticleCollection $collection;
 
     public function __construct(
         private SerializerInterface $serializer,
-        #[Autowire(service: 'cache.app')]
+        private HttpClientInterface $httpClient,
         private CacheInterface $cache,
         #[Autowire('%kernel.project_dir%')]
         private string $projectDir,
@@ -43,7 +45,7 @@ final class ExternalArticleRepository implements ArticleRepositoryInterface
                 if (ArticleType::EXTERNAL === $article->getType() && '' === $article->getContent()) {
                     $description = $this->fetchMetaDescription($article);
 
-                    if (null !== $description) {
+                    if ('' !== $description) {
                         $articles[$index] = $article->withContent($description);
                     }
                 }
@@ -71,49 +73,45 @@ final class ExternalArticleRepository implements ArticleRepositoryInterface
         return $articlesFiltered->first();
     }
 
-    /**
-     * Fetches the remote meta description, memoized in the Symfony cache
-     * (cache.app) so static builds never re-hit third-party sites.
-     */
-    private function fetchMetaDescription(Article $article): ?string
+    private function fetchMetaDescription(Article $article): string
     {
         if (null === $article->getUrl()) {
-            return null;
+            return '';
         }
 
         $key = 'external_article_meta_' . md5($article->getUrl());
 
         try {
-            return $this->cache->get($key, static function (ItemInterface $item) use ($article): ?string {
-                $context = stream_context_create(['http' => [
-                    'timeout' => 3,
-                    'header' => "User-Agent: Mozilla/5.0 (compatible; jibebarth.fr static builder)\r\n",
-                ]]);
-                $html = @file_get_contents($article->getUrl(), false, $context);
+            return $this->cache->get($key, function (ItemInterface $item) use ($article): string {
+                $item->expiresAfter(self::CACHE_TTL);
 
-                if (false === $html || '' === $html) {
-                    // ponytail: failures are not cached, one retry per build;
-                    // add a negative-TTL entry if a flaky host slows builds
-                    return null;
+                try {
+                    $response = $this->httpClient->request('GET', $article->getUrl(), [
+                        'timeout' => 3,
+                    ]);
+                    $html = $response->getContent(false);
+                } catch (\Throwable) {
+                    return '';
                 }
 
-                // ponytail: regex on meta tags instead of DOM crawl — good enough for
-                // description/og:description; switch to DomCrawler if extraction misses appear
-                preg_match('/<meta[^>]+(?:name|property)=["\'](?:description|og:description)["\'][^>]*content=["\']([^"\']*)["\']/i', $html, $after)
-                    || preg_match('/<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:name|property)=["\'](?:description|og:description)["\']/i', $html, $after);
-
-                $description = isset($after[1]) ? mb_trim(html_entity_decode($after[1], \ENT_QUOTES)) : '';
-
-                if ('' === $description) {
-                    return null;
+                if ('' === $html) {
+                    return '';
                 }
 
-                $item->expiresAfter(30 * 24 * 3600);
+                preg_match('/<meta[^>]+(?:name|property)=["\'](?:description|og:description)["\'][^>]*content=["\']([^"\']*)["\']/i', $html, $after);
 
-                return $description;
+                if ([] === $after) {
+                    preg_match('/<meta[^>]+content=["\']([^"\']*)["\'][^>]*(?:name|property)=["\'](?:description|og:description)["\']/i', $html, $after);
+                }
+
+                if ([] === $after) {
+                    return '';
+                }
+
+                return mb_trim(html_entity_decode($after[1], \ENT_QUOTES));
             });
         } catch (InvalidArgumentException) {
-            return null;
+            return '';
         }
     }
 }
