@@ -47,6 +47,12 @@
             <div class="px-4 py-6 space-y-4">
                  <a href="{{ path('article_list') }}" class="block text-base font-medium hover:text-primary">Blog</a>
                  <div class="border-t border-border my-4 pt-4 flex items-center justify-between">
+                     <span class="text-sm font-medium text-muted-foreground">Social</span>
+                     <div class="flex items-center gap-1 -mr-2 text-muted-foreground">
+                         {{ partial('social') }}
+                     </div>
+                 </div>
+                 <div class="border-t border-border my-4 pt-4 flex items-center justify-between">
                      <span class="text-sm font-medium text-muted-foreground">Theme</span>
                      <button data-controller="theme" data-action="theme#toggle" class="p-2 rounded-md hover:bg-accent transition-colors" aria-label="Toggle theme">
                         <span class="dark:hidden flex items-center gap-2">{{ ux_icon('ri:moon-line') }} Dark</span>
