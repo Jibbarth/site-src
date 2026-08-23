@@ -37,15 +37,13 @@
                 </a>
             </div>
 
-            <div class="rounded-xl border border-border bg-card shadow-sm overflow-hidden">
-                <div class="divide-y divide-border">
-                    {% for article in articles %}
-                         <twig:article_line article="{{ article }}" />
-                    {% endfor %}
-                </div>
-                <div class="p-4 bg-muted/30 text-center border-t border-border">
-                    <a href="{{ path('article_list') }}" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">View all articles</a>
-                </div>
+            <div class="divide-y divide-border">
+                {% for article in articles %}
+                     <twig:article_line article="{{ article }}" />
+                {% endfor %}
+            </div>
+            <div class="mt-6 text-center">
+                <a href="{{ path('article_list') }}" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">View all articles</a>
             </div>
         </section>
 

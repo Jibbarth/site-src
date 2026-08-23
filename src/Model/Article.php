@@ -80,10 +80,21 @@ final class Article
 
     public function getAbstract(): string
     {
-        return u($this->content)
-            ->replace($this->title, '')
-            ->truncate(200, '...')
-            ->toString();
+        $abstract = u($this->content)
+            ->replace($this->title, '');
+
+        if ($abstract->length() <= 200) {
+            return $abstract->trimEnd()->toString();
+        }
+
+        $cut = $abstract->truncate(200, '');
+        $spacePos = $cut->indexOfLast(' ');
+
+        if (null === $spacePos) {
+            return $cut->trimEnd()->append('…')->toString();
+        }
+
+        return $cut->truncate($spacePos, '')->trimEnd()->append('…')->toString();
     }
 
     /**
@@ -114,6 +125,14 @@ final class Article
         $this->image = $imageUrl;
 
         return $this;
+    }
+
+    public function withContent(string $content): self
+    {
+        $clone = clone $this;
+        $clone->content = $content;
+
+        return $clone;
     }
 
     public function markInDraft(): self
